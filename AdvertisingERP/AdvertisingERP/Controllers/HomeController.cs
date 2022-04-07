@@ -17,5 +17,13 @@ namespace AdvertisingERP.Controllers
         {
             return View();
         }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
     }
 }
