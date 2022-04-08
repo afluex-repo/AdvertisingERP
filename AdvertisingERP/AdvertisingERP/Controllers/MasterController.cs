@@ -9,7 +9,7 @@ namespace AdvertisingERP.Controllers
     public class MasterController : Controller
     {
         // GET: Master
-        public ActionResult Site()
+        public ActionResult SiteMaster()
         {
             return View();
         }

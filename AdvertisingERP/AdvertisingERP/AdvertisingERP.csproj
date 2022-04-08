@@ -732,6 +732,7 @@
     <Compile Include="Models\Crypto.cs" />
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\Master.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -750,6 +751,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
+    <Content Include="Views\Master\SiteMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -760,7 +762,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\AdminBase\" />
-    <Folder Include="Views\Master\" />
     <Folder Include="Views\UserBase\" />
   </ItemGroup>
   <PropertyGroup>
