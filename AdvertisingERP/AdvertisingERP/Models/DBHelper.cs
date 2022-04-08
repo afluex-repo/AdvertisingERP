@@ -16,10 +16,9 @@ namespace AdvertisingERP.Models
         {
             try
             {
-                //connectionString = "Data Source=DESKTOP-UDD0G1A\\SQLEXPRESS; Initial Catalog=CitiAdDB; User Id=sa; Password=1234; Integrated Security=false; ";
-                //connectionString = "Data Source=184.95.53.181;Initial Catalog=CitiAdDemo;User Id=citiusertest;Password=citi123!@#;Integrated Security=false;";
+              
 
-                connectionString = "Data Source=23.111.171.42;Initial Catalog=AdvertisingERP;User Id=AdvertisingERP;Password=AfluexERP123!@#;Integrated Security=false;";
+                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=AdvertisingERPDB;User Id=erpuser;Password=erp@3%!*!18;Integrated Security=false;";
             }
             catch (Exception)
             {
