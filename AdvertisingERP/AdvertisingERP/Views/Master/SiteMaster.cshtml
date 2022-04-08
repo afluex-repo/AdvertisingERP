@@ -7,9 +7,33 @@
 
 
     <div class="col-md-12">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-5 align-self-center">
+                    <h4 class="page-title"></h4>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Masters</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Site Master</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
                 <div class="card">
                     <div class="card-body">
-                        <div class="card-title">Vertical Form</div>
+                        <div class="m-b-0 card-title">Site Master
+                            <a href="/Master/SiteList" class="btn btn-light list-button">Back To List</a>
+                        </div>
+                        @*<div class="card-header bg-info">
+                            <h4 class="m-b-0 text-white">
+                                Site Master
+                                <a href="/Master/SiteList" class="btn btn-success pull-right" style="margin-left: 82%;">Back To List</a>
+                            </h4>
+                        </div>*@
                         <hr>@using (Html.BeginForm("SiteMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
                         {
                             <div class="form-group">
