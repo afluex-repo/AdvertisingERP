@@ -46,3 +46,9 @@ a.btn.btn-light.list-button {
     float: right;
     margin-top: -8px;
 }
+input.btn.btn-light {
+    margin-top: 33px;
+}
+a.btn.btn-dark {
+    margin-top: 33px;
+}

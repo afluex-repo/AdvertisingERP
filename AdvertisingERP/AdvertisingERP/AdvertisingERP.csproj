@@ -767,6 +767,10 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\Master\SiteMaster.cshtml" />
+    <Content Include="Views\Master\SiteList.cshtml" />
+    <Content Include="Views\Master\ServiceMaster.cshtml" />
+    <Content Include="Views\Master\ServiceList.cshtml" />
+    <Content Include="Views\Master\BankMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
