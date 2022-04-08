@@ -5,13 +5,16 @@
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
-
-    <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card-title">Vertical Form</div>
-                        <hr>@using (Html.BeginForm("SiteMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
-                        {
+@using (Html.BeginForm("SiteMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">Vertical Form</div>
+                            <hr>
                             <div class="form-group">
                                 <label for="input-1">Name</label>
                                 <input type="text" class="form-control" id="input-1" placeholder="Enter Your Name">
@@ -41,8 +44,11 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Register</button>
                             </div>
-                        }
+
+                        </div>
                     </div>
                 </div>
+            </div>
         </div>
-
+    </div>
+}

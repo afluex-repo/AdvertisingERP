@@ -229,7 +229,7 @@ namespace AdvertisingERP.Controllers
                 TempData["CustomerError"] = ex.Message;
                
             }
-            return View(obj);
+            return View("AddCustomer");
         }
 
         public ActionResult DeleteCustomer(string CustomerId)

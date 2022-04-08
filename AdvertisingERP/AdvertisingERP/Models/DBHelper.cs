@@ -16,8 +16,9 @@ namespace AdvertisingERP.Models
         {
             try
             {
-                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog= AdvertisingERPDB;User Id=erpuser;Password=erp@3%!*!18;Integrated Security=false";
+              
 
+                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=AdvertisingERPDB;User Id=erpuser;Password=erp@3%!*!18;Integrated Security=false;";
             }
             catch (Exception)
             {
