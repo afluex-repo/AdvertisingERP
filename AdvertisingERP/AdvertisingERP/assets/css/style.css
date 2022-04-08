@@ -39,3 +39,6 @@ ul.nav.navbar-nav.sub-menu li:hover{
 ul.nav.navbar-nav.sub-menu li a{
     color: #fff;
 }
+img.login-img {
+    width: 185px;
+}

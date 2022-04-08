@@ -24,10 +24,12 @@
     <link href="~/assets/css/icons.css" rel="stylesheet" type="text/css" />
     <!-- Custom Style-->
     <link href="~/assets/css/app-style.css" rel="stylesheet" />
+    <!--Style-->
+    <link href="~/assets/css/style.css" rel="stylesheet" />
 
 </head>
 <body class="bg-theme bg-theme1">
-    @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "Signup-Form" }))
+    @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
     {
         <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner"><div class="loader"></div></div></div></div>
     <!-- end loader -->
@@ -45,7 +47,7 @@
                             <div class="form-group">
                                 <label for="exampleInputUsername" class="sr-only">Username</label>
                                 <div class="position-relative has-icon-right">
-                                    @Html.TextBoxFor(m => m.LoginID, new { @class = "form-control", @placeholder = "Enter Username" })
+                                    @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Username" })
 
                                     <div class="form-control-position">
                                         <i class="icon-user"></i>
@@ -104,9 +106,9 @@
             $("#divload").css({ 'display': 'none' });
             $(".errortext").removeClass("errortext");
 
-            if ($('#LoginID').val() == ''){
-                $('#LoginID').addClass('errortext');
-                $('#LoginID').focus();
+            if ($('#LoginId').val() == '') {
+                $('#LoginId').addClass('errortext');
+                $('#LoginId').focus();
                 return false;
             }
             if ($('#Password').val() == ''){

@@ -130,6 +130,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\bootstrap.min.css" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\app-style.css" />
@@ -137,6 +138,7 @@
     <Content Include="assets\css\icons.css" />
     <Content Include="assets\css\pace.min.css" />
     <Content Include="assets\css\sidebar-menu.css" />
+    <Content Include="assets\dataTables.bootstrap.min.css" />
     <Content Include="assets\flags\1x1\ad.svg" />
     <Content Include="assets\flags\1x1\ae.svg" />
     <Content Include="assets\flags\1x1\af.svg" />
@@ -670,6 +672,13 @@
     <Content Include="assets\images\timeline\react.svg" />
     <Content Include="assets\js\app-script.js" />
     <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\datatable\datatable-advanced.init.js" />
+    <Content Include="assets\js\datatable\datatable-api.init.js" />
+    <Content Include="assets\js\datatable\datatable-basic.init.js" />
+    <Content Include="assets\js\datatable\datatables.init.js" />
+    <Content Include="assets\js\datatable\details_close.png" />
+    <Content Include="assets\js\datatable\details_open.png" />
+    <Content Include="assets\js\datatable\jquery.min.js" />
     <Content Include="assets\js\index.js" />
     <Content Include="assets\js\jquery.loading-indicator.html" />
     <Content Include="assets\js\jquery.min.js" />
@@ -722,17 +731,32 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CompaignController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DashBoard.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MasterController.cs" />
+    <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\SaleOrderController.cs" />
     <Compile Include="Controllers\UserBaseController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\Compaign.cs" />
     <Compile Include="Models\Crypto.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\Home.cs" />
+    <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\PO.cs" />
+    <Compile Include="Models\SaleOrder.cs" />
+    <Compile Include="Models\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -751,6 +775,10 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
+    <Content Include="Views\Master\SiteMaster.cshtml" />
+    <Content Include="Views\Admin\DashBoard.cshtml" />
+    <Content Include="Views\Customer\AddCustomer.cshtml" />
+    <Content Include="Views\Customer\CustomerList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -760,8 +788,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="assets\SoftwareImages\" />
     <Folder Include="Views\AdminBase\" />
-    <Folder Include="Views\Master\" />
     <Folder Include="Views\UserBase\" />
   </ItemGroup>
   <PropertyGroup>

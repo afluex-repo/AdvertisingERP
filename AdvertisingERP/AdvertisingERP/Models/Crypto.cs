@@ -4,12 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
+using System.Threading.Tasks;
 
-namespace AdvertisingERP.Models
+namespace AdvertisingERP
 {
-    public class Crypto
+    public  class Crypto
     {
+
         public static string Encrypt(string clearText)
         {
             try

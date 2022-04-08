@@ -13,91 +13,80 @@ namespace AdvertisingERP.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
         public ActionResult Index()
         {
-            return View();
-        }
-        public ActionResult Dashboard()
-        {
+            
             return View();
         }
         public ActionResult Login()
         {
-            return View();
-        }
-        public ActionResult ForgetPassword()
-        {
+            Session.Abandon();
+            if (TempData["Login"] == null)
+            {
+                ViewBag.errormsg = "none";
+            }
             return View();
         }
         [HttpPost]
         [ActionName("Login")]
-        [OnAction(ButtonName = "btnlogin")]
-        public ActionResult LoginPanel(Home model)
+        [OnAction(ButtonName= "btnlogin")]
+        public ActionResult LoginAction(Home obj)
         {
-            if (model.LoginID == null)
+            if (obj.LoginId == null)
             {
                 ViewBag.errormsg = "";
                 TempData["Login"] = "Please Enter LoginId";
                 return RedirectToAction("Login");
 
             }
-            if (model.Password == null)
+            if (obj.Password == null)
             {
                 ViewBag.errormsg = "";
                 TempData["Login"] = "Please Enter Password";
                 return RedirectToAction("Login");
             }
-            if (model.LoginID.Trim() == "")
+            if (obj.LoginId.Trim() == "")
             {
                 ViewBag.errormsg = "";
                 TempData["Login"] = "Please Enter LoginId";
                 return RedirectToAction("Login");
-
+               
             }
-            if (model.Password.Trim() == "")
+            if (obj.Password.Trim() == "")
             {
                 ViewBag.errormsg = "";
                 TempData["Login"] = "Please Enter Password";
                 return RedirectToAction("Login");
+
             }
+          
             try
             {
-                DataSet ds = model.Login();
+                Home Modal = new Home();
+                DataSet ds = obj.Login();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-
-                    if (ds.Tables[0].Rows[0]["Fk_UserTypeId"].ToString() == "1")
-                    {
-                        ViewBag.errormsg = "";
-                        Session["AdminID"] = ds.Tables[0].Rows[0]["Pk_Id"].ToString();
-                        Session["LoginID"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                        Session["Username"] = ds.Tables[0].Rows[0]["Name"].ToString();
-                        Session["EmailID"] = ds.Tables[0].Rows[0]["EmailId"].ToString();
-                        Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["Fk_UserTypeId"].ToString();
-
-                        return RedirectToAction("DashBoard", "Home");
-
-                    }
-
-                    if (ds.Tables[0].Rows[0]["Fk_UserTypeId"].ToString() != "1")
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
                         ViewBag.errormsg = "";
                         Session["UserID"] = ds.Tables[0].Rows[0]["Pk_Id"].ToString();
                         Session["LoginID"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["Username"] = ds.Tables[0].Rows[0]["Name"].ToString();
-                        Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["Fk_UserTypeId"].ToString();
-                        return RedirectToAction("EmployeeDashBoard", "Employee");
+                        Session["EmailId"] = ds.Tables[0].Rows[0]["EmailId"].ToString();
 
+                        return RedirectToAction("DashBoard","Admin");
+                      
                     }
-
                     else
                     {
                         ViewBag.errormsg = "";
                         TempData["Login"] = "Incorrect LoginId Or Password";
                         return RedirectToAction("Login");
-
+                      
                     }
+                    
+                    
+
 
                 }
                 else
@@ -105,6 +94,8 @@ namespace AdvertisingERP.Controllers
                     ViewBag.errormsg = "";
                     TempData["Login"] = "Incorrect LoginId Or Password";
                     return RedirectToAction("Login");
+                   
+
                 }
             }
             catch (Exception ex)
@@ -112,18 +103,25 @@ namespace AdvertisingERP.Controllers
                 ViewBag.errormsg = "";
                 TempData["Login"] = ex.Message;
                 return RedirectToAction("Login");
-
+               
             }
+
+          
+
+
 
         }
 
-       
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
         [HttpPost]
         [ActionName("ForgetPassword")]
         [OnAction(ButtonName = "btnforgetpassword")]
         public ActionResult ChangePassword(Home model)
         {
-            if (model.LoginID == null)
+            if (model.LoginId == null)
             {
                 ViewBag.errormsg = "";
                 TempData["Error"] = "Please Enter LoginId";
@@ -183,4 +181,3 @@ namespace AdvertisingERP.Controllers
         }
     }
 }
-   
