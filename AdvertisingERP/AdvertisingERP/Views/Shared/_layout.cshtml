@@ -2,7 +2,6 @@
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -10,11 +9,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>Advertising ERP</title>
     <!-- loader-->
-    @*<link href="assets/css/pace.min.css" rel="stylesheet" />
-    <script src="assets/js/pace.min.js"></script>*@
+    @*<script src="~/assets/js/pace.min.js"></script>
+    <link href="~/assets/css/pace.min.css" rel="stylesheet" />*@
     <!--favicon-->
-    <script src="~/assets/js/pace.min.js"></script>
-    @*<link rel="icon" href="~/assets/images/favicon.ico" type="image/x-icon">*@
+    
+    <link rel="icon" href="~/assets/images/favicon.ico" type="image/x-icon">
     <!-- Vector CSS -->
     <link href="~/assets/plugins/vectormap/jquery-jvectormap-2.0.2.html" rel="stylesheet" />
     <!-- simplebar CSS-->
@@ -56,13 +55,13 @@
                 <li class="sidebar-header">MAIN NAVIGATION</li>
                 <!-- Dropdown-->
                 <li>
-                    <a href="icons.html">
+                    <a href="#">
                         <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="panel panel-default" id="dropdown">
                     <a data-toggle="collapse" href="#dropdown-dashboard">
-                        <i class="zmdi zmdi-view-dashboard"></i><span>Masters</span>
+                        <i class="zmdi zmdi-collection-item"></i><span>Masters</span>
                         @*<span class="caret"></span>*@
                         <i class="fa fa-plus caret1"></i>
                     </a>
@@ -70,97 +69,97 @@
                     <div id="dropdown-dashboard" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Site Master</li>
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Service Master</li>
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Financial Year</li>
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Bank Master</li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-cast-connected"></i> Site Master</a></li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-widgets"></i> Service Master</a></li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-money-box"></i> Financial Year</a></li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-home"></i> Bank Master</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
                 <li class="panel panel-default" id="dropdown">
                     <a data-toggle="collapse" href="#dropdown_Customer">
-                        <i class="fa fa-user"></i><span>Customer</span>
+                        <i class="zmdi zmdi-account-circle"></i><span>Customer</span>
                         <i class="fa fa-plus caret1"></i>
                     </a>
                     <!-- Dropdown dashboard 1 -->
                     <div id="dropdown_Customer" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"> <i class="fa fa-user-plus mr-2"></i> Add Customer</li>
-                                <li class="dropdown-item"> <i class="fa fa-list-ul mr-2"></i> Customer List</li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-account-circle"></i> Add Customer</a></li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-format-list-bulleted"></i> Customer List</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
                 <li class="panel panel-default" id="dropdown">
                     <a data-toggle="collapse" href="#dropdown_Vendor">
-                        <i class="zmdi zmdi-view-dashboard"></i><span>Vendor</span>
+                        <i class="zmdi zmdi-accounts"></i><span>Vendor</span>
                         <i class="fa fa-plus caret1"></i>
                     </a>
                     <!-- Dropdown dashboard 1 -->
                     <div id="dropdown_Vendor" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Add Vendor</li>
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Vendor List</li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-accounts"></i> Add Vendor</a></li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-format-list-bulleted"></i> Vendor List</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
                 <li class="panel panel-default" id="dropdown">
                     <a data-toggle="collapse" href="#dropdown-Campaign">
-                        <i class="zmdi zmdi-view-dashboard"></i><span>Campaign</span>
+                        <i class="zmdi zmdi-memory"></i><span>Campaign</span>
                         <i class="fa fa-plus caret1"></i>
                     </a>
                     <!-- Dropdown dashboard 1 -->
                     <div id="dropdown-Campaign" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Add Campaign</li>
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Campaign List</li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-file-add"></i> Add Campaign</a></li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-format-list-bulleted"></i> Campaign List</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
                 <li class="panel panel-default" id="dropdown">
                     <a data-toggle="collapse" href="#dropdown-Sale">
-                        <i class="zmdi zmdi-view-dashboard"></i><span>Sale Order</span>
+                        <i class="zmdi zmdi-shopping-cart"></i><span>Sale Order</span>
                         <i class="fa fa-plus caret1"></i>
                     </a>
                     <!-- Dropdown dashboard 1 -->
                     <div id="dropdown-Sale" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Generate Sale Order</li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-file-add"></i> Generate Sale Order</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
                 <li class="panel panel-default" id="dropdown">
                     <a data-toggle="collapse" href="#dropdown-Purchase">
-                        <i class="zmdi zmdi-view-dashboard"></i><span>Purchase Order</span>
+                        <i class="zmdi zmdi-shopping-basket"></i><span>Purchase Order</span>
                         <i class="fa fa-plus caret1"></i>
                     </a>
                     <!-- Dropdown dashboard 1 -->
                     <div id="dropdown-Purchase" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Generate PO</li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-file-add"></i> Generate PO</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
                 <li class="panel panel-default" id="dropdown">
                     <a data-toggle="collapse" href="#dropdown-Invoice">
-                        <i class="zmdi zmdi-view-dashboard"></i><span>Invoice</span>
+                        <i class="zmdi zmdi-assignment-check"></i><span>Invoice</span>
                         <i class="fa fa-plus caret1"></i>
                     </a>
                     <!-- Dropdown dashboard 1 -->
                     <div id="dropdown-Invoice" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"> <i class="zmdi zmdi-view-dashboard"></i> Generate Invoice</li>
+                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-assignment-o"></i> Generate Invoice</a></li>
                             </ul>
                         </div>
                     </div>
