@@ -130,13 +130,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\css\style.css" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\app-style.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\icons.css" />
     <Content Include="assets\css\pace.min.css" />
     <Content Include="assets\css\sidebar-menu.css" />
+    <Content Include="assets\css\style.css" />
     <Content Include="assets\flags\1x1\ad.svg" />
     <Content Include="assets\flags\1x1\ae.svg" />
     <Content Include="assets\flags\1x1\af.svg" />
@@ -767,10 +767,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\Master\SiteMaster.cshtml" />
-    <Content Include="Views\Master\SiteList.cshtml" />
-    <Content Include="Views\Master\ServiceMaster.cshtml" />
-    <Content Include="Views\Master\ServiceList.cshtml" />
-    <Content Include="Views\Master\BankMaster.cshtml" />
+    <Content Include="Views\SaleOrder\GenerateSaleOrder.cshtml" />
+    <Content Include="Views\PurchaseOrder\POList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -798,7 +796,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58325</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58325/</IISUrl>
+          <IISUrl>http://localhost:58326/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

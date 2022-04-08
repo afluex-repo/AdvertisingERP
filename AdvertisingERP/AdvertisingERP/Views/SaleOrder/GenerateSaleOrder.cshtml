@@ -1,0 +1,106 @@
+﻿@model AdvertisingERP.Models.SaleOrder
+
+@{
+    ViewBag.Title = "GenerateSaleOrder";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+@using (Html.BeginForm("GenerateSaleOrder", "SaleOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Sale Order No </label>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(m => m.SalesOrderNo, new { @class = "form-control mb-3", @Placeholder = "Sale Order No", @readonly = "true" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-md-3">
+                                            <input type="submit" value="Generate Sale Order" class="btn btn-light" name="Generate" onclick="return generatesaleorderno()" />
+                                        </div>
+                                        <div class="form-group col-9 text-right">
+                                            @if (TempData["GenerateOrder"] != null)
+                                            {
+                                                <span class="@TempData["Class"]">@TempData["GenerateOrder"]</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="file_export" class="table table-striped table-bordered display">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Sales Order No</th>
+                                            <th>Order Date</th>
+                                            <th>CustomerName</th>
+                                            <th>CustomerMobile</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.lstsaleorder != null)
+                                            {
+                                                foreach (var item in Model.lstsaleorder)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @if (item.PostStatus == "True")
+                                                            {
+                                                                <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
+                                                                    <div class="font-22 text-white">
+
+                                                                    </div>
+                                                                    <div class="ms-2">printer</div>
+                                                                </div>
+                                                                <a href="/SaleOrder/SaleOrderDetails?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary">View</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="/SaleOrder/SaleOrderDetails?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary"><i class="fa fa-edit text-danger"></i></a>
+                                                            }
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <a href="/SaleOrder/PrintSO?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary"><i class="fa fa-file-pdf-o text-success"></i></a>
+                                                        </td>
+                                                        <td>@item.SalesOrderNo</td>
+                                                        <td>@item.OrderDate</td>
+                                                        <td>@item.CustomerName</td>
+                                                        <td>@item.CustomerMobile</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>Sales Order No</th>
+                                            <th>Order Date</th>
+                                            <th>CustomerName</th>
+                                            <th>CustomerMobile</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+
