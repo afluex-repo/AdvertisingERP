@@ -2001,7 +2001,7 @@ table.grid td {
 /* Alerts*/
 .alert {
     position: relative;
-    padding: 0;
+    padding: 10px;
     margin-bottom: 1rem;
     border: none;
 	background-color: rgba(0,0,0,.2);
