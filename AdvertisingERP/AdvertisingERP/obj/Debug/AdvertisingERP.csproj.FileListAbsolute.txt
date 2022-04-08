@@ -212,4 +212,3 @@ D:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\b
 D:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.csprojResolveAssemblyReference.cache
 D:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.dll
 D:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.pdb
-E:\Ashwani Mishra repo\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.csprojResolveAssemblyReference.cache
