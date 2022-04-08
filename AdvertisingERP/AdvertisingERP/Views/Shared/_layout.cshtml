@@ -10,7 +10,7 @@
     <title>Advertising ERP</title>
     <!-- loader-->
     @*<script src="~/assets/js/pace.min.js"></script>
-    <link href="~/assets/css/pace.min.css" rel="stylesheet" />*@
+        <link href="~/assets/css/pace.min.css" rel="stylesheet" />*@
     <!--favicon-->
     <script src="~/assets/js/pace.min.js"></script>
     @*<link rel="icon" href="~/assets/images/favicon.ico" type="image/x-icon">*@
@@ -46,7 +46,7 @@
         <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
             <div class="brand-logo">
                 <a href="index.html">
-                    <img src="~/assets/images/footer_logo.png" class="logo-icon" alt="logo icon"/>
+                    <img src="~/assets/images/footer_logo.png" class="logo-icon" alt="logo icon" />
                     @*<img src="~/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">*@
                     @*<h5 class="logo-text">Admin</h5>*@
                 </a>
@@ -131,7 +131,7 @@
                     <div id="dropdown-Sale" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-file-add"></i> Generate Sale Order</a></li>
+                                <li class="dropdown-item"><a href="/SaleOrder/GenerateSaleOrder"> <i class="zmdi zmdi-file-add"></i> Generate Sale Order</a></li>
                             </ul>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                     <div id="dropdown-Purchase" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-file-add"></i> Generate PO</a></li>
+                                <li class="dropdown-item"><a href="/PurchaseOrder/POList"> <i class="zmdi zmdi-file-add"></i> Generate PO</a></li>
                             </ul>
                         </div>
                     </div>
@@ -159,18 +159,17 @@
                     <div id="dropdown-Invoice" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul class="nav navbar-nav sub-menu">
-                                <li class="dropdown-item"><a href="#"> <i class="zmdi zmdi-assignment-o"></i> Generate Invoice</a></li>
+                                <li class="dropdown-item"><a href="/SaleOrder/InvoiceNo"> <i class="zmdi zmdi-assignment-o"></i> Generate Invoice</a></li>
                             </ul>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <a href="icons.html">
+                    <a href="/Home/Index">
                         <i class="icon-power mr-2"></i> <span>Logout</span>
                     </a>
                 </li>
             </ul>
-
         </div>
         <!--End sidebar-wrapper-->
         <!--Start topbar header-->
@@ -255,7 +254,6 @@
 
     <!-- Index js -->
     <script src="~/assets/js/index.js"></script>
-
 </body>
 
 </html>
