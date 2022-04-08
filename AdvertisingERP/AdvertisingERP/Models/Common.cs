@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace AdvertisingERP.Models
 {
     public class Common
@@ -23,10 +24,27 @@ namespace AdvertisingERP.Models
         public string FinancialYearID { get; set; }
         public string FinancialYearName { get; set; }
 
-     
-       
+        public DataSet BindVendor()
+        {
+            SqlParameter[] para ={new SqlParameter ("@VendorCode",VendorCode),
+                                new SqlParameter("@Name",Name),
+                                  new SqlParameter("@MobileNo",MobileNo)};
+            DataSet ds = DBHelper.ExecuteQuery("GetVendorDetails", para);
+            return ds;
+        }
 
-       
+        public DataSet GetMediaVehicle()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetMediaVehicle");
+            return ds;
+        }
+
+        public DataSet GetMediaType()
+        {
+            SqlParameter[] para ={new SqlParameter ("@ServiceType", ServiceTypeNameSO), };
+            DataSet ds = DBHelper.ExecuteQuery("GetMediaType", para);
+            return ds;
+        }
 
         public DataSet GetStateCity()
         {
@@ -43,33 +61,33 @@ namespace AdvertisingERP.Models
             List<SelectListItem> ddldateformat = new List<SelectListItem>();
             ddldateformat.Add(new SelectListItem { Text = "Single", Value = "Single" });
             ddldateformat.Add(new SelectListItem { Text = "Double", Value = "Double" });
-
+         
             return ddldateformat;
         }
         public static List<SelectListItem> BindPaymentTerms()
         {
             List<SelectListItem> PaymentMode = new List<SelectListItem>();
-            PaymentMode.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
-            PaymentMode.Add(new SelectListItem { Text = "Monthly", Value = "1" });
-            PaymentMode.Add(new SelectListItem { Text = "Quarterly", Value = "2" });
-            PaymentMode.Add(new SelectListItem { Text = "Yearly", Value = "3" });
-            PaymentMode.Add(new SelectListItem { Text = "Immediate", Value = "4" });
+            PaymentMode.Add(new SelectListItem { Text="Please Select ",Value="0" });
+            PaymentMode.Add(new SelectListItem { Text="Monthly",Value="1" });
+            PaymentMode.Add(new SelectListItem { Text="Quarterly",Value="2" });
+            PaymentMode.Add(new SelectListItem { Text="Yearly",Value="3" });
+            PaymentMode.Add(new SelectListItem { Text="Immediate",Value="4" });
             return PaymentMode;
         }
         public static List<SelectListItem> BillingSnaps()
         {
             List<SelectListItem> PaymentMode = new List<SelectListItem>();
             PaymentMode.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
-            PaymentMode.Add(new SelectListItem { Text = "Start Date-End Date", Value = "1" });
-            PaymentMode.Add(new SelectListItem { Text = "Start Date-Mid Date-End Date", Value = "2" });
+            PaymentMode.Add(new SelectListItem { Text="Start Date-End Date",Value="1" });
+            PaymentMode.Add(new SelectListItem { Text="Start Date-Mid Date-End Date",Value="2" });
             return PaymentMode;
         }
         public static List<SelectListItem> POReceived()
         {
             List<SelectListItem> PaymentMode = new List<SelectListItem>();
             PaymentMode.Add(new SelectListItem { Text = "Please Select ", Value = "0" });
-            PaymentMode.Add(new SelectListItem { Text = "Yes", Value = "1" });
-            PaymentMode.Add(new SelectListItem { Text = "Awaited", Value = "2" });
+            PaymentMode.Add(new SelectListItem { Text="Yes",Value="1" });
+            PaymentMode.Add(new SelectListItem { Text="Awaited",Value="2" });
             PaymentMode.Add(new SelectListItem { Text = "Billing on Mail Confirmation", Value = "3" });
             return PaymentMode;
         }
@@ -102,6 +120,8 @@ namespace AdvertisingERP.Models
 
             try
             {
+                //Dt = DateTime.Parse(DateString);
+                //return Dt.ToString("MM/dd/yyyy");
                 return DateString;
             }
             catch
@@ -111,6 +131,7 @@ namespace AdvertisingERP.Models
 
         }
     }
+
     public class CompanyProfile
     {
         static public string CompanyName = "Afluex Multiservices LLP";
@@ -123,4 +144,5 @@ namespace AdvertisingERP.Models
         static public string PAN = "ABJFA3997N";
         static public string GSTIN = "09ABJFA3997N1ZK";
     }
+
 }
