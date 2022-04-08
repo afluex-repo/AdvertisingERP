@@ -9,16 +9,19 @@ namespace AdvertisingERP.Controllers
 {
     public class AdminBaseController : Controller
     {
+        //
+        // GET: /Base/
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-        
+            // code involving this.Session // edited to simplify
             HttpSessionStateBase session = filterContext.HttpContext.Session;
             // If the browser session or authentication session has expired...
-            if (session.IsNewSession || Session["AdminID"] == null)
+            if (session.IsNewSession || Session["UserID"] == null)
             {
-
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
-                     new { action = "Index", Controller = "Home" }));
+                Session["UserID"] = "1";
+                //filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                //     new { action = "Index", Controller = "Home" }));
             }
             else
             {
@@ -40,5 +43,6 @@ namespace AdvertisingERP.Controllers
             }
             base.OnActionExecuting(filterContext); // re-added in edit
         }
+
     }
 }

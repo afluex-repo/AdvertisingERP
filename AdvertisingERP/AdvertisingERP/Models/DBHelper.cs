@@ -1,9 +1,10 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AdvertisingERP.Models
 {
@@ -15,8 +16,10 @@ namespace AdvertisingERP.Models
         {
             try
             {
-                connectionString = "Data Source=103.48.51.111,1232;Initial Catalog=FollowupTest;User Id=FollowupTestUser;Password=followup123!@#;Integrated Security=false";
-                // connectionString = "Data Source=23.111.171.42;Initial Catalog=followupdb;User Id=afluex;Password=afluex@123!@#;Integrated Security=false;";
+                //connectionString = "Data Source=DESKTOP-UDD0G1A\\SQLEXPRESS; Initial Catalog=CitiAdDB; User Id=sa; Password=1234; Integrated Security=false; ";
+                //connectionString = "Data Source=184.95.53.181;Initial Catalog=CitiAdDemo;User Id=citiusertest;Password=citi123!@#;Integrated Security=false;";
+
+                connectionString = "Data Source=23.111.171.42;Initial Catalog=AdvertisingERP;User Id=AdvertisingERP;Password=AfluexERP123!@#;Integrated Security=false;";
             }
             catch (Exception)
             {
@@ -77,3 +80,6 @@ namespace AdvertisingERP.Models
         }
     }
 }
+
+
+
