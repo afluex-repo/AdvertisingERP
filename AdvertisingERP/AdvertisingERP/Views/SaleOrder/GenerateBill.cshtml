@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "GenerateBill";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
 <style>
@@ -14,68 +14,55 @@
 
 @using (Html.BeginForm("GenerateBill", "SaleOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
-    <div class="clearfix"></div>
-
-    <div class="content-wrapper">
-        <div class="container-fluid">
-            <div class="col-md-12">
-                <div class="page-breadcrumb">
-                    <div class="row">
-                        <div class="col-5 align-self-center">
-                            <h4 class="page-title"></h4>
-                            <div class="d-flex align-items-center">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">SaleOrder</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">GenerateBill</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-
-                    </div>
+    <div class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">SaleOrder</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Generate Bill</li>
+                    </ol>
+                </nav>
+            </div>
+            @if (TempData["InvoiceNo"] != null)
+            { <div class="@TempData["Class"]">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h5 class="text-success"><i class="fa fa-check-circle"></i>&nbsp; @TempData["InvoiceNo"]</h5>
+        </div>
+            } @if (TempData["Bill"] != null)
+            { <div class="@TempData["Class"]">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <h5 class="text-success"><i class="fa fa-check-circle"></i>@TempData["Bill"]</h5>
+        </div>
+            }
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <a href="/Master/BankList" class="btn btn-light list-button">Back To List</a>
                 </div>
-                @if (TempData["InvoiceNo"] != null)
-                {
-                    <div class="@TempData["Class"]">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                        <h5 class="text-success"><i class="fa fa-check-circle"></i>&nbsp; @TempData["InvoiceNo"]</h5>
-                    </div>
-                }
-                @if (TempData["Bill"] != null)
-                {
-                    <div class="@TempData["Class"]">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                        <h5 class="text-success"><i class="fa fa-check-circle"></i>@TempData["Bill"]</h5>
-                    </div>
-                }
-                <div class="card">
-                    <div class="card-body">
-                        <div class="m-b-0 card-title">
-                            GenerateBill
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4">
+            </div>
 
+            <hr />
+            <div class="card">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <div class="row g-3">
+                            <div class="col-md-4">
                                 <label for="input-1">Invoice No </label>
-                             
-                                    @Html.TextBoxFor(m => m.InvoiceNo, new { @class = "form-control", @Placeholder = "Invoice No", @readonly = "readonly" })
-                                    @Html.HiddenFor(m => m.PK_InvoiceNoID)
-                                </div>
-                          
+
+                                @Html.TextBoxFor(m => m.InvoiceNo, new { @class = "form-control", @Placeholder = "Invoice No", @readonly = "readonly" }) @Html.HiddenFor(m => m.PK_InvoiceNoID)
+                            </div>
 
                             <div class="col-md-4">
-
                                 <label for="input-1">Campaign No </label>
 
-                                @Html.TextBoxFor(m => m.CampaignNo, new { @class = "form-control", @Placeholder = "Campaign No" })
-                                @Html.HiddenFor(m => m.CampaignID)
+                                @Html.TextBoxFor(m => m.CampaignNo, new { @class = "form-control", @Placeholder = "Campaign No" }) @Html.HiddenFor(m => m.CampaignID)
                             </div>
 
-
                             <div class="col-md-4">
-
                                 <input type="submit" value="Get Details" class="btn btn-light list-button mt-btn" name="btnGetCampaignDetails" onclick="return validateCampaignNo()" />
                             </div>
                         </div>
@@ -95,35 +82,32 @@
                                     </thead>
                                     <tbody>
                                         @if (Model != null)
-                                                    {
-                                                        if (Model.lstsaleorder != null)
-                                                        {
-                                                            var j = 1;
-                                                            foreach (var item in Model.lstsaleorder)
+                                        {
+                                            if (Model.lstsaleorder != null)
+                                            { var j = 1; foreach (var item in Model.lstsaleorder)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @if (item.LineStatus == "Unmapped")
                                                             {
-                                    <tr>
-                                        <td>
-                                            @if (item.LineStatus == "Unmapped")
-                                                                        {
-                                                            <input type="checkbox" name="chkSO_@j" />
-                                                                        }
-                                        </td>
-                                        <td>@item.ServiceName</td>
-                                        <td>@item.SalesOrderNo</td>
-                                        <td>@item.OrderDate</td>
-                                        <td>@item.CustomerName</td>
-                                        <td>
-                                            @item.CustomerMobile
-                                            <input type="hidden" name="hdPON_@j" value="@item.PONumber" />
-                                            <input type="hidden" name="hdSaleOrderID_@j" value="@item.FK_SaleOrderId" />
-                                        </td>
-                                    </tr>
-                                                                j++;
+                                                                <input type="checkbox" name="chkSO_@j" />
                                                             }
-                                    <input type='hidden' value='@j' id='hdrows' name='hdrows'>
-                                                        }
-                                                    }
-
+                                                        </td>
+                                                        <td>@item.ServiceName</td>
+                                                        <td>@item.SalesOrderNo</td>
+                                                        <td>@item.OrderDate</td>
+                                                        <td>@item.CustomerName</td>
+                                                        <td>
+                                                            @item.CustomerMobile
+                                                            <input type="hidden" name="hdPON_@j" value="@item.PONumber" />
+                                                            <input type="hidden" name="hdSaleOrderID_@j" value="@item.FK_SaleOrderId" />
+                                                        </td>
+                                                    </tr>
+                                                    j++;
+                                                }
+                                                <input type="hidden" value="@j" id="hdrows" name="hdrows" />
+                                            }
+                                        }
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -138,7 +122,7 @@
                                 </table>
                             </div>
                         </div>
-                     
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -149,63 +133,60 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
 }
+<script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+ <script>
+    $(document).ready(function () {
+        //$('#InvoiceNo').val('AFLX/2019-20/');
+        $("#divload").css({ display: "none" });
 
-                  
+        var campaigns = [];
+        $.ajax({
+            url: "/SaleOrder/GetAllCampaigns",
+            type: "Post",
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) {
+                        // GETTING ERROR HERE
+                        campaigns.push(item.CreativeName + "(" + item.CampaignNo + ")");
+                    });
 
-                    <script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
-                    <script>
-                        $(document).ready(function () {
-                            //$('#InvoiceNo').val('AFLX/2019-20/');
-                            $("#divload").css({ 'display': 'none' });
-
-                            var campaigns = [];
-                            $.ajax({
-                                url: '/SaleOrder/GetAllCampaigns',
-                                type: 'Post',
-                                success: function (response) {
-                                    if (response != null) {
-                                        $(response).each(function (index, item) { // GETTING ERROR HERE
-                                            campaigns.push(item.CreativeName + "(" + item.CampaignNo + ")");
-                                        });
-
-                                        $('#CampaignNo').autocomplete({
-                                            source: campaigns,
-                                            select: function (event, ui) {
-                                                var str = ui.item.label;
-                                                var afterComma = str.substr(str.indexOf("(") + 1);
-                                                var citycode = afterComma.substr(0, afterComma.length - 1);
-                                                $('#CampaignID').val(citycode);
-                                            }
-                                        })
-                                    }
-                                    else {
-
-                                    }
-                                }, error: function () { alert('Some Thing wrong!'); }
-                            });
-                        });
-                        function validateCampaignNo() {
-                            if ($('#InvoiceNo').val() == "") {
-                                $("#InvoiceNo").addClass('errortext');
-                                $('#InvoiceNo').focus();
-                                return false;
-                            }
-                            if ($('#CampaignNo').val() == "") {
-                                $("#CampaignNo").addClass('errortext');
-                                $('#CampaignNo').focus();
-                                return false;
-                            }
-
-                        }
-                    </script>
-
-                    <style>
-                        .errortext {
-                            border: 1px solid red !important;
-                            background-color: #ff00003b !important;
-                        }
-                    </style>
+                    $("#CampaignNo").autocomplete({
+                        source: campaigns,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var afterComma = str.substr(str.indexOf("(") + 1);
+                            var citycode = afterComma.substr(0, afterComma.length - 1);
+                            $("#CampaignID").val(citycode);
+                        },
+                    });
+                } else {
+                }
+            },
+            error: function () {
+                alert("Some Thing wrong!");
+            },
+        });
+    });
+    function validateCampaignNo() {
+        if ($("#InvoiceNo").val() == "") {
+            $("#InvoiceNo").addClass("errortext");
+            $("#InvoiceNo").focus();
+            return false;
+        }
+        if ($("#CampaignNo").val() == "") {
+            $("#CampaignNo").addClass("errortext");
+            $("#CampaignNo").focus();
+            return false;
+        }
+    }
+  </script>
+ <style>
+       .errortext {
+             border: 1px solid red !important;
+              background-color: #ff00003b !important;
+              }
+  </style>
 

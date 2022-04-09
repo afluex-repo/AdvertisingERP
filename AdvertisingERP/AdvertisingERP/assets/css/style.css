@@ -42,3 +42,14 @@ ul.nav.navbar-nav.sub-menu li a{
 img.login-img {
     width: 185px;
 }
+.list-button{
+    float:right;
+    margin-top:-8px;
+}
+.btndown {
+    margin-top: 31px;
+}
+ .errortext {
+        border: 2px solid red !important;
+        background-color: #ff00003b !important;
+    }
