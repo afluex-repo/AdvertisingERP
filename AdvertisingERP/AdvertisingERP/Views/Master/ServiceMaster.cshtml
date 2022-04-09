@@ -41,6 +41,34 @@
                         <a href="/Master/ServiceList" class="btn btn-light list-button">Back To List</a>
                     </div>
                     <hr>
+                    @if (@TempData["success"] != null)
+                    {
+                        <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["success"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                        </div>
+                    }
+                    @if (@TempData["error"] != null)
+                    {
+                        <div class="alert border-0 bg-danger alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["error"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
                   @using (Html.BeginForm("ServiceMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
                   {
                         <div class="row">
@@ -48,7 +76,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label class="control-label">Service Name <span style="color: red">*</span></label>
-                                            @Html.TextBoxFor(m => m.ServiceName, new { @class = "form-control form-control-lg", @Placeholder = "Service Name" })
+                                            @Html.TextBoxFor(m => m.ServiceName, new { @class = "form-control", @Placeholder = "Service Name" })
                                             @Html.HiddenFor(m => m.ServiceId, new { @Placeholder = "Site Name" })
                                         
                                     </div>
@@ -58,7 +86,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label class="control-label">HSN Code <span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.HSNCode, new { @class = "form-control form-control-lg", @Placeholder = "HSC Code" })
+                                        @Html.TextBoxFor(m => m.HSNCode, new { @class = "form-control", @Placeholder = "HSC Code" })
                                     </div>
                                 </div>
                             </div>
@@ -66,7 +94,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label class="control-label">Date Format <span style="color: red">*</span></label>
-                                        @Html.DropDownListFor(m => m.DateFormat, new SelectList(ViewBag.ddldateformat, "Value", "Text"), new { @class = "form-control form-control-lg" })
+                                        @Html.DropDownListFor(m => m.DateFormat, new SelectList(ViewBag.ddldateformat, "Value", "Text"), new { @class = "form-control" })
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +102,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label class="control-label">CGST <span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.CGST, new { @class = "form-control form-control-lg", @Placeholder = "CGST", onkeypress = "return isNumber(event);" })
+                                        @Html.TextBoxFor(m => m.CGST, new { @class = "form-control", @Placeholder = "CGST", onkeypress = "return isNumber(event);" })
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +110,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label class="control-label">IGST <span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.IGST, new { @class = "form-control form-control-lg", @Placeholder = "IGST", onkeypress = "return isNumber(event);" })
+                                        @Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @Placeholder = "IGST", onkeypress = "return isNumber(event);" })
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +118,7 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label class="control-label">SGST <span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.SGST, new { @class = "form-control form-control-lg", @Placeholder = "SGST", onkeypress = "return isNumber(event);" })
+                                        @Html.TextBoxFor(m => m.SGST, new { @class = "form-control", @Placeholder = "SGST", onkeypress = "return isNumber(event);" })
                                     </div>
                                 </div>
                             </div>

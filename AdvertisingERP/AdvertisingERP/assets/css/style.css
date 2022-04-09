@@ -42,33 +42,14 @@ ul.nav.navbar-nav.sub-menu li a{
 img.login-img {
     width: 185px;
 }
-a.btn.btn-light.list-button {
-    float: right;
-    margin-top: -8px;
+.list-button{
+    float:right;
+    margin-top:-8px;
 }
-input.btn.btn-light {
-    margin-top: 33px;
+.btndown {
+    margin-top: 31px;
 }
-a.btn.btn-dark {
-    margin-top: 33px;
-}
-.breadcrumb-title {
-	font-size: 20px;
-	border-right: 1.5px solid rgb(255 255 255 / 34%);
-}
-.page-breadcrumb .breadcrumb li.breadcrumb-item {
-	font-size: 16px
-}
-.pe-3 {
-    padding-right: 1rem!important;
-}
-.ps-3 {
-    padding-left: 1rem!important;
-}
-.page-breadcrumb.d-sm-flex.align-items-center.mb-3.breadcrumb-card {
-    padding: 5px 20px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
-    border: none;
-    background-color: rgba(0,0,0,.2);
-}
+ .errortext {
+        border: 2px solid red !important;
+        background-color: #ff00003b !important;
+    }
