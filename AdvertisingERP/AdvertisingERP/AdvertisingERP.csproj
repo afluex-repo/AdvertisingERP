@@ -130,6 +130,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\bootstrap.min.css" />
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\app-style.css" />
     <Content Include="assets\css\bootstrap.min.css" />
@@ -137,6 +138,7 @@
     <Content Include="assets\css\pace.min.css" />
     <Content Include="assets\css\sidebar-menu.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\dataTables.bootstrap.min.css" />
     <Content Include="assets\flags\1x1\ad.svg" />
     <Content Include="assets\flags\1x1\ae.svg" />
     <Content Include="assets\flags\1x1\af.svg" />
@@ -684,6 +686,10 @@
     <Content Include="assets\plugins\simplebar\css\simplebar.css" />
     <Content Include="assets\plugins\simplebar\js\simplebar.js" />
     <Content Include="assets\plugins\vectormap\jquery-jvectormap-2.0.2.html" />
+    <Content Include="assets\SoftwareImages\1cd0b6e1-dca8-4c1f-a04c-dd4e6e94a7a5.jpg" />
+    <Content Include="assets\SoftwareImages\628ada92-e293-4b22-add8-25d399993f58.png" />
+    <Content Include="assets\SoftwareImages\7100733d-dc00-40e5-8a23-da0f395f61d7.jpeg" />
+    <Content Include="assets\SoftwareImages\cd2106dc-9e90-4c7a-aae5-70731ebfa5c0.jpeg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -769,6 +775,10 @@
     <Content Include="Views\Master\SiteMaster.cshtml" />
     <Content Include="Views\SaleOrder\GenerateSaleOrder.cshtml" />
     <Content Include="Views\PurchaseOrder\POList.cshtml" />
+    <Content Include="Views\Admin\DashBoard.cshtml" />
+    <Content Include="Views\Customer\CustomerList.cshtml" />
+    <Content Include="Views\Customer\AddCustomer.cshtml" />
+    <Content Include="Views\Vendor\AddVendor.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

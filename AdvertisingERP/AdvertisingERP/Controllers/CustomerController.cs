@@ -79,12 +79,12 @@ namespace AdvertisingERP.Controllers
                     {
                         if (count == 0)
                         {
-                            obj.IdImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            obj.IdImage = "../assets/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.IdImage)));
                         }
                         if (count == 1)
                         {
-                            obj.PanImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            obj.PanImage = "../assets/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
                         }
 
@@ -229,7 +229,7 @@ namespace AdvertisingERP.Controllers
                 TempData["CustomerError"] = ex.Message;
                
             }
-            return View(obj);
+            return View("AddCustomer");
         }
 
         public ActionResult DeleteCustomer(string CustomerId)

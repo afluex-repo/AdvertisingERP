@@ -39,7 +39,7 @@ namespace AdvertisingERP.Models
         public string InvoiceDate { get; set; }
         public string CampaignID { get; set; }
         public string CampaignNumber { get; set; }
-        public string POReceived { get; set; }
+       public string POReceived { get; set; }
         public string Quantity { get; set; }
         public string Rate { get; set; }
         public string TotalAmount { get; set; }
@@ -76,7 +76,7 @@ namespace AdvertisingERP.Models
         public string VendorID { get; set; }
         public string VendorName { get; set; }
         public string Description { get; set; }
-        //public string SaleOrderNo { get; set; }
+        public string SaleOrderNo { get; set; }
         public string OrderDate { get; set; }
         public string CustomerName { get; set; }
         public string CustomerInfo { get; set; }
