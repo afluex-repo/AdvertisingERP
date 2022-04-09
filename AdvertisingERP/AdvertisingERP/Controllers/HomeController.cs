@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace AdvertisingERP.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AdminBaseController
     {
         public ActionResult Index()
         {
