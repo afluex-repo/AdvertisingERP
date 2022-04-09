@@ -28,8 +28,29 @@
     <link href="~/AdminCss/assets/css/icons.css" rel="stylesheet">
 
     <title>Dashtreme - Multipurpose Bootstrap5 Admin Template</title>
+    <style>
+        #cover {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-image: linear-gradient(82deg, #01465f, #5bb3e0);
+            z-index: 9999;
+            font-size: 65px;
+            text-align: center;
+            padding-top: 200px;
+            color: #fff;
+            font-family: tahoma;
+        }
+
+        .loadergif {
+            width: 300px;
+        }
+    </style>
 </head>
 <body class="bg-theme bg-theme1">
+    <div id="cover"> <span class="glyphicon glyphicon-refresh w3-spin preloader-Icon"></span> <img src="~/AdminCss/assets/images/erpgif.gif" class="loadergif" /></div>
     <div class="wrapper">
         <!--sidebar wrapper -->
         <div class="sidebar-wrapper" data-simplebar="true">
@@ -634,5 +655,10 @@
     </script>
     <!--app JS-->
     <script src="~/AdminCss/assets/js/app.js"></script>
+    <script>
+        $(window).on('load', function () {
+            $("#cover").fadeOut(1750);
+        });
+    </script>
 </body>
 </html>
