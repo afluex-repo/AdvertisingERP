@@ -49,3 +49,7 @@ img.login-img {
 .btndown {
     margin-top: 31px;
 }
+ .errortext {
+        border: 2px solid red !important;
+        background-color: #ff00003b !important;
+    }
