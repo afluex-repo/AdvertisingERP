@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "VendorList";
-    Layout = "~/Views/Shared/_layout.cshtml";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 <style>
     .mt-btn {
@@ -18,136 +18,121 @@
 
 @using (Html.BeginForm("VendorList", "Vendor", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
-    <div class="content-wrapper">
-        <div class="container-fluid">
-            <div class="col-md-12">
-                <div class="page-breadcrumb">
-                    <div class="row">
-                        <div class="col-5 align-self-center">
-                            <h4 class="page-title"></h4>
-                            <div class="d-flex align-items-center">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Vendor</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">VendorList</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-
-                    </div>
+    <div class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Vendor</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Vendor List</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="alert alert-success" style="display: @ViewBag.saverrormsg;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h5 class="text-success"><i class="fa fa-check-circle"></i>@TempData["VendorDelete"]</h5>
+            </div>
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <a href="/Vendor/AddVendor" class="btn btn-light list-button">Back To Vendor</a>
                 </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <hr>
-                        <div class="alert alert-success" style="display:@ViewBag.saverrormsg">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                            <h5 class="text-success"><i class="fa fa-check-circle"></i>@TempData["VendorDelete"]</h5>
-
+            </div>
+        </div>
+        <hr />
+        <div class="card">
+            <div class="card-body">
+                <div class="p-4 border rounded">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="input-1">Vendor Name</label>
+                            @Html.TextBoxFor(m => m.VendorName, new { @class = "form-control", @Placeholder = "Vendor Name" })
+                        </div>
+                        <div class="col-md-4">
+                            <label for="input-1">Vendor Code </label>
+                            @Html.TextBoxFor(m => m.VendorCode, new { @class = "form-control", @Placeholder = "Vendor Code" })
                         </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="input-1">Vendor Name</label>
-                                                @Html.TextBoxFor(m => m.VendorName, new { @class = "form-control", @Placeholder = "Vendor Name" })
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="input-1">Vendor Code </label>
-                                                @Html.TextBoxFor(m => m.VendorCode, new { @class = "form-control", @Placeholder = "Vendor Code" })
-                                            </div>
-
-
-                                            <div class="col-md-4">
-                                                <input type="submit" value="Get Details" class="btn btn-light list-button mt-btn" name="GetDetails" onclick="return getdeatils();" />
-
-
-                                            </div>
-                                        </div>
-                                        <br />
-                                        <div class="table-responsive">
-                                            <table id="file_export" class="table table-striped table-bordered display">
-                                                <thead>
-                                                    <tr>
-
-                                                        <th>Vendor Code</th>
-                                                        <th>Vendor Name</th>
-                                                        <th>Contact</th>
-                                                        <th>Email</th>
-                                                        <th>Nature</th>
-                                                        <th>Contact Person</th>
-                                                        <th>Bank Details</th>
-                                                        <th>Address</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @if (Model != null)
-                                                    {
-                                                        if (Model.lstVendor != null)
-                                                        {
-                                                            foreach (var item in Model.lstVendor)
-                                                            {
-                                                                <tr>
-
-                                                                    <td>@item.VendorCode</td>
-                                                                    <td>@item.VendorName</td>
-                                                                    <td>@item.MobileNo</td>
-                                                                    <td>@item.Email</td>
-                                                                    <td>@item.NatureOfBusiness</td>
-                                                                    <td>@item.ConcernPerson @item.ConcerPersonContact</td>
-                                                                    <td>@item.BankName @item.AccountNo @item.IFSCCode </td>
-                                                                    <td>@item.Address @item.StateName @item.City @item.Pincode</td>
-                                                                    <td>
-                                                                        <a href="/Vendor/AddVendor?VendorId=@item.VendorCode" class="label label-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                                                        &nbsp;
-                                                                        <a href="/Vendor/DeleteVendor?VendorId=@item.VendorId" onclick="return confirm('Sure you want to delete this Vendor ?');" class="label label-danger"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></a>
-                                                                    </td>
-                                                                </tr>
-                                                            }
-                                                        }
-                                                    }
-
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-
-                                                        <th>Vendor Code</th>
-                                                        <th>Vendor Name</th>
-                                                        <th>Contact</th>
-                                                        <th>Email</th>
-                                                        <th>Nature</th>
-                                                        <th>Contact Person</th>
-                                                        <th>Bank Details</th>
-                                                        <th>Address</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="col-md-4">
+                            <input type="submit" value="Get Details" class="btn btn-light list-button mt-btn" name="GetDetails" onclick="return getdeatils();" />
                         </div>
-                      
-
+                    </div>
+                    <br />
+                    <div class="table-responsive">
+                        <table id="example2" class="table table-striped table-bordered display">
+                            <thead>
+                                <tr>
+                                    <th>Vendor Code</th>
+                                    <th>Vendor Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Nature</th>
+                                    <th>Contact Person</th>
+                                    <th>Bank Details</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    if (Model.lstVendor != null)
+                                    {
+                                        foreach (var item in Model.lstVendor)
+                                        {
+                                            <tr>
+                                                <td>@item.VendorCode</td>
+                                                <td>@item.VendorName</td>
+                                                <td>@item.MobileNo</td>
+                                                <td>@item.Email</td>
+                                                <td>@item.NatureOfBusiness</td>
+                                                <td>@item.ConcernPerson @item.ConcerPersonContact</td>
+                                                <td>@item.BankName @item.AccountNo @item.IFSCCode</td>
+                                                <td>@item.Address @item.StateName @item.City @item.Pincode</td>
+                                                <td>
+                                                    <a href="/Vendor/AddVendor?VendorId=@item.VendorCode" class="label label-primary"><i class="bx bx-edit" aria-hidden="true"></i></a>
+                                                    &nbsp;
+                                                    <a href="/Vendor/DeleteVendor?VendorId=@item.VendorId" onclick="return confirm('Sure you want to delete this Vendor ?');" class="label label-danger">
+                                                        <i class="bx bx-trash" aria-hidden="true" style="color: red;"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Vendor Code</th>
+                                    <th>Vendor Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Nature</th>
+                                    <th>Contact Person</th>
+                                    <th>Bank Details</th>
+                                    <th>Address</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 }
-    <script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#divload").css({ 'display': 'none' });
-        });
-        function getdeatils() {
-            $("#divload").css({ 'display': '' });
-        }
-    </script>
+<script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#divload").css({ display: "none" });
+    });
+    function getdeatils() {
+        $("#divload").css({ display: "" });
+    }
+</script>
+
 

@@ -213,7 +213,7 @@ namespace AdvertisingERP.Controllers
         [ActionName("VendorList")]
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetVendorList(Vendor objVendor)
-        {
+         {
             if (TempData["VendorDelete"] == null)
             {
                 ViewBag.saverrormsg = "none";

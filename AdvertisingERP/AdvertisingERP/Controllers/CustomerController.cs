@@ -123,11 +123,41 @@ namespace AdvertisingERP.Controllers
 
         public ActionResult CustomerList()
         {
+            Customer objcustomer = new Customer();
             if (TempData["CustomerDelete"] == null)
             {
                 ViewBag.saverrormsg = "none";
             }
-            return View();
+
+            List<Customer> lst = new List<Customer>();
+            objcustomer.CompanyName = string.IsNullOrEmpty(objcustomer.CompanyName) ? null : objcustomer.CompanyName;
+            objcustomer.CustomerCode = string.IsNullOrEmpty(objcustomer.CustomerCode) ? null : objcustomer.CustomerCode;
+            DataSet ds = objcustomer.GetAllCustomers();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Customer obj = new Customer();
+                    obj.CompanyId = Crypto.Encrypt(dr["PK_CustomerID"].ToString());
+                    obj.CustomerCode = dr["CustomerCode"].ToString();
+                    obj.CompanyName = dr["CompanyName"].ToString();
+                    obj.NatureOfBusiness = dr["NatureOfBusiness"].ToString();
+                    obj.MobileNo = dr["CompanyMobile"].ToString();
+                    obj.PhoneNo = dr["CompanyPhone"].ToString();
+                    obj.BankName = dr["BankName"].ToString();
+                    obj.AccountNo = dr["BankAccountNumber"].ToString();
+                    obj.IFSCCode = dr["IFSCCode"].ToString();
+                    obj.BankAddress = dr["BankAddress"].ToString();
+                    obj.Address = dr["Address"].ToString();
+                    obj.Pincode = dr["Pincode"].ToString();
+                    obj.StateName = dr["State"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.Email = dr["Email"].ToString();
+                    lst.Add(obj);
+                }
+                objcustomer.lstcustomer = lst;
+            }
+            return View(objcustomer);
         }
         [HttpPost]
         [ActionName("CustomerList")]
