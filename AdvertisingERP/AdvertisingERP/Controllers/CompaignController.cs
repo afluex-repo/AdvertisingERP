@@ -101,11 +101,38 @@ namespace AdvertisingERP.Controllers
 
         public ActionResult CompaignList()
         {
+            Compaign objCompaign = new Compaign();
             if (TempData["CompaignDelete"] == null)
             {
                 ViewBag.saverrormsg = "none";
             }
-            return View();
+            List<Compaign> lst = new List<Compaign>();
+
+            objCompaign.CampaignNo = string.IsNullOrEmpty(objCompaign.CampaignNo) ? null : objCompaign.CampaignNo;
+            objCompaign.CustomerId = string.IsNullOrEmpty(objCompaign.CustomerId) ? null : objCompaign.CustomerId;
+            DataSet ds = objCompaign.GetCampaigns();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Compaign obj = new Compaign();
+
+                    obj.CompaignId = Crypto.Encrypt(dr["PK_CamapignID"].ToString());
+                    obj.CampaignNo = dr["CampaignNo"].ToString();
+                    obj.CustomerName = dr["CompanyName"].ToString();
+                    obj.CreativeName = dr["CreativeName"].ToString();
+                    obj.StartDate = dr["StartDate"].ToString();
+
+                    obj.EndDate = dr["EndDate"].ToString();
+                    obj.Decription = dr["Description"].ToString();
+
+
+
+                    lst.Add(obj);
+                }
+                objCompaign.lstCompaign = lst;
+            }
+            return View(objCompaign);
         }
         [HttpPost]
         [ActionName("CompaignList")]
