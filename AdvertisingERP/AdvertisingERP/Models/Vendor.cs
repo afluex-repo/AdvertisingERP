@@ -46,8 +46,8 @@ namespace AdvertisingERP.Models
 
         public DataSet GetAllVendors()
         {
-            SqlParameter[] para ={    new SqlParameter ("@VendorCode", VendorId),
-                                      new SqlParameter("@Name",VendorName ), };
+            SqlParameter[] para ={ new SqlParameter ("@VendorCode", VendorId),
+                                    new SqlParameter("@Name",VendorName ), };
             DataSet ds = DBHelper.ExecuteQuery("GetVendorDetails", para);
             return ds;
         }
@@ -118,7 +118,7 @@ namespace AdvertisingERP.Models
         public DataSet DeleteVendor()
         {
             SqlParameter[] para ={    
-                                      new SqlParameter ("@VendorCode",VendorCode),
+                                      new SqlParameter ("@VendorCode",VendorId),
                                       new SqlParameter("@Deletedby",DeletedBy ),
                                      
                                  };

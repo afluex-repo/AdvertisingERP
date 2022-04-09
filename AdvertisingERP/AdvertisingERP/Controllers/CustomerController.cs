@@ -185,12 +185,12 @@ namespace AdvertisingERP.Controllers
                     {
                         if (count == 0)
                         {
-                            obj.IdImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            obj.IdImage = "../assets/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.IdImage)));
                         }
                         if (count == 1)
                         {
-                            obj.PanImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                            obj.PanImage = "../assets/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
                             file.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
                         }
 
@@ -229,7 +229,7 @@ namespace AdvertisingERP.Controllers
                 TempData["CustomerError"] = ex.Message;
                
             }
-            return View("AddCustomer");
+            return View("CustomerList");
         }
 
         public ActionResult DeleteCustomer(string CustomerId)
@@ -249,13 +249,13 @@ namespace AdvertisingERP.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
 
-                        TempData["CustomerDelete"] = "Customer Deleted Successfully";
+                        TempData["CustomerError"] = "Customer Deleted Successfully";
 
 
                     }
                     else
                     {
-                        TempData["CustomerDelete"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["CustomerError"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
 
                     }
@@ -263,7 +263,7 @@ namespace AdvertisingERP.Controllers
             }
             catch (Exception ex)
             {
-                TempData["CustomerDelete"] = ex.Message;
+                TempData["CustomerError"] = ex.Message;
 
             }
             ViewBag.saverrormsg = "";
