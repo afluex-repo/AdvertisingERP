@@ -1,0 +1,173 @@
+﻿@model AdvertisingERP.Models.Master
+
+@{
+    ViewBag.Title = "ServiceMaster";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+
+<style>
+    .errortext {
+        border: 2px solid red !important;
+        background-color: #ff00003b !important;
+    }
+</style>
+<div class="clearfix"></div>
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-5 align-self-center">
+                        <h4 class="page-title"></h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Masters</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Service Master</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="m-b-0 card-title">
+                        Service Master
+                        <a href="/Master/ServiceList" class="btn btn-light list-button">Back To List</a>
+                    </div>
+                    <hr>
+                  @using (Html.BeginForm("ServiceMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+                  {
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Service Name <span style="color: red">*</span></label>
+                                            @Html.TextBoxFor(m => m.ServiceName, new { @class = "form-control form-control-lg", @Placeholder = "Service Name" })
+                                            @Html.HiddenFor(m => m.ServiceId, new { @Placeholder = "Site Name" })
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="control-label">HSN Code <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.HSNCode, new { @class = "form-control form-control-lg", @Placeholder = "HSC Code" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Date Format <span style="color: red">*</span></label>
+                                        @Html.DropDownListFor(m => m.DateFormat, new SelectList(ViewBag.ddldateformat, "Value", "Text"), new { @class = "form-control form-control-lg" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="control-label">CGST <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.CGST, new { @class = "form-control form-control-lg", @Placeholder = "CGST", onkeypress = "return isNumber(event);" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="control-label">IGST <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.IGST, new { @class = "form-control form-control-lg", @Placeholder = "IGST", onkeypress = "return isNumber(event);" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="control-label">SGST <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.SGST, new { @class = "form-control form-control-lg", @Placeholder = "SGST", onkeypress = "return isNumber(event);" })
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        @if (Model.ServiceId != null)
+                                        {
+                                            <input type="submit" value="Update Service" class="btn btn-light" name="UpdateService" onclick="return validateservice();" />
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" value="Save Service" class="btn btn-light" name="SaveService" onclick="return validateservice();" />
+
+                                                    <a href="/Master/ServiceMaster" class="btn btn-dark">Reset</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function isNumber(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+    function validateservice() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ServiceName').val() == '') {
+            $("#ServiceName").addClass('errortext');
+            $('#ServiceName').focus();
+            return false;
+        }
+        if ($('#HSNCode').val() == '') {
+            $("#HSNCode").addClass('errortext');
+            $('#HSNCode').focus();
+            return false;
+        }
+        if ($('#CGST').val() == '') {
+            $("#CGST").addClass('errortext');
+            $('#CGST').focus();
+            return false;
+        }
+        if ($('#IGST').val() == '') {
+            $("#IGST").addClass('errortext');
+            $('#IGST').focus();
+            return false;
+        }
+        if ($('#SGST').val() == '') {
+            $("#SGST").addClass('errortext');
+            $('#SGST').focus();
+            return false;
+
+        }
+        $("#divload").css({ 'display': '' });
+    }
+
+</script>
