@@ -4,14 +4,6 @@
     ViewBag.Title = "BankMaster";
     Layout = "~/Views/Shared/_layout.cshtml";
 }
-
-
-<style>
-    .errortext {
-        border: 2px solid red !important;
-        background-color: #ff00003b !important;
-    }
-</style>
 @using (Html.BeginForm("BankMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
 <div class="content-wrapper">
