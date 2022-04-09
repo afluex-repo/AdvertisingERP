@@ -779,6 +779,13 @@
     <Content Include="Views\Customer\CustomerList.cshtml" />
     <Content Include="Views\Customer\AddCustomer.cshtml" />
     <Content Include="Views\Vendor\AddVendor.cshtml" />
+    <Content Include="Views\Master\BankMaster.cshtml" />
+    <Content Include="Views\Master\ServiceList.cshtml" />
+    <Content Include="Views\Master\ServiceMaster.cshtml" />
+    <Content Include="Views\Master\SiteList.cshtml" />
+    <Content Include="Views\Master\BankList.cshtml" />
+    <Content Include="Views\Master\FinancialYearList.cshtml" />
+    <Content Include="Views\Master\FinancialYear.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

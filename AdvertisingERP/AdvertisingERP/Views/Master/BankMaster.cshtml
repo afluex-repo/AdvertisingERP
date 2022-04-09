@@ -1,0 +1,155 @@
+﻿@model AdvertisingERP.Models.Master
+
+@{
+    ViewBag.Title = "BankMaster";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+
+<style>
+    .errortext {
+        border: 2px solid red !important;
+        background-color: #ff00003b !important;
+    }
+</style>
+@using (Html.BeginForm("BankMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-5 align-self-center">
+                        <h4 class="page-title"></h4>
+                        <div class="d-flex align-items-center">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Masters</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Bank Master</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="m-b-0 card-title">
+                        Bank Master
+                        <a href="/Master/BankList" class="btn btn-light list-button">Back To List</a>
+                    </div>
+                    <hr>
+                  
+                    @*<div class="alert alert-success" style="display:@ViewBag.errormsg">*@
+                       @if (@TempData["success"] != null)
+                       {
+                        <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["success"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                        </div>
+                       }
+                    @if (@TempData["error"] != null)
+                    {
+                        <div class="alert border-0 bg-danger alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["error"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @*</div>*@
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="control-label">Bank Name  <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name" })
+                                        @Html.HiddenFor(m => m.BankID)
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="control-label">IFSC Prefix <span style="color: red">*</span></label>
+                                        @Html.TextBoxFor(m => m.IFSCPrefix, new { @class = "form-control", @Placeholder = "IFSC Prefix" })
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <!--/span-->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        @if (Model.ServiceId != null)
+                                        {
+                                            <input type="submit" value="Update Bank" class="btn btn-light" name="UpdateService" onclick="return validateservice();" />
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" value="Save Bank" class="btn btn-light" name="SaveService" onclick="return validateservice();" />
+
+                                            <a href="/Master/BankMaster" class="btn btn-dark">Reset</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"></div>
+                        </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+<script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+    });
+    function isNumber(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+
+    function validateservice() {
+        $(".errortext").removeClass("errortext");
+        if ($('#BankName').val() == '') {
+            $("#BankName").addClass('errortext');
+            $('#BankName').focus();
+            return false;
+        }
+        if ($('#IFSCPrefix').val() == '') {
+            $("#IFSCPrefix").addClass('errortext');
+            $('#IFSCPrefix').focus();
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+    }
+
+</script>
