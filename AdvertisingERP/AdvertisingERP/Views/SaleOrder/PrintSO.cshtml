@@ -1,0 +1,201 @@
+﻿@model AdvertisingERP.Models.SaleOrder
+
+@{
+    ViewBag.Title = "PrintSO";
+    Layout = null;
+}
+
+<style>
+    .headertable td {
+        height: 70px;
+        padding: 10px;
+        text-align:center
+    }
+    .descriptiontable {
+        text-align:center
+    }
+</style>
+
+<table style="width:90%; margin-left:5%" class="headertable">
+    <tr>
+        <td style="background-color:grey; color:white; width:25%">
+            <h3>@ViewBag.CompanyName</h3>
+
+        </td>
+        <td style="border-right:2px solid black; width:25%">
+            <b>Address</b>
+            <br />
+            <small>@ViewBag.CompanyAddress</small>
+        </td>
+        <td style="border-right:2px solid black; width:25%">
+            <b>Mail</b>
+            <br />
+            <small>@ViewBag.CompanyEmail</small>
+        </td>
+        <td style="border-right:2px solid black; width:25%">
+            <b>Phone</b>
+            <br />
+            <small>@ViewBag.CompanyMobile</small>
+        </td>
+    </tr>
+</table>
+<br />
+<table style="width:90%; margin-left:5%">
+    <tr>
+        <td style="width:50%; float:left">
+            <div style="background-color:grey; color:white; text-transform:uppercase; padding-left:10px">
+                Invoice Details
+            </div>
+            <br />
+            Order No : @ViewBag.InvoiceNumber
+            <br />
+            Order Date : @DateTime.Now.ToString("dd/MM/yyyy")
+        </td>
+        <td style="width:49%; float:left; text-align:right">
+            <div style="background-color:grey; color:white; text-transform:uppercase; padding-right:10px">
+                Invoice To
+            </div>
+            <br />
+            Shankar Advertising Agency
+            <br />
+            D-54, Arjun Tower, Vibhuti Khand
+            <br />
+            Lucknow
+        </td>
+    </tr>
+</table>
+<br />
+<table style="width:90%; margin-left:5%" class="descriptiontable" border="1">
+    <thead style="background-color:grey; color:white; height:80px">
+        <tr>
+            <th>SNo</th>
+            <th>Dscription Of Goods</th>
+            <th>HSN/SAC</th>
+            <th>Quantity</th>
+            <th>Rate</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    @if (Model != null)
+    {
+        if (Model.lstsaleorder != null)
+        {
+            var i = 1;
+            foreach (var item in Model.lstsaleorder)
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Description</td>
+                    <td>@item.HSNCode</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Rate</td>
+                    <td>@item.TotalAmount</td>
+                </tr>
+                i++;
+            }
+        }
+    }
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>Total CGST</b></td>
+            <td>&#8377; @ViewBag.CGST</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>Total SGST</b></td>
+            <td>&#8377; @ViewBag.SGST</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>Total</b></td>
+            <td>&#8377; @ViewBag.FinalAmount</td>
+        </tr>
+    </tfoot>
+</table>
+<table style="width:90%; margin-left:5%">
+    <tr>
+        <td>
+            (Amount Chargeable in Words)
+            <br />
+            <b>@ViewBag.AmountInWords</b>
+        </td>
+    </tr>
+</table>
+<table style="width:90%; margin-left:5%; text-align:center" border="1">
+    <thead>
+        <tr>
+            <th rowspan="2">HSN/SAC</th>
+            <th rowspan="2">Taxable Value</th>
+            <th colspan="2">Central Tax</th>
+            <th colspan="2">State Tax</th>
+            <th rowspan="2">Total Tax Amount</th>
+        </tr>
+        <tr>
+            <th>Rate</th>
+            <th>Amount</th>
+            <th>Rate</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tr>
+        <td></td>
+        <td>@ViewBag.FinalAmount</td>
+        <td>9</td>
+        <td>
+            &#8377; @ViewBag.CentralTax
+        </td>
+        <td>9</td>
+        <td>
+            &#8377; @ViewBag.StateTax
+        </td>
+        <td>&#8377; @ViewBag.TotalTax</td>
+    </tr>
+</table>
+<br />
+<br />
+<table style="width:90%; margin-left:5%">
+    <tr>
+        <td>
+            <u>Payment Information</u>
+            <br />
+            <table border="0">
+                <tr>
+                    <td>Bank</td>
+                    <td>:  @ViewBag.BankName</td>
+                </tr>
+                <tr>
+                    <td>Account No</td>
+                    <td>:  @ViewBag.AccountNo</td>
+                </tr>
+                <tr>
+                    <td>IFSC</td>
+                    <td>:  @ViewBag.IFSC</td>
+                </tr>
+            </table>
+        </td>
+        <td style="text-align:right">
+            <br />
+            <br />
+            <hr />
+            (Signature with Stamp)
+        </td>
+    </tr>
+</table>
+<br />
+<table style="width:90%; margin-left:5%">
+    <tr style="background-color:grey; color:white; height:40px; text-align:center">
+        <td>
+            Thank you for your Business
+        </td>
+    </tr>
+</table>
