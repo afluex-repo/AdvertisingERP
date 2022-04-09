@@ -42,13 +42,10 @@ ul.nav.navbar-nav.sub-menu li a{
 img.login-img {
     width: 185px;
 }
-a.btn.btn-light.list-button {
-    float: right;
-    margin-top: -8px;
+.list-button{
+    float:right;
+    margin-top:-8px;
 }
-input.btn.btn-light {
-    margin-top: 33px;
-}
-a.btn.btn-dark {
-    margin-top: 33px;
+.btndown {
+    margin-top: 31px;
 }
