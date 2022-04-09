@@ -1215,6 +1215,9 @@ namespace AdvertisingERP.Controllers
         }
 
         #endregion
-
+        public ActionResult DataTable()
+        {
+            return View();
+        }
     }
 }
