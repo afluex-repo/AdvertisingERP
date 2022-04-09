@@ -1,0 +1,134 @@
+﻿@model AdvertisingERP.Models.SaleOrder
+@{
+    ViewBag.Title = "InvoiceNo";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<style>
+    .mt-btn {
+        margin-top: 32px;
+    }
+</style>
+@using (Html.BeginForm("InvoiceNo", "SaleOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
+  
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <div class="page-breadcrumb">
+                    <div class="row">
+                        <div class="col-5 align-self-center">
+                            <h4 class="page-title"></h4>
+                            <div class="d-flex align-items-center">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="#">SaleOrder</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">InvoiceNo</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+         @if (TempData["InvoiceNo"] != null)
+           {
+            <div class="@TempData["Class"]">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                <h5 class="text-success"><i class="fa fa-check-circle"></i>&nbsp; @TempData["InvoiceNo"]</h5>
+            </div>
+           }
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label for="input-1">Invoice No </label>
+
+                                        @Html.TextBoxFor(m => m.InvoiceNo, new { @class = "form-control", @Placeholder = "Invoice No", @readonly = "true" })
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+
+                                    <input type="submit" value="Generate Invoice No" class="btn btn-light list-button mt-btn" name="btnGenerateInvoiceNo" onclick="return generateInvoiceNo()" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="table-responsive">
+                                    <table id="file_export" class="table table-striped table-bordered display">
+                                        <thead>
+                                            <tr>
+                                                <th>Action</th>
+                                                <th>Invoice No</th>
+                                                <th>Invoice Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.lstInvoiceNo != null)
+                                                {
+                                                    foreach (var item in Model.lstInvoiceNo)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @if (item.LineStatus == "Mapped")
+                                                                {
+                                                                    <label class="label label-primary">Mapped</label>
+                                                                    <a href="/SaleOrder/Invoice?InvoiceNo=@item.InvoiceNo" class="label label-primary">Print</a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="/SaleOrder/GenerateBill?invid=@item.PK_InvoiceNoID&no=@item.SaleOrderNoEncrypt" class="label label-primary">Generate Bill</a>
+                                                                    @*<a href="/SaleOrder/PrintSO?SaleOrderId=@item.PK_InvoiceNoID" class="label label-primary">Print</a>*@
+                                                                }
+                                                            </td>
+                                                            <td>@item.InvoiceNo</td>
+                                                            <td>@item.InvoiceDate</td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Action</th>
+                                                <th>Invoice No</th>
+                                                <th>Invoice Date</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#InvoiceNo').val('CAA/2019-20/');
+        $("#divload").css({ 'display': 'none' });
+    });
+    function generateInvoiceNo() {
+        var result = confirm('Are you sure you want to generate New Invoice Number ?');
+        if (result == false) {
+            return false;
+        }
+        $("#divload").css({ 'display': '' });
+    }
+</script>
+
+

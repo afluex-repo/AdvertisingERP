@@ -60,7 +60,7 @@ namespace AdvertisingERP.Controllers
             if (VendorId != null && VendorId != "")
             {
 
-                objVendor.VendorId = Crypto.Decrypt(VendorId);
+                objVendor.VendorId =(VendorId);
                 DataSet ds = objVendor.GetAllVendors();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
@@ -117,7 +117,7 @@ namespace AdvertisingERP.Controllers
             {
                 if (postedFile != null)
                 {
-                    obj.PanImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    obj.PanImage = "../assets/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
                     postedFile.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
                 }
                 obj.AddedBy = Session["UserID"].ToString();
@@ -166,17 +166,54 @@ namespace AdvertisingERP.Controllers
 
         public ActionResult VendorList()
         {
+            Vendor objVendor = new Vendor();
             if (TempData["VendorDelete"] == null)
             {
                 ViewBag.saverrormsg = "none";
             }
-            return View();
+           
+
+
+            List<Vendor> lst = new List<Vendor>();
+            objVendor.VendorName = string.IsNullOrEmpty(objVendor.VendorName) ? null : objVendor.VendorName;
+            objVendor.VendorId = string.IsNullOrEmpty(objVendor.VendorCode) ? null : objVendor.VendorCode;
+            DataSet ds = objVendor.GetAllVendors();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    Vendor obj = new Vendor();
+                    obj.VendorId = Crypto.Encrypt(dr["VendorCode"].ToString());
+                    obj.VendorCode = dr["VendorCode"].ToString();
+                    obj.VendorName = dr["Name"].ToString();
+                    obj.NatureOfBusiness = dr["NatureOfBusiness"].ToString();
+                    obj.MobileNo = dr["Contact"].ToString();
+                    obj.Email = dr["Email"].ToString();
+                    obj.Address = dr["Address"].ToString();
+                    obj.Pincode = dr["Pincode"].ToString();
+                    obj.StateName = dr["State"].ToString();
+                    obj.City = dr["City"].ToString();
+                    obj.GSTNO = dr["GSTNo"].ToString();
+                    obj.BankName = dr["BankName"].ToString();
+                    obj.AccountNo = dr["AccountNumber"].ToString();
+                    obj.IFSCCode = dr["IFSCCode"].ToString();
+                    obj.ConcernPerson = dr["ConcernPersonName"].ToString();
+                    obj.ConcerPersonContact = dr["ConcernPersonContact"].ToString();
+                    obj.ConcerPersonEmail = dr["ConcernPersonEmail"].ToString();
+                    obj.PANNO = dr["PANNO"].ToString();
+                    obj.PanImage = dr["PanImage"].ToString();
+
+                    lst.Add(obj);
+                }
+                objVendor.lstVendor = lst;
+            }
+            return View(objVendor);
         }
         [HttpPost]
         [ActionName("VendorList")]
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetVendorList(Vendor objVendor)
-        {
+         {
             if (TempData["VendorDelete"] == null)
             {
                 ViewBag.saverrormsg = "none";
@@ -185,7 +222,7 @@ namespace AdvertisingERP.Controllers
 
             List<Vendor> lst = new List<Vendor>();
             objVendor.VendorName = string.IsNullOrEmpty(objVendor.VendorName) ? null : objVendor.VendorName;
-            objVendor.VendorCode = string.IsNullOrEmpty(objVendor.VendorCode) ? null : objVendor.VendorCode;
+            objVendor.VendorId = string.IsNullOrEmpty(objVendor.VendorCode) ? null : objVendor.VendorCode;
             DataSet ds = objVendor.GetAllVendors();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -224,6 +261,11 @@ namespace AdvertisingERP.Controllers
         [OnAction(ButtonName = "UpdateVendor")]
         public ActionResult UpdateVendor(Vendor obj, HttpPostedFileBase postedFile)
         {
+            if (postedFile != null)
+            {
+                obj.PanImage = "../assets/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                postedFile.SaveAs(Path.Combine(Server.MapPath(obj.PanImage)));
+            }
             try
             {
                 obj.UpdatedBy = Session["UserID"].ToString();
@@ -279,7 +321,7 @@ namespace AdvertisingERP.Controllers
             {
 
                 obj.DeletedBy = Session["UserID"].ToString();
-                obj.VendorCode = Crypto.Decrypt(VendorId);
+                obj.VendorId = Crypto.Decrypt(VendorId);
                 DataSet ds = new DataSet();
 
 

@@ -1,0 +1,1162 @@
+﻿@model AdvertisingERP.Models.SaleOrder
+@{
+    ViewBag.Title = "GetSaleOrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #ff00003b !important;
+    }
+</style>
+
+<style>
+    #divload {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 9999;
+        background: url("../../assets/images/loading.gif") no-repeat center center rgba(0,0,0,0.25);
+    }
+
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+
+<div class="loader" id="divload"></div>
+
+<div class="page-wrapper">
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-5 align-self-center">
+                <h4 class="page-title"></h4>
+                <div class="d-flex align-items-center">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Sale Order</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Sale Order Details</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("GetSaleOrderDetails", "SaleOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid">
+        <div class="alert alert-success" style="display:@ViewBag.errormsg">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+            <h5 class="text-success"><i class="fa fa-check-circle"></i>@TempData["VendorError"]</h5>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <h4 class="m-b-0 text-white">Sale Order
+                            <a href="/SaleOrder/GenerateSaleOrder" class="btn btn-success float-right">Sale Order No List</a>
+                        </h4>
+                    </div>
+
+                    <div class="form-body">
+                        <span style="color: red; margin-left: 2%">Note : All fields which have star sign are mandatory.</span>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Sale Order No<span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(m => m.SalesOrderNo, new { @class = "form-control form-control-lg", @Placeholder = "Sale Order No" })
+                                            @Html.HiddenFor(m => m.SalesOrderNoID)
+                                            @Html.HiddenFor(m => m.PK_SalesOrderID)
+                                            @Html.HiddenFor(m => m.isEditable)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Order Date<span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(m => m.OrderDate, new { @class = "form-control form-control-lg mydatepicker", @Placeholder = "Order Date" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Payment Terms <span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.DropDownListFor(m => m.PaymentTermsID, new SelectList(ViewBag.ddlPaymentTerms, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Customer Name</label>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control form-control-lg", @Placeholder = "Customer Name", @onchange = "return getCustomerCampaigns(this);" })
+                                            @Html.HiddenFor(m => m.CustomerCode)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Campaign No <span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(m => m.CampaignNumber, new { @class = "form-control form-control-lg", @Placeholder = "Campaign No" })
+                                            @Html.HiddenFor(m => m.CampaignID)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Sales Person <span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.DropDownListFor(m => m.SalesPersonID, new SelectList(ViewBag.ddlSalesPerson, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Operation Executive <span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.DropDownListFor(m => m.OperationExecutiveID, new SelectList(ViewBag.ddlOperationExecutive, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Billing Snaps <span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.DropDownListFor(m => m.BillingSnapsID, new SelectList(ViewBag.ddlBillingSnaps, "Value", "Text"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">PO Received ? <span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.DropDownListFor(m => m.POReceived, new SelectList(ViewBag.ddlPOReceived, "Value", "Text"), new { @class = "form-control", @onchange = "return onPOchange();" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group" id="divPOImage" style="display: none">
+                                        <label class="control-label col-md-3">PO Image <span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="file" name="postedFile" id="Image" onchange="readURL(this)" />
+                                            <a href="@Model.POImagePath" target="_blank">
+                                                <img id="ContentPlaceHolder1_imgProductImage" src="@Model.POImagePath" runat="server" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" id="divPONumber" style="display: none">
+                                        <label class="control-label col-md-3">PO Number <span style="color: red">*</span></label>
+                                        <div class="col-md-9">
+                                            @Html.TextBoxFor(m => m.PONumber, new { @class = "form-control form-control-lg", @Placeholder = "PO Number" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="file_export1" class="table table-striped table-bordered display">
+                                    <thead>
+                                        <tr>
+                                            <th>Select Site</th>
+                                            <th>Description</th>
+                                            <th>Select Service</th>
+                                            <th>Select Vendor</th>
+                                            <th>From Date</th>
+                                            <th>To Date</th>
+                                            <th>Width</th>
+                                            <th>Height</th>
+                                            <th>Side</th>
+                                            <th>Unit</th>
+                                            <th>Area</th>
+                                            <th>Amt</th>
+                                            <th>Rate (sqft/each)</th>
+                                            <th>Amount</th>
+                                            <th>TDS</th>
+                                            <th>Discount</th>
+                                            <th>CGST</th>
+                                            <th>SGST</th>
+                                            <th>IGST</th>
+                                            <th>Final Amount</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSites, "Value", "Text"), new { @class = "form-control", onchange = "return fonSiteChange();", @style = "width:150px" })
+                                            </td>
+                                            <td>@Html.TextBoxFor(m => m.Description, new { @class = "form-control", @placeholder = "Description", @style = "width:150px" })</td>
+                                            <td>
+                                                @Html.DropDownListFor(m => m.ServiceID, new SelectList(ViewBag.ddlServices, "Value", "Text"), new { @class = "form-control", @onchange = "return onServiceChange();", @style = "width:150px" })
+                                            </td>
+                                            <td>
+                                                @Html.DropDownListFor(m => m.VendorID, new SelectList(ViewBag.ddlVendors, "Value", "Text"), new { @class = "form-control", @onchange = "return onVendorChange();", @style = "width:150px" })
+                                                <input type="text" id="txtVendorName" readonly="readonly" style="width: 150px; display: none" />
+                                                <input type="hidden" id="hdVendorID" />
+                                                <input type="hidden" id="hdVendorName" />
+                                            </td>
+                                            <td>@Html.TextBoxFor(m => m.FromDate, new { @class = "form-control mydatepicker", @placeholder = "From Date", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.ToDate, new { @class = "form-control mydatepicker", @placeholder = "To Date", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.Width, new { @class = "form-control", @placeholder = "Width", @disabled = "disabled", @onchange = "return calculateArea()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.Height, new { @class = "form-control", @placeholder = "Height", @disabled = "disabled", @onchange = "return calculateArea()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.Side, new { @class = "form-control", @placeholder = "Side", @onchange = "return calculateAmount1()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.Unit, new { @class = "form-control", @placeholder = "Unit", @onchange = "return calculateAmount1()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.Area, new { @class = "form-control", @placeholder = "Area", @onchange = "return calculateAmount1()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.Amt, new { @class = "form-control", @placeholder = "Calculate Amount", @onchange = "return calculateRateFromAmount()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.Rate, new { @class = "form-control", @placeholder = "Rate", @onchange = "return calculateAmount1()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control", @placeholder = "Amount", @readonly = "readonly", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.TDS, new { @class = "form-control", @placeholder = "TDS", @onchange = "return calculateAmount2()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.Discount, new { @class = "form-control", @placeholder = "Discount", @onchange = "return calculateAmount2()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.CGST, new { @class = "form-control", @placeholder = "CGST", @onchange = "return calculateAmount3()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.SGST, new { @class = "form-control", @placeholder = "SGST", @onchange = "return calculateAmount3()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.IGST, new { @class = "form-control", @placeholder = "IGST", @onchange = "return calculateAmount3()", @onkeypress = "return isNumber(event);", @style = "width:150px" })</td>
+                                            <td>@Html.TextBoxFor(m => m.FinalAmount, new { @class = "form-control", @placeholder = "Final Amount", @readonly = "readonly", @style = "width:150px" })</td>
+                                            <td>
+                                                <input type="button" id="btnAddLine" value="Add Line" onclick="return addLine();" class="btn btn-sm btn-info" />
+                                                <input type="button" id="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();" class="btn btn-sm btn-info" />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <table id="file_export" class="table table-striped table-bordered display">
+                                    <tbody id="listSaleOrder">
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <input type="submit" value="Save Sale Order" class="btn btn-success" id="SaveSaleOrder" name="SaveSaleOrder" onclick="return validateVendor();" />
+                                            <input type="submit" value="Update Sale Order" class="btn btn-success" id="UpdateSaleOrder" name="UpdateSaleOrder" onclick="return validateVendor();" />
+                                            <span id="spTotalDisplay"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+
+<script>
+
+    jQuery('.mydatepicker, #datepicker, .input-group.date').datepicker(
+        {
+            dateFormat: 'dd/mm/yy',
+            changeYear: true,
+            changeMonth: true
+        });
+
+</script>
+<script>
+
+    $(document).ready(function () {
+        $("#divload").css({ 'display': 'none' });
+        $('#SaveSaleOrder').show();
+        $('#UpdateSaleOrder').hide();
+        var cityuse = [];
+        $.ajax({
+            url: '/Compaign/GetAllCustomer',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) { // GETTING ERROR HERE                                                    
+                        cityuse.push(item.CompanyName + "(" + item.CustomerCode + ")");
+                    });
+
+                    $('#CustomerName').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var afterComma = str.substr(str.indexOf("(") + 1);
+                            var citycode = afterComma.substr(0, afterComma.length - 1);
+                            $('#CustomerCode').val(citycode);
+                        }
+                    })
+                }
+                else {
+
+                }
+            }, error: function () { alert('Some Thing wrong!'); }
+        });
+
+        //Load previous data in Lines
+        var editable = $('#isEditable').val();
+        var tr = [];
+        var j = 1;
+        if (editable == "1") {
+            $('#SalesOrderNo').attr("disabled", true);
+            $('#SaveSaleOrder').hide();
+            $('#UpdateSaleOrder').show();
+
+            var poValue = $('#POReceived').val();
+            //alert("Select PO Value : " + poValue);
+            if (poValue == "1") {
+                $('#divPONumber').show();
+                $('#divPOImage').show();
+            }
+            else if (poValue == "2") {
+                $('#divPONumber').hide();
+                $('#divPOImage').hide();
+            }
+            else if (poValue == "3") {
+                $('#divPONumber').hide();
+                $('#divPOImage').show();
+            }
+
+            //alert("Line me data bind hoga..!");
+            $.ajax({
+                url: '/SaleOrder/AddLines', type: 'post', dataType: 'json',
+                success: function (data) {
+                    $('#spTotalDisplay').text("Total Amount : " + data.TotalAmountDisplay);
+                    $('#listSaleOrder').empty();
+                    for (var i = 0; i < data.lstsaleorder.length; i++) {
+                        tr.push('<tr>');
+                        tr.push("<td>" + j + "</td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].SiteName + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].Description + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].ServiceName + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].VendorName + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].FromDate + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].ToDate + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].Side + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].Quantity + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].Height + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].Width + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].Area + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].Rate + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].TotalAmount + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].CGST + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].SGST + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].IGST + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].TDS + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].Discount + " </label></td>");
+                        tr.push("<td><label>" + data.lstsaleorder[i].FinalAmount + " </label></td>");
+                        tr.push("<td><input type='button' value='Delete' onclick='return deleteLine(" + data.lstsaleorder[i].SaleOrderDetailsID + ")' /></td>");
+
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SaleOrderDetailsID + "' id='PK_SalesOrderDetailsID_ " + i + "' name='PK_SalesOrderDetailsID_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SiteID + "' id='SiteID_ " + i + "' name='SiteID_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SiteName + "' id='SiteName_ " + i + "' name='SiteName_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ServiceID + "' id='ServiceID_ " + i + "' name='ServiceID_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ServiceName + "' id='ServiceName_ " + i + "' name='ServiceName_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].VendorID + "' id='VendorID_ " + i + "' name='VendorID_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].VendorName + "' id='VendorName_ " + i + "' name='VendorName_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].FromDate + "' id='FromDate_ " + i + "' name='FromDate_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ToDate + "' id='ToDate_ " + i + "' name='ToDate_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Side + "' id='Side_ " + i + "' name='Side_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Quantity + "' id='Quantity_ " + i + "' name='Quantity_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Height + "' id='Height_ " + i + "' name='Height_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Width + "' id='Width_ " + i + "' name='Width_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Area + "' id='Area_ " + i + "' name='Area_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Rate + "' id='Rate_ " + i + "' name='Rate_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].TotalAmount + "' id='TotalAmount_ " + i + "' name='TotalAmount_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].CGST + "' id='CGST_ " + i + "' name='CGST_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SGST + "' id='SGST_ " + i + "' name='SGST_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].IGST + "' id='IGST_ " + i + "' name='IGST_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].TDS + "' id='TDS_ " + i + "' name='TDS_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Discount + "' id='Discount_ " + i + "' name='Discount_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].FinalAmount + "' id='FinalAmount_ " + i + "' name='FinalAmount_ " + i + "'></td>");
+                        tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Description + "' id='Description_ " + i + "' name='Description_ " + i + "'></td>");
+
+                        tr.push('</tr>');
+                        j++;
+
+                    }
+                    tr.push('<tr style="display:none">');
+                    tr.push("<td><input type='hidden' value='" + j + "' id='hdrows' name='hdrows'></td>");
+                    tr.push('</tr>');
+                    $('#listSaleOrder').append($(tr.join('')));
+
+                }
+
+            });
+        }
+
+    });
+
+    function addLine() {
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        if ($('#SiteID').val() == "0") {
+            $("#SiteID").addClass('errortext');
+            $('#SiteID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#ServiceID').val() == "0") {
+            $("#ServiceID").addClass('errortext');
+            $("#divload").css({ 'display': 'none' });
+            $('#ServiceID').focus();
+            return false;
+        }
+        if ($('#FromDate').val() == "") {
+            $("#FromDate").addClass('errortext');
+            $('#FromDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Side').val() == "") {
+            $("#Side").addClass('errortext');
+            $('#Side').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Unit').val() == "") {
+            $("#Unit").addClass('errortext');
+            $('#Unit').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Area').val() == "") {
+            $("#Area").addClass('errortext');
+            $('#Area').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Rate').val() == "") {
+            $("#Rate").addClass('errortext');
+            $('#Rate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#TotalAmount').val() == "") {
+            $("#TotalAmount").addClass('errortext');
+            $('#TotalAmount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#TDS').val() == "") {
+            $("#TDS").addClass('errortext');
+            $('#TDS').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Discount').val() == "") {
+            $("#Discount").addClass('errortext');
+            $('#Discount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CGST').val() == "") {
+            $("#CGST").addClass('errortext');
+            $('#CGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#SGST').val() == "") {
+            $("#SGST").addClass('errortext');
+            $('#SGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#IGST').val() == "") {
+            $("#IGST").addClass('errortext');
+            $('#IGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#FinalAmount').val() == "") {
+            $("#FinalAmount").addClass('errortext');
+            $('#FinalAmount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        $("#divload").css({ 'display': 'none' });
+        //string siteID, string siteName, string side, string area, string qty, string rate, string serviceID, string serviceName, string FromDate, string ToDate, string totalAmount, string cgst, string sgst, string igst, string tds, string discount, string finalAmount
+        var siteName = $('#SiteID').find(":selected").text();
+        var serviceName = $('#ServiceID').find(":selected").text();
+
+        var vendorName = document.getElementById("txtVendorName").value;
+        var siteID = $('#SiteID').val();
+        var serviceID = $('#ServiceID').val();
+        var vendorID = document.getElementById("hdVendorID").value;
+        //alert(document.getElementById("txtVendorName").value);
+        var side = $('#Side').val();
+        var height = $('#Height').val();
+        var width = $('#Width').val();
+        var area = $('#Area').val();
+        var rate = $('#Rate').val();
+        var qty = $('#Unit').val();
+        var fromDate = $('#FromDate').val();
+        var toDate = $('#ToDate').val();
+        var totalAmount = $('#TotalAmount').val();
+        var cgst = $('#CGST').val();
+        var sgst = $('#SGST').val();
+        var igst = $('#IGST').val();
+        var TDS = $('#TDS').val();
+        var Discount = $('#Discount').val();
+        var finalAmount = $('#FinalAmount').val();
+        var description = $('#Description').val();
+        var tr = [];
+        var j = 1;
+
+        $.ajax({
+            url: '/SaleOrder/AddLines', type: 'post', dataType: 'json',
+            //data: { 'sizeID': sizeID, 'colorID': colorid, 'qty': qty, 'bv': bv, 'mrp': mrp, 'offeredprice': offerprice, 'dealerprice': dealerprice, 'cgst': cgst, 'sgst': sgst, 'igst': igst, 'unitID': unit, 'unitname': unitname, 'sizename': sizename, 'colorname': colorname1 },
+            //string siteID, string siteName, string side, string area, string qty, string rate, string serviceID, string serviceName, string FromDate, string ToDate, string totalAmount, string cgst, string sgst, string igst, string tds, string discount, string finalAmount)
+            data: { 'siteID': siteID, 'siteName': siteName, 'side': side, 'area': area, 'qty': qty, 'rate': rate, 'serviceID': serviceID, 'serviceName': serviceName, 'FromDate': fromDate, 'ToDate': toDate, 'totalAmount': totalAmount, 'cgst': cgst, 'sgst': sgst, 'igst': igst, 'tds': TDS, 'discount': Discount, 'finalAmount': finalAmount, 'vendorID': vendorID, 'vendorName': vendorName, 'height': height, 'width': width, 'description': description },
+            success: function (data) {
+                $('#spTotalDisplay').text("Total Amount : " + data.TotalAmountDisplay);
+                $('#listSaleOrder').empty();
+                for (var i = 0; i < data.lstsaleorder.length; i++) {
+                    tr.push('<tr>');
+                    tr.push("<td style='width:10px'>" + data.lstsaleorder[i].LineSNo + "</td>");
+                    tr.push("<td><label style='width:130px'>" + data.lstsaleorder[i].SiteName + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Description + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].ServiceName + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].VendorName + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].FromDate + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].ToDate + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Side + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Quantity + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Height + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Width + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Area + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Rate + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].TotalAmount + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].CGST + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].SGST + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].IGST + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].TDS + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Discount + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].FinalAmount + " </label></td>");
+                    tr.push("<td><input type='button' value='Edit' onclick='return editLine(" + data.lstsaleorder[i].LineSNo + ")' /></td>");
+
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SaleOrderDetailsID + "' id='SaleOrderDetailsID_ " + i + "' name='SaleOrderDetailsID_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SiteID + "' id='SiteID_ " + i + "' name='SiteID_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SiteName + "' id='SiteName_ " + i + "' name='SiteName_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ServiceID + "' id='ServiceID_ " + i + "' name='ServiceID_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ServiceName + "' id='ServiceName_ " + i + "' name='ServiceName_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].VendorID + "' id='VendorID_ " + i + "' name='VendorID_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].VendorName + "' id='VendorName_ " + i + "' name='VendorName_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].FromDate + "' id='FromDate_ " + i + "' name='FromDate_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ToDate + "' id='ToDate_ " + i + "' name='ToDate_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Side + "' id='Side_ " + i + "' name='Side_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Quantity + "' id='Quantity_ " + i + "' name='Quantity_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Height + "' id='Height_ " + i + "' name='Height_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Width + "' id='Width_ " + i + "' name='Width_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Area + "' id='Area_ " + i + "' name='Area_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Rate + "' id='Rate_ " + i + "' name='Rate_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].TotalAmount + "' id='TotalAmount_ " + i + "' name='TotalAmount_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].CGST + "' id='CGST_ " + i + "' name='CGST_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SGST + "' id='SGST_ " + i + "' name='SGST_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].IGST + "' id='IGST_ " + i + "' name='IGST_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].TDS + "' id='TDS_ " + i + "' name='TDS_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Discount + "' id='Discount_ " + i + "' name='Discount_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].FinalAmount + "' id='FinalAmount_ " + i + "' name='FinalAmount_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Description + "' id='Description_ " + i + "' name='Description_ " + i + "'></td>");
+
+                    tr.push('</tr>');
+                    j++;
+
+                }
+                tr.push('<tr style="display:none">');
+                tr.push("<td><input type='hidden' value='" + j + "' id='hdrows' name='hdrows'></td>");
+                tr.push('</tr>');
+                $('#listSaleOrder').append($(tr.join('')));
+            }
+        });
+    }
+
+    function editLine(sno) {
+        //alert("SNo for Line : " + sno);
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: '/SaleOrder/selectDataForLineEdit', type: 'post', dataType: 'json',
+            data: { 'linesno': sno },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+
+                $('#FromDate').val(data.FromDate);
+                $('#ToDate').val(data.ToDate);
+                $('#Width').val(data.Width);
+                $('#Height').val(data.Height);
+                $('#Side').val(data.Side);
+                $('#Unit').val(data.Unit);
+                $('#Rate').val(data.Rate);
+                $('#TotalAmount').val(data.TotalAmount);
+                //$('#FromDate').val(data.);
+                $('#TDS').val(data.TDS);
+                $('#Discount').val(data.Discount);
+                $('#CGST').val(data.CGST);
+                $('#SGST').val(data.SGST);
+                $('#IGST').val(data.IGST);
+                $('#IGST').val(data.IGST);
+                $('#FinalAmount').val(data.FinalAmount);
+
+                $('#btnUpdateLine').show();
+                $('#btnAddLine').hide();
+            }
+        });
+    }
+
+    function updateLine() {
+        $(".errortext").removeClass("errortext");
+        if ($('#SiteID').val() == "0") {
+            $("#SiteID").addClass('errortext');
+            $('#SiteID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#ServiceID').val() == "0") {
+            $("#ServiceID").addClass('errortext');
+            $("#divload").css({ 'display': 'none' });
+            $('#ServiceID').focus();
+            return false;
+        }
+        if ($('#FromDate').val() == "") {
+            $("#FromDate").addClass('errortext');
+            $('#FromDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Side').val() == "") {
+            $("#Side").addClass('errortext');
+            $('#Side').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Unit').val() == "") {
+            $("#Unit").addClass('errortext');
+            $('#Unit').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Area').val() == "") {
+            $("#Area").addClass('errortext');
+            $('#Area').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Rate').val() == "") {
+            $("#Rate").addClass('errortext');
+            $('#Rate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#TotalAmount').val() == "") {
+            $("#TotalAmount").addClass('errortext');
+            $('#TotalAmount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#TDS').val() == "") {
+            $("#TDS").addClass('errortext');
+            $('#TDS').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Discount').val() == "") {
+            $("#Discount").addClass('errortext');
+            $('#Discount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CGST').val() == "") {
+            $("#CGST").addClass('errortext');
+            $('#CGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#SGST').val() == "") {
+            $("#SGST").addClass('errortext');
+            $('#SGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#IGST').val() == "") {
+            $("#IGST").addClass('errortext');
+            $('#IGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#FinalAmount').val() == "") {
+            $("#FinalAmount").addClass('errortext');
+            $('#FinalAmount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        var siteName = $('#SiteID').find(":selected").text();
+        var serviceName = $('#ServiceID').find(":selected").text();
+        var vendorName = document.getElementById("txtVendorName").value;
+        var siteID = $('#SiteID').val();
+        var serviceID = $('#ServiceID').val();
+        var vendorID = document.getElementById("hdVendorID").value;
+        //alert(document.getElementById("txtVendorName").value);
+        var side = $('#Side').val();
+        var height = $('#Height').val();
+        var width = $('#Width').val();
+        var area = $('#Area').val();
+        var rate = $('#Rate').val();
+        var qty = $('#Unit').val();
+        var fromDate = $('#FromDate').val();
+        var toDate = $('#ToDate').val();
+        var totalAmount = $('#TotalAmount').val();
+        var cgst = $('#CGST').val();
+        var sgst = $('#SGST').val();
+        var igst = $('#IGST').val();
+        var TDS = $('#TDS').val();
+        var Discount = $('#Discount').val();
+        var finalAmount = $('#FinalAmount').val();
+        var description = $('#Description').val();
+        var tr = [];
+        var j = 1;
+
+        $.ajax({
+            url: '/SaleOrder/UpdateLineData', type: 'post', dataType: 'json',
+            data: { 'siteID': siteID, 'siteName': siteName, 'side': side, 'area': area, 'qty': qty, 'rate': rate, 'serviceID': serviceID, 'serviceName': serviceName, 'FromDate': fromDate, 'ToDate': toDate, 'totalAmount': totalAmount, 'cgst': cgst, 'sgst': sgst, 'igst': igst, 'tds': TDS, 'discount': Discount, 'finalAmount': finalAmount, 'vendorID': vendorID, 'vendorName': vendorName, 'height': height, 'width': width, 'description': description },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+
+                $('#FromDate').val(data.FromDate);
+                $('#ToDate').val(data.ToDate);
+                $('#Width').val(data.Width);
+                $('#Height').val(data.Height);
+                $('#Side').val(data.Side);
+                $('#Unit').val(data.Unit);
+                $('#Rate').val(data.Rate);
+                $('#TotalAmount').val(data.TotalAmount);
+                $('#TDS').val(data.TDS);
+                $('#Discount').val(data.Discount);
+                $('#CGST').val(data.CGST);
+                $('#SGST').val(data.SGST);
+                $('#IGST').val(data.IGST);
+                $('#IGST').val(data.IGST);
+                $('#FinalAmount').val(data.FinalAmount);
+
+                $('#spTotalDisplay').text("Total Amount : " + data.TotalAmountDisplay);
+                $('#listSaleOrder').empty();
+                for (var i = 0; i < data.lstsaleorder.length; i++) {
+                    tr.push('<tr>');
+                    tr.push("<td style='width:10px'>" + data.lstsaleorder[i].LineSNo + "</td>");
+                    tr.push("<td><label style='width:130px'>" + data.lstsaleorder[i].SiteName + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Description + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].ServiceName + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].VendorName + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].FromDate + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].ToDate + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Side + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Quantity + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Height + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Width + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Area + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Rate + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].TotalAmount + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].CGST + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].SGST + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].IGST + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].TDS + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].Discount + " </label></td>");
+                    tr.push("<td><label style='width:150px'>" + data.lstsaleorder[i].FinalAmount + " </label></td>");
+                    tr.push("<td><input type='button' value='Edit' onclick='return editLine(" + data.lstsaleorder[i].LineSNo + ")' /></td>");
+
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SaleOrderDetailsID + "' id='SaleOrderDetailsID_ " + i + "' name='SaleOrderDetailsID_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SiteID + "' id='SiteID_ " + i + "' name='SiteID_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SiteName + "' id='SiteName_ " + i + "' name='SiteName_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ServiceID + "' id='ServiceID_ " + i + "' name='ServiceID_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ServiceName + "' id='ServiceName_ " + i + "' name='ServiceName_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].VendorID + "' id='VendorID_ " + i + "' name='VendorID_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].VendorName + "' id='VendorName_ " + i + "' name='VendorName_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].FromDate + "' id='FromDate_ " + i + "' name='FromDate_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].ToDate + "' id='ToDate_ " + i + "' name='ToDate_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Side + "' id='Side_ " + i + "' name='Side_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Quantity + "' id='Quantity_ " + i + "' name='Quantity_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Height + "' id='Height_ " + i + "' name='Height_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Width + "' id='Width_ " + i + "' name='Width_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Area + "' id='Area_ " + i + "' name='Area_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Rate + "' id='Rate_ " + i + "' name='Rate_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].TotalAmount + "' id='TotalAmount_ " + i + "' name='TotalAmount_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].CGST + "' id='CGST_ " + i + "' name='CGST_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].SGST + "' id='SGST_ " + i + "' name='SGST_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].IGST + "' id='IGST_ " + i + "' name='IGST_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].TDS + "' id='TDS_ " + i + "' name='TDS_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Discount + "' id='Discount_ " + i + "' name='Discount_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].FinalAmount + "' id='FinalAmount_ " + i + "' name='FinalAmount_ " + i + "'></td>");
+                    tr.push("<td style='display:none'><input type='hidden' value='" + data.lstsaleorder[i].Description + "' id='Description_ " + i + "' name='Description_ " + i + "'></td>");
+
+                    tr.push('</tr>');
+                    j++;
+
+                }
+                tr.push('<tr style="display:none">');
+                tr.push("<td><input type='hidden' value='" + j + "' id='hdrows' name='hdrows'></td>");
+                tr.push('</tr>');
+                $('#listSaleOrder').append($(tr.join('')));
+                //
+            }
+        });
+        $('#btnUpdateLine').hide();
+        $('#btnAddLine').show();
+        $("#divload").css({ 'display': 'none' });
+    }
+
+    function deleteLine(str) {
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: '/SaleOrder/DeleteLine', type: 'post', dataType: 'json',
+            data: { 'saleOrderDetailsID': str },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "1") {
+                    alert("Line deleted");
+                    location.reload();
+                }
+                else {
+                    alert("Error : " + data.Result);
+                }
+            }
+        });
+    }
+
+    function getCustomerCampaigns(customerID) {
+        $("#divload").css({ 'display': '' });
+        var customerCode = customerID.value;
+        var afterComma = customerCode.substr(customerCode.indexOf("(") + 1);
+        var citycode = afterComma.substr(0, afterComma.length - 1);
+
+        //alert(citycode);
+        var campaigns = [];
+        $.ajax({
+            url: '/SaleOrder/GetAllCampaigns',
+            type: 'Post',
+            data: { 'customerCode': citycode },
+            success: function (response) {
+                $("#divload").css({ 'display': 'none' });
+                if (response != null) {
+                    $(response).each(function (index, item) { // GETTING ERROR HERE                                                    
+                        campaigns.push(item.CreativeName + "(" + item.CampaignNo + ")");
+                    });
+
+                    $('#CampaignNumber').autocomplete({
+                        source: campaigns,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var afterComma = str.substr(str.indexOf("(") + 1);
+                            var citycode = afterComma.substr(0, afterComma.length - 1);
+                            $('#CampaignID').val(citycode);
+                        }
+                    })
+                }
+                else {
+
+                }
+            }, error: function () { alert('Some Thing wrong !'); }
+        });
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ContentPlaceHolder1_imgProductImage')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function onPOchange() {
+        $("#divload").css({ 'display': '' });
+        var poValue = $('#POReceived').val();
+
+        if (poValue == "1") {
+            $('#divPONumber').show();
+            $('#divPOImage').show();
+        }
+        else if (poValue == "2") {
+            $('#divPONumber').hide();
+            $('#divPOImage').hide();
+        }
+        else if (poValue == "3") {
+            $('#divPONumber').hide();
+            $('#divPOImage').show();
+        }
+        $("#divload").css({ 'display': 'none' });
+    }
+
+    function onVendorChange() {
+        document.getElementById("hdVendorID").value = $('#VendorID').val();
+        $('#txtVendorName').val($('#VendorID').find(":selected").text());
+    }
+
+    function onServiceChange() {
+        $("#divload").css({ 'display': '' });
+        var ServiceID = $('#ServiceID').val();
+
+        $.ajax({
+            url: '/SaleOrder/ServiceType', type: 'post', dataType: 'json',
+            data: { 'serviceID': ServiceID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.ServiceType == "Single") {
+                    $('#FromDate').attr("disabled", false);
+                    $('#ToDate').attr("disabled", "disabled");
+                }
+                else if (data.ServiceType == "Double") {
+                    $('#FromDate').attr("disabled", false);
+                    $('#ToDate').attr("disabled", false);
+                }
+
+                //if (ServiceID == "1") {
+                //    $('#txtVendorName').hide();
+                //    $('#VendorID').show();
+                //}
+                //else {
+                //    $('#txtVendorName').show();
+                //    $('#VendorID').hide();
+                //}
+            }
+        });
+    }
+
+    function fonSiteChange() {
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+
+        $.ajax({
+            url: '/SaleOrder/SiteChange', type: 'post', dataType: 'json',
+            data: { 'siteID': siteID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "1") {
+                    if (data.IsDummySite == "True") {
+                        $('#Height').removeAttr("disabled");
+                        $('#Width').removeAttr("disabled");
+                    }
+                    else {
+                        $('#Height').attr("disabled", "disabled");
+                        $('#Width').attr("disabled", "disabled");
+                    }
+
+                    $('#Side').val(data.Side);
+                    $('#Height').val(data.Height);
+                    $('#Width').val(data.Width);
+                    $('#Area').val(data.Area);
+                    $('#Unit').val(data.Unit);
+                    $('#Rate').val(data.Rate);
+                    document.getElementById("hdVendorID").value = data.VendorID;
+                    calculateAmount1();
+                }
+            }
+        });
+    }
+
+    function calculateArea() {
+        $("#divload").css({ 'display': '' });
+        var height, width, area = 1;
+
+        height = $('#Height').val();
+        width = $('#Width').val();
+
+        area = (Number)(height) * (Number)(width);
+        $('#Area').val(area.toFixed(2));
+        calculateAmount1();
+        calculateAmount2();
+        calculateAmount3();
+        $("#divload").css({ 'display': 'none' });
+    }
+
+    function calculateAmount1() {
+        $("#divload").css({ 'display': '' });
+        var unit, rate, side, area, amount = 0;
+
+        side = $('#Side').val();
+        unit = $('#Unit').val();
+        area = $('#Area').val();
+        rate = $('#Rate').val();
+
+        //alert("Side : " + side + "\nUnit : " + unit + "\nArea : " + area + "\nRate : " + rate);
+        amount = side * unit * area * rate;
+        //alert("Amount : " + amount);
+        $('#TotalAmount').val(amount.toFixed(2));
+        calculateAmount2();
+        calculateAmount3();
+        $("#divload").css({ 'display': 'none' });
+    }
+
+    function calculateAmount2() {
+        $("#divload").css({ 'display': '' });
+        var tds, discount, amount, amounttoSubtract = 0;
+
+
+        tds = $('#TDS').val();
+        discount = $('#Discount').val();
+        amount = $('#TotalAmount').val();
+
+        amounttoSubtract = (Number)(tds) + (Number)(discount);
+        //alert("Sub : " + amounttoSubtract + "\nPrev : " + amount);
+        amount = amount - amounttoSubtract;
+        $('#FinalAmount').val(amount.toFixed(2));
+        calculateAmount3();
+        $("#divload").css({ 'display': 'none' });
+    }
+
+    function calculateAmount3() {
+        var totalamount = 0;
+        var cgstpercent, sgstpercent, igstpercent, cgstvalue, sgstvalue, igstvalue, amount = 0;
+        cgstpercent = $('#CGST').val();
+        sgstpercent = $('#SGST').val();
+        igstpercent = $('#IGST').val();
+
+        amount = $('#TotalAmount').val();
+
+        cgstvalue = amount * cgstpercent / 100;
+        sgstvalue = amount * sgstpercent / 100;
+        igstvalue = amount * igstpercent / 100;
+
+        totalamount = (Number)(amount) + (Number)(cgstvalue) + (Number)(sgstvalue) + (Number)(igstvalue);
+        $('#FinalAmount').val(totalamount.toFixed(2));
+
+    }
+
+    function calculateRateFromAmount() {
+        var rate = (Number)($('#Amt').val()) / (Number)($('#Area').val());
+        //alert(rate);
+        $('#Rate').val(rate);
+        calculateAmount1();
+    }
+
+    function isNumber(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function validateVendor() {
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        if ($('#SalesOrderNo').val() == '') {
+            $("#SalesOrderNo").addClass('errortext');
+            $('#SalesOrderNo').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#OrderDate').val() == '') {
+            $("#OrderDate").addClass('errortext');
+            $('#OrderDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#PaymentTermsID').val() == "0") {
+            $("#PaymentTermsID").addClass('errortext');
+            $('#PaymentTermsID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CustomerName').val() == '') {
+            $("#CustomerName").addClass('errortext');
+            $('#CustomerName').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CampaignNumber').val() == '') {
+            $("#CampaignNumber").addClass('errortext');
+            $('#CampaignNumber').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#SalesPersonID').val() == "0") {
+            $("#SalesPersonID").addClass('errortext');
+            $('#SalesPersonID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#OperationExecutiveID').val() == "0") {
+            $("#OperationExecutiveID").addClass('errortext');
+            $('#OperationExecutiveID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#BillingSnapsID').val() == "0") {
+            $("#BillingSnapsID").addClass('errortext');
+            $('#BillingSnapsID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#POReceived').val() == "1") {
+            if ($('#PONumber').val() == '') {
+                $("#PONumber").addClass('errortext');
+                $('#PONumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#POReceived').val() == "3") {
+            if ($('#POImagePath').val() == '') {
+                $("#POImagePath").addClass('errortext');
+                $('#POImagePath').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+
+        var rows = document.getElementById("file_export").getElementsByTagName("tr").length;
+        if ((Number)(rows) <= 1) {
+            alert("Add values in Lines");
+            $('#SiteID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        $("#divload").css({ 'display': 'none' });
+    }
+
+    function getstatecity() {
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: "/Master/GetStateCity",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PinCode: $("#Pincode").val() },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "1") {
+                    $("#StateName").val(data.StateName);
+                    $("#City").val(data.City);
+                }
+                else {
+                    $("#StateName").val('');
+                    $("#City").val('');
+                    $("#PinCode").val('');
+                    alert('Invalid PinCode');
+                    $('#PinCode').focus();
+                }
+            }
+        });
+    }
+
+</script>
+
