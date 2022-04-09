@@ -265,4 +265,3 @@ E:\reenaproject\Repository\Repository\AdvertisingERP\AdvertisingERP\AdvertisingE
 E:\reenaproject\Repository\Repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\bin\System.Web.Http.WebHost.xml
 E:\reenaproject\Repository\Repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.dll
 E:\reenaproject\Repository\Repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.pdb
-E:\reenaproject\Repository\Repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.csprojResolveAssemblyReference.cache
