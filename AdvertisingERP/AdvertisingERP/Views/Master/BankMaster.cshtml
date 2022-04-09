@@ -2,145 +2,93 @@
 
 @{
     ViewBag.Title = "BankMaster";
-    Layout = "~/Views/Shared/_layout.cshtml";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-
-
-<style>
-    .errortext {
-        border: 2px solid red !important;
-        background-color: #ff00003b !important;
-    }
-</style>
-<div class="clearfix"></div>
-
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <div class="col-md-12">
-            <div class="page-breadcrumb">
-                <div class="row">
-                    <div class="col-5 align-self-center">
-                        <h4 class="page-title"></h4>
-                        <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Masters</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Bank Master</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-
-                </div>
+@using (Html.BeginForm("BankMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
+    <div class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Master</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Bank Master</li>
+                    </ol>
+                </nav>
             </div>
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <a href="/Master/BankList" class="btn btn-light list-button">Back To List</a>
 
-            <div class="card">
-                <div class="card-body">
-                    <div class="m-b-0 card-title">
-                        Bank Master
-                        <a href="/Master/BankMaster" class="btn btn-light list-button">Back To List</a>
-                    </div>
-                    <hr>
-                   @using (Html.BeginForm("BankMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
-                   {
-                    <div class="alert alert-success" style="display:@ViewBag.errormsg">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                        <h5 class="text-success"><i class="fa fa-check-circle"></i>@TempData["Bank"]</h5>
-                    </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <label class="control-label">Bank Name  <span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control form-control-lg", @Placeholder = "Bank Name" })
-                                        @Html.HiddenFor(m => m.BankID)
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <label class="control-label">IFSC Prefix <span style="color: red">*</span></label>
-                                        @Html.TextBoxFor(m => m.IFSCPrefix, new { @class = "form-control form-control-lg", @Placeholder = "IFSC Prefix" })
-                                    </div>
-                                </div>
-                            </div>
-                           
-                            <!--/span-->
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-offset-3 col-md-9">
-                                        @if (Model.ServiceId != null)
-                                        {
-                                            <input type="submit" value="Update Bank" class="btn btn-light" name="UpdateService" onclick="return validateservice();" />
-                                        }
-                                        else
-                                        {
-                                            <input type="submit" value="Save Bank" class="btn btn-light" name="SaveService" onclick="return validateservice();" />
-
-                                            <a href="/Master/BankMaster" class="btn btn-dark">Reset</a>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6"></div>
-                        </div>
-                    }
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        <hr />
+        <div class="card">
+            <div class="card-body">
+                <div class="p-4 border rounded">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="validationCustom01" class="form-label">>Bank Name  <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", @Placeholder = "Bank Name" })
+                            @Html.HiddenFor(m => m.BankID)
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validationCustom02" class="form-label">IFSC Prefix <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.IFSCPrefix, new { @class = "form-control", @Placeholder = "IFSC Prefix" })
+                        </div>
+                        <div class="col-12">
+                            @if (Model.ServiceId != null)
+                            {
+                                <input type="submit" value="Update Bank" class="btn btn-light px-5" name="UpdateService" onclick="return validateservice();" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Save Bank" class="btn btn-light px-5" name="SaveService" onclick="return validateservice();" />
 
-<script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
-<script>
-
-    $(document).ready(function () {
-        $("#divload").css({ 'display': 'none' });
-    });
-    function isNumber(evt) {
-        var charCode = (evt.which) ? evt.which : evt.keyCode;
-        if (charCode != 46 && charCode > 31
-          && (charCode < 48 || charCode > 57))
-            return false;
-
-        return true;
-    }
-
-
-    function validateservice() {
-        $(".errortext").removeClass("errortext");
-        if ($('#ServiceName').val() == '') {
-            $("#ServiceName").addClass('errortext');
-            $('#ServiceName').focus();
-            return false;
+                                <a href="/Master/BankMaster" class="btn btn-dark">Reset</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        
         }
-        if ($('#HSNCode').val() == '') {
-            $("#HSNCode").addClass('errortext');
-            $('#HSNCode').focus();
-            return false;
-        }
-        if ($('#CGST').val() == '') {
-            $("#CGST").addClass('errortext');
-            $('#CGST').focus();
-            return false;
-        }
-        if ($('#IGST').val() == '') {
-            $("#IGST").addClass('errortext');
-            $('#IGST').focus();
-            return false;
-        }
-        if ($('#SGST').val() == '') {
-            $("#SGST").addClass('errortext');
-            $('#SGST').focus();
-            return false;
+        <script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+        <script>
 
-        }
-        $("#divload").css({ 'display': '' });
-    }
+            $(document).ready(function () {
+                $("#divload").css({ 'display': 'none' });
+            });
+            function isNumber(evt) {
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if (charCode != 46 && charCode > 31
+                  && (charCode < 48 || charCode > 57))
+                    return false;
 
-</script>
+                return true;
+            }
+
+
+            function validateservice() {
+                $(".errortext").removeClass("errortext");
+                if ($('#BankName').val() == '') {
+                    $("#BankName").addClass('errortext');
+                    $('#BankName').focus();
+                    return false;
+                }
+                if ($('#IFSCPrefix').val() == '') {
+                    $("#IFSCPrefix").addClass('errortext');
+                    $('#IFSCPrefix').focus();
+                    return false;
+                }
+                $("#divload").css({ 'display': '' });
+            }
+
+        </script>

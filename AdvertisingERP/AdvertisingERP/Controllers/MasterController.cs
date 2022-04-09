@@ -1038,17 +1038,17 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["FinancialYear"] = "Financial Year saved successfully";
+                        TempData["success"] = "Financial Year saved successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
-                        TempData["FinancialYear"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["FinancialYear"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("FinancialYear");
         }
@@ -1094,17 +1094,17 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["FinancialYear"] = "Financial year updated successfully";
+                        TempData["success"] = "Financial year updated successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
-                        TempData["FinancialYear"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["FinancialYear"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("FinancialYearList");
         }
@@ -1142,17 +1142,17 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["Bank"] = "Bank saved successfully";
+                        TempData["success"] = "Bank saved successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
-                        TempData["Bank"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["Bank"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("BankMaster");
         }
@@ -1199,17 +1199,17 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["Bank"] = "Bank updated successfully";
+                        TempData["success"] = "Bank updated successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
-                        TempData["Bank"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["Bank"] = ex.Message;
+                TempData["error"] = ex.Message;
             }
             return RedirectToAction("BankMaster");
         }

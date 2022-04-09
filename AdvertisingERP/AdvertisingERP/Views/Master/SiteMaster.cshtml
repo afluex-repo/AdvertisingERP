@@ -11,8 +11,9 @@
         background-color: #ff00003b !important;
     }
 </style>
-<div class="clearfix"></div>
 
+@using (Html.BeginForm("SiteMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
 <div class="content-wrapper">
     <div class="container-fluid">
         <div class="col-md-12">
@@ -40,8 +41,35 @@
                         <a href="/Master/SiteList" class="btn btn-light list-button">Back To List</a>
                     </div>
                     <hr>
-                    @using (Html.BeginForm("SiteMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+                    @if (@TempData["success"] != null)
                     {
+                        <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["success"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
+                        </div>
+                    }
+                    @if (@TempData["error"] != null)
+                    {
+                        <div class="alert border-0 bg-danger alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["error"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                   
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group row">
@@ -320,13 +348,13 @@
                                 </div>
                                 <div class="col-md-6"></div>
                             </div>
-                    }
+                 
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+}
 <script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
 <script>
 
