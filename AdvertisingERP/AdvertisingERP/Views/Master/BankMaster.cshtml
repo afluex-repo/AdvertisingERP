@@ -42,7 +42,7 @@
                             @Html.TextBoxFor(m => m.IFSCPrefix, new { @class = "form-control", @Placeholder = "IFSC Prefix" })
                         </div>
                         <div class="col-12">
-                            @if (Model.ServiceId != null)
+                            @if (Model.BankID != null)
                             {
                                 <input type="submit" value="Update Bank" class="btn btn-light px-5" name="UpdateService" onclick="return validateservice();" />
                             }
