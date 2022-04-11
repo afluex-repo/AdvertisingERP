@@ -143,7 +143,7 @@ namespace AdvertisingERP.Controllers
                 }
                 if (postedFile != null)
                 {
-                    model.SiteImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    model.SiteImage = "/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
                     postedFile.SaveAs(Path.Combine(Server.MapPath(model.SiteImage)));
                 }
                 DataTable dt = new DataTable();
