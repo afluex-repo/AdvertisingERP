@@ -26,10 +26,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
     <link href="~/AdminCss/assets/css/app.css" rel="stylesheet">
     <link href="~/AdminCss/assets/css/icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>Dashtreme - Multipurpose Bootstrap5 Admin Template</title>
+    @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
+    <title>Advertising ERP</title>
     <style>
-        #cover {
+        #divload {
             position: fixed;
             height: 100%;
             width: 100%;
@@ -50,6 +50,7 @@
     </style>
 </head>
 <body class="bg-theme bg-theme1">
+    <div id="divload"> <span class="glyphicon glyphicon-refresh w3-spin preloader-Icon"></span> <img src="~/AdminCss/assets/images/erpgif.gif" class="loadergif" /></div>
     <div class="wrapper">
         <!--sidebar wrapper -->
         <div class="sidebar-wrapper" data-simplebar="true">
@@ -633,11 +634,11 @@
 	  $(document).ready(function() {
 	  $('#example').DataTable()
 	});
-         $(function () {
-        Pace.on("done", function () {
-            $("#contents").fadeIn(1000);
-        });
-    });
+    //     $(function () {
+    //    Pace.on("done", function () {
+    //        $("#contents").fadeIn(1000);
+    //    });
+    //});
     </script>
 
 
@@ -654,5 +655,10 @@
     </script>
     <!--app JS-->
     <script src="~/AdminCss/assets/js/app.js"></script>
+    <script>
+        $(window).on('load', function () {
+            $("#divload").fadeOut(1750);
+        });
+    </script>
 </body>
 </html>
