@@ -45,7 +45,7 @@ namespace AdvertisingERP.Models
         public string SGST { get; set; }
         public string DateFormat { get; set; }
         public string FinancialYearStatus { get; set; }
-        
+
         public List<Master> lstFinancialYear { get; set; }
         public List<Master> lstBanks { get; set; }
 
@@ -57,7 +57,7 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("SiteMaster", para);
             return ds;
         }
-        
+
         public DataSet UpdateSite()
         {
             SqlParameter[] para ={
@@ -85,7 +85,7 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateSite", para);
             return ds;
         }
-        
+
         public DataSet GetSiteList()
         {
             SqlParameter[] para ={new SqlParameter ("@SiteName",SiteName),
@@ -150,7 +150,7 @@ namespace AdvertisingERP.Models
         {
             SqlParameter[] para ={new SqlParameter ("@ServiceID",ServiceId),
                                      new SqlParameter("@DeletedBy",DeletedBy),
-                                     
+
                                  };
             DataSet ds = DBHelper.ExecuteQuery("DeleteService", para);
             return ds;
@@ -179,6 +179,16 @@ namespace AdvertisingERP.Models
             return ds;
         }
 
+        //public DataSet DeleteFinancialYear()
+        //{
+        //    SqlParameter[] para ={new SqlParameter ("@FinancialId",FinancialYearID),
+        //                             new SqlParameter("@DeletedBy",DeletedBy),
+
+        //                         };
+        //    DataSet ds = DBHelper.ExecuteQuery("DeleteFinancialYearDetails", para);
+        //    return ds;
+        //}
+
         public DataSet SaveBank()
         {
             SqlParameter[] para ={new SqlParameter ("@BankName", BankName),
@@ -202,6 +212,16 @@ namespace AdvertisingERP.Models
                                      new SqlParameter("@IFSCPrefix",IFSCPrefix),
                                      new SqlParameter("@UpdatedBy",AddedBy), };
             DataSet ds = DBHelper.ExecuteQuery("UpdateBank", para);
+            return ds;
+        }
+
+        public DataSet DeleteBank()
+        {
+            SqlParameter[] para ={new SqlParameter ("@Fk_BankId",BankID),
+                                     new SqlParameter("@DeletedBy",DeletedBy),
+
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteBankDetails", para);
             return ds;
         }
 

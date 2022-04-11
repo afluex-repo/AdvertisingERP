@@ -33,36 +33,36 @@
                 <hr />
 
                 <div class="card">
+                    @if (@TempData["ServiceSuccess"] != null)
+                    {
+                        <div class="alert border-0 alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="font-35 text-white">
+                                    <i class="bx bxs-check-circle" style="color:green"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["ServiceSuccess"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                    }
+                    @if (@TempData["ServiceError"] != null)
+                    {
+                        <div class="alert border-0 alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="font-35 text-white">
+                                    <i class="bx bxs-check-circle" style="color:green"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["ServiceError"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
                     <div class="card-body">
-                        @*@if (@TempData["success"] != null)
-                            {
-                                <div class="alert border-0 bg-success alert-dismissible fade show py-2">
-                                    <div class="d-flex align-items-center">
-                                        <div class="fs-3 text-white">
-                                            <i class="bi bi-check-circle-fill"></i>
-                                        </div>
-                                        <div class="ms-3">
-                                            <div class="text-white">@TempData["success"]!</div>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span> </button>
-                                </div>
-                            }
-                            @if (@TempData["error"] != null)
-                            {
-                                <div class="alert border-0 bg-danger alert-dismissible fade show py-2">
-                                    <div class="d-flex align-items-center">
-                                        <div class="fs-3 text-white">
-                                            <i class="bi bi-check-circle-fill"></i>
-                                        </div>
-                                        <div class="ms-3">
-                                            <div class="text-white">@TempData["error"]!</div>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                            }*@
-                       
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group row">
