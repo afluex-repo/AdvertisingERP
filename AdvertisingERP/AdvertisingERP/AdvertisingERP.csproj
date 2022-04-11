@@ -746,6 +746,7 @@
     <Content Include="AdminCss\assets\images\products\16.png" />
     <Content Include="AdminCss\assets\images\products\17.png" />
     <Content Include="AdminCss\assets\images\products\19.png" />
+    <Content Include="AdminCss\assets\images\user.png" />
     <Content Include="AdminCss\assets\js\app.js" />
     <Content Include="AdminCss\assets\js\bootstrap.bundle.min.js" />
     <Content Include="AdminCss\assets\js\dashboard-alternate.js" />
@@ -1387,10 +1388,10 @@
     <Content Include="assets\plugins\simplebar\css\simplebar.css" />
     <Content Include="assets\plugins\simplebar\js\simplebar.js" />
     <Content Include="assets\plugins\vectormap\jquery-jvectormap-2.0.2.html" />
-    <Content Include="SoftwareImages\1cd0b6e1-dca8-4c1f-a04c-dd4e6e94a7a5.jpg" />
-    <Content Include="SoftwareImages\628ada92-e293-4b22-add8-25d399993f58.png" />
-    <Content Include="SoftwareImages\7100733d-dc00-40e5-8a23-da0f395f61d7.jpeg" />
-    <Content Include="SoftwareImages\cd2106dc-9e90-4c7a-aae5-70731ebfa5c0.jpeg" />
+    <Content Include="assets\SoftwareImages\1cd0b6e1-dca8-4c1f-a04c-dd4e6e94a7a5.jpg" />
+    <Content Include="assets\SoftwareImages\628ada92-e293-4b22-add8-25d399993f58.png" />
+    <Content Include="assets\SoftwareImages\7100733d-dc00-40e5-8a23-da0f395f61d7.jpeg" />
+    <Content Include="assets\SoftwareImages\cd2106dc-9e90-4c7a-aae5-70731ebfa5c0.jpeg" />
     <Content Include="cdn.datatables.net\1.10.16\js\jquery.dataTables.min.js" />
     <Content Include="cdn.datatables.net\1.10.19\css\dataTables.bootstrap.min.css" />
     <Content Include="cdn.datatables.net\1.10.19\css\dataTables.bootstrap4.min.css" />
@@ -1643,7 +1644,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58325</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58328/</IISUrl>
+          <IISUrl>http://localhost:58326/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
