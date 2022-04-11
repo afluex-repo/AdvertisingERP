@@ -26,10 +26,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
     <link href="~/AdminCss/assets/css/app.css" rel="stylesheet">
     <link href="~/AdminCss/assets/css/icons.css" rel="stylesheet">
-
-    <title>Dashtreme - Multipurpose Bootstrap5 Admin Template</title>
+    @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
+    <title>Advertising ERP</title>
     <style>
-        #cover {
+        #divload {
             position: fixed;
             height: 100%;
             width: 100%;
@@ -50,7 +50,7 @@
     </style>
 </head>
 <body class="bg-theme bg-theme1">
-    <div id="cover"> <span class="glyphicon glyphicon-refresh w3-spin preloader-Icon"></span> <img src="~/AdminCss/assets/images/erpgif.gif" class="loadergif" /></div>
+    <div id="divload"> <span class="glyphicon glyphicon-refresh w3-spin preloader-Icon"></span> <img src="~/AdminCss/assets/images/erpgif.gif" class="loadergif" /></div>
     <div class="wrapper">
         <!--sidebar wrapper -->
         <div class="sidebar-wrapper" data-simplebar="true">
@@ -617,7 +617,7 @@
     <script src="~/AdminCss/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
     <script src="~/AdminCss/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="~/AdminCss/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
-
+    <script src="~/AdminCss/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 
     <!-- <script>
         $(document).ready(function() {
@@ -634,11 +634,11 @@
 	  $(document).ready(function() {
 	  $('#example').DataTable()
 	});
-         $(function () {
-        Pace.on("done", function () {
-            $("#contents").fadeIn(1000);
-        });
-    });
+    //     $(function () {
+    //    Pace.on("done", function () {
+    //        $("#contents").fadeIn(1000);
+    //    });
+    //});
     </script>
 
 
@@ -657,7 +657,7 @@
     <script src="~/AdminCss/assets/js/app.js"></script>
     <script>
         $(window).on('load', function () {
-            $("#cover").fadeOut(1750);
+            $("#divload").fadeOut(1750);
         });
     </script>
 </body>
