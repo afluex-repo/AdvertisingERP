@@ -649,6 +649,7 @@
     <Content Include="AdminCss\assets\flags\4x3\zw.svg" />
     <Content Include="AdminCss\assets\fonts\boxiconsd41d.svg" />
     <Content Include="AdminCss\assets\fonts\LineIcons.svg" />
+    <Content Include="AdminCss\assets\images\autocomplete.js" />
     <Content Include="AdminCss\assets\images\avatars\avatar-1.png" />
     <Content Include="AdminCss\assets\images\avatars\avatar-10.png" />
     <Content Include="AdminCss\assets\images\avatars\avatar-11.png" />
