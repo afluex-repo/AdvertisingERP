@@ -30,10 +30,12 @@ namespace AdvertisingERP.Models
         public DataSet CampaignEntry()
         {
             SqlParameter[] para ={    
-                                      new SqlParameter ("@CustomerCode",CustomerId),
-                                       new SqlParameter ("@CreativeName",CreativeName),
+                                      new SqlParameter ("@CustomerCode","CUST0001"),
+                                       new SqlParameter ("@CreativeName","Test"),
                                         new SqlParameter ("@StartDate",StartDate),
                                          new SqlParameter ("@EndDate",EndDate),
+                                          //new SqlParameter ("@StartDate","01/04/2022"),
+                                         //new SqlParameter ("@EndDate","25/04/2022"),
                                           new SqlParameter ("@Description",Decription),
                                            new SqlParameter ("@AddedBy",AddedBy),
                                    
