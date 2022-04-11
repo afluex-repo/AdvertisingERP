@@ -4293,3 +4293,7 @@ body.bg-theme15 {
 	}
 
 }
+ .errortext {
+        border: 2px solid red !important;
+        background-color: #ff00003b !important;
+    }
