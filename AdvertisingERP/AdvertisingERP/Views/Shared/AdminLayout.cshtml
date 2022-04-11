@@ -50,7 +50,6 @@
     </style>
 </head>
 <body class="bg-theme bg-theme1">
-    <div id="cover"> <span class="glyphicon glyphicon-refresh w3-spin preloader-Icon"></span> <img src="~/AdminCss/assets/images/erpgif.gif" class="loadergif" /></div>
     <div class="wrapper">
         <!--sidebar wrapper -->
         <div class="sidebar-wrapper" data-simplebar="true">
@@ -80,10 +79,10 @@
                         <div class="menu-title">Master</div>
                     </a>
                     <ul>
-                        <li><a href="/Master/SiteMaster"><i class="bx bx-right-arrow-alt"></i>Site Master</a></li>
-                        <li><a href="/Master/ServiceMaster"> <i class="bx bx-right-arrow-alt"></i> Service Master</a></li>
-                        <li><a href="/Master/FinancialYear"> <i class="bx bx-right-arrow-alt"></i> Financial Year</a></li>
-                        <li><a href="/Master/BankMaster"> <i class="bx bx-right-arrow-alt"></i> Bank Master</a></li>
+                        <li><a href="#"><i class="bx bx-right-arrow-alt"></i>Site Master</a></li>
+                        <li><a href="#"> <i class="bx bx-right-arrow-alt"></i> Service Master</a></li>
+                        <li><a href="#"> <i class="bx bx-right-arrow-alt"></i> Financial Year</a></li>
+                        <li><a href="#"> <i class="bx bx-right-arrow-alt"></i> Bank Master</a></li>
                     </ul>
                     
                 </li>
@@ -617,7 +616,7 @@
     <script src="~/AdminCss/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
     <script src="~/AdminCss/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="~/AdminCss/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
-
+    <script src="~/AdminCss/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 
     <!-- <script>
         $(document).ready(function() {
@@ -655,10 +654,5 @@
     </script>
     <!--app JS-->
     <script src="~/AdminCss/assets/js/app.js"></script>
-    <script>
-        $(window).on('load', function () {
-            $("#cover").fadeOut(1750);
-        });
-    </script>
 </body>
 </html>
