@@ -34,7 +34,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="/SaleOrder/GenerateSaleOrder" class="btn btn-outline-info px-5 float-right">Sale Order No List</a>
+                    <a href="/SaleOrder/GenerateSaleOrder" class="btn btn-light list-button px-5 float-right">Sale Order No List</a>
 
                 </div>
             </div>
@@ -46,10 +46,10 @@
                 <div class="p-4 border rounded">
                     <div class="row  g-3">
                         @*<div class="h-100 d-flex flex-column bd-highlight">
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="input" placeholder="Start typing..." autocomplete="off">
-                            </div>
-                        </div>*@
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="input" placeholder="Start typing..." autocomplete="off">
+                                </div>
+                            </div>*@
 
 
 
@@ -148,9 +148,9 @@
                                     <input type="file" name="postedFile" id="Image" onchange="readURL(this)" />
                                     <input type="hidden" id="hdPOImagePath" name="hdPOImagePath" />
                                     @*@if (Model.POImagePath != null)
-                    {
-                        @Html.HiddenFor(m => m.POImagePath)
-                    }*@
+                                        {
+                                            @Html.HiddenFor(m => m.POImagePath)
+                                        }*@
                                     <a href="@Model.POImagePath" target="_blank">
                                         <img id="ContentPlaceHolder1_imgProductImage" src="@Model.POImagePath" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;" />
                                     </a>
@@ -262,8 +262,8 @@
                                         }
                                         else
                                         {
-                                            <input type="submit" id="btnAddLine" name="btnAddLine" value="Add Line" class="btn btn-sm btn-info" onclick="return validateLine();" />
-                                            <input type="submit" id="btnUpdateLine" name="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();" class="btn btn-sm btn-info" />
+                                            <input type="submit" id="btnAddLine" name="btnAddLine" value="Add Line" class="btn btn-light list-button" onclick="return validateLine();" />
+                                            <input type="submit" id="btnUpdateLine" name="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();" class="btn btn-light list-button" />
                                         }
                                     </td>
                                 </tr>
@@ -385,7 +385,7 @@
                                 {
                                     if (Model.PostStatus == "False")
                                     {
-                                        <input type="submit" value="Post Sale Order" class="btn btn-success" id="UpdateSaleOrder" name="UpdateSaleOrder" onclick="return validateFormForPostSO();" />
+                                        <input type="submit" value="Post Sale Order" class="btn btn-light list-button" id="UpdateSaleOrder" name="UpdateSaleOrder" onclick="return validateFormForPostSO();" />
                                     }
                                     else
                                     {
@@ -396,7 +396,7 @@
                                 }
                                 else
                                 {
-                                    <input type="submit" value="Save Sale Order" class="btn btn-outline-success px-5" id="SaveSaleOrder" name="SaveSaleOrder" onclick="return validateVendor();" />
+                                    <input type="submit" value="Save Sale Order" class="btn btn-light list-button px-5" id="SaveSaleOrder" name="SaveSaleOrder" onclick="return validateVendor();" />
                                 }
                                 //}
                             }
@@ -452,90 +452,78 @@
         $('#TotalAmount').val("");
         $('#FinalAmount').val("");
 
-                                $("#divload").css({ 'display': 'none' });
-                                $('#SaveSaleOrder').show();
+        $("#divload").css({ 'display': 'none' });
+        $('#SaveSaleOrder').show();
 
-                                var cityuse = [];
-                                $.ajax({
-                                    url: '/Compaign/GetAllCustomer',
-                                    type: 'Post',
-                                    success: function (response) {
-                                        if (response != null) {
-                                            $(response).each(function (index, item) { // GETTING ERROR HERE
-                                                cityuse.push(item.CompanyName + "(" + item.CustomerCode + ")");
-                                            });
-                                            const field = document.getElementById('CustomerName');
-                                            const ac = new Autocomplete(field, {
-                                                source: cityuse,
-                                                maximumItems: 5,
-                                                threshold: 1,
-                                                onSelectItem: (event, ui) => {
-                                                    var str = ui.item.label;
-                                                    var afterComma = str.substr(str.indexOf("(") + 1);
-                                                    var citycode = afterComma.substr(0, afterComma.length - 1);
-                                                    $('#CustomerCode').val(citycode);
-                                                }
-                                            });
-                                            //$('#CustomerName').autocomplete({
-                                            //    source: cityuse,
-                                            //    select: function (event, ui) {
-                                            //        var str = ui.item.label;
-                                            //        var afterComma = str.substr(str.indexOf("(") + 1);
-                                            //        var citycode = afterComma.substr(0, afterComma.length - 1);
-                                            //        $('#CustomerCode').val(citycode);
-                                            //    }
-                                            //})
-                                        }
-                                        else {
+        var cityuse = [];
+        $.ajax({
+            url: '/Compaign/GetAllCustomer',
+            type: 'Post',
+            success: function (response) {
+                if (response != null) {
+                    $(response).each(function (index, item) { // GETTING ERROR HERE
+                        cityuse.push(item.CompanyName + "(" + item.CustomerCode + ")");
+                    });
+                    $('#CustomerName').autocomplete({
+                        source: cityuse,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var afterComma = str.substr(str.indexOf("(") + 1);
+                            var citycode = afterComma.substr(0, afterComma.length - 1);
+                            $('#CustomerCode').val(citycode);
+                        }
+                    })
+                }
+                else {
 
-                                        }
-                                    }, error: function () { alert('Some Thing wrong!'); }
-                                });
+                }
+            }, error: function () { alert('Some Thing wrong!'); }
+        });
 
-                                var poValue = $('#POReceived').val();
-                                var poimguploaded = $('#POImagePath').val();
+        var poValue = $('#POReceived').val();
+        var poimguploaded = $('#POImagePath').val();
 
-                                if (poimguploaded != null && poimguploaded != '') {
-                                    $('#POImagePath').val(poimguploaded);
-                                    document.getElementById("hdPOImagePath").value = poimguploaded;
-                                }
+        if (poimguploaded != null && poimguploaded != '') {
+            $('#POImagePath').val(poimguploaded);
+            document.getElementById("hdPOImagePath").value = poimguploaded;
+        }
 
-                                var serviceID = $('#ServiceID').val();
-                                if (serviceID != null && serviceID != '' && serviceID != '0') {
-                                    $('#ServiceID').val(serviceID);
-                                    document.getElementById("hdServiceID").value = serviceID;
-                                    $('#ServiceID').attr("disabled", "disabled");
+        var serviceID = $('#ServiceID').val();
+        if (serviceID != null && serviceID != '' && serviceID != '0') {
+            $('#ServiceID').val(serviceID);
+            document.getElementById("hdServiceID").value = serviceID;
+            $('#ServiceID').attr("disabled", "disabled");
 
-                                    $.ajax({
-                                        url: '/SaleOrder/ServiceType', type: 'post', dataType: 'json',
-                                        data: { 'serviceID': serviceID },
-                                        success: function (data) {
-                                            $("#divload").css({ 'display': 'none' });
-                                            if (data.ServiceType == "Single") {
-                                                $('#FromDate').attr("disabled", false);
-                                                $('#ToDate').attr("disabled", "disabled");
-                                                document.getElementById('spEndDate').innerHTML = "NA";
-                                            }
-                                            else if (data.ServiceType == "Double") {
-                                                $('#FromDate').attr("disabled", false);
-                                                $('#ToDate').attr("disabled", false);
-                                                document.getElementById('spEndDate').innerHTML = "End Date";
-                                            }
+            $.ajax({
+                url: '/SaleOrder/ServiceType', type: 'post', dataType: 'json',
+                data: { 'serviceID': serviceID },
+                success: function (data) {
+                    $("#divload").css({ 'display': 'none' });
+                    if (data.ServiceType == "Single") {
+                        $('#FromDate').attr("disabled", false);
+                        $('#ToDate').attr("disabled", "disabled");
+                        document.getElementById('spEndDate').innerHTML = "NA";
+                    }
+                    else if (data.ServiceType == "Double") {
+                        $('#FromDate').attr("disabled", false);
+                        $('#ToDate').attr("disabled", false);
+                        document.getElementById('spEndDate').innerHTML = "End Date";
+                    }
 
-                                            if (data.Result == "1") {
+                    if (data.Result == "1") {
 
-                                                $("#MediaTypeID").html("");
-                                                $("#MediaTypeID").empty();
-                                                $("#MediaTypeID").append($('<option></option>').val(0).html('Select Media Type'));
-                                                $.each(data.lstMediaType, function (index, Sectorcount) {
-                                                    $("#MediaTypeID").append(
-                                                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
-                                                });
+                        $("#MediaTypeID").html("");
+                        $("#MediaTypeID").empty();
+                        $("#MediaTypeID").append($('<option></option>').val(0).html('Select Media Type'));
+                        $.each(data.lstMediaType, function (index, Sectorcount) {
+                            $("#MediaTypeID").append(
+                                  $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                        });
 
-                                            }
-                                        }
-                                    });
-                                }
+                    }
+                }
+            });
+        }
 
         var serviceType = $('#ServiceID').find('option:selected').text();
         //alert("Selected Service : " + serviceType);
@@ -554,227 +542,216 @@
             document.getElementById('spStartDateDisplay').innerHTML = "Start Date";
         }
 
-                                if (serviceType == "Retail Branding") {
-                                    $('#divState').show();
-                                    $('#StateName').attr("disabled", "disabled");
-                                    $('#SiteID').attr("disabled", "disabled");
-                                    $('#Width').prop("readonly", false);
-                                    $('#Height').prop("readonly", false);
-                                    $('#ToDate').prop("readonly", true);
+        if (serviceType == "Retail Branding") {
+            $('#divState').show();
+            $('#StateName').attr("disabled", "disabled");
+            $('#SiteID').attr("disabled", "disabled");
+            $('#Width').prop("readonly", false);
+            $('#Height').prop("readonly", false);
+            $('#ToDate').prop("readonly", true);
 
-                                    document.getElementById('spStartDate').innerHTML = serviceType + " Date";
-                                    document.getElementById('spEndDate').innerHTML = "NA";
-                                    document.getElementById('spSelectSite').innerText = "NA";
+            document.getElementById('spStartDate').innerHTML = serviceType + " Date";
+            document.getElementById('spEndDate').innerHTML = "NA";
+            document.getElementById('spSelectSite').innerText = "NA";
 
-                                    //Load Cities according to the Previous Selected State
-                                    var statename = $('#StateName').val();
+            //Load Cities according to the Previous Selected State
+            var statename = $('#StateName').val();
 
-                                    $.ajax({
-                                        url: '/SaleOrder/StateChange', type: 'post', dataType: 'json',
-                                        data: { 'statename': statename },
-                                        success: function (data) {
-                                            if (data.Result == "1") {
+            $.ajax({
+                url: '/SaleOrder/StateChange', type: 'post', dataType: 'json',
+                data: { 'statename': statename },
+                success: function (data) {
+                    if (data.Result == "1") {
 
-                                                $("#CityID").html(""); // clear before appending new list
-                                                $("#CityID").empty();
-                                                $("#CityID").append(
-                                                      $('<option></option>').val(0).html('Select City'));
-                                                $.each(data.lstVendors, function (index, Sectorcount) {
-                                                    $("#CityID").append(
-                                                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                        $("#CityID").html(""); // clear before appending new list
+                        $("#CityID").empty();
+                        $("#CityID").append(
+                              $('<option></option>').val(0).html('Select City'));
+                        $.each(data.lstVendors, function (index, Sectorcount) {
+                            $("#CityID").append(
+                                  $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
 
-                                                });
-                                            }
-                                        }
-                                    });
-                                    //Load Cities according to the Previous Selected State
-                                }
-                                else {
-                                    $.ajax({
-                                        url: '/SaleOrder/BindAllCityList', type: 'post', dataType: 'json',
-                                        //data: { 'statename': statename },
-                                        success: function (data) {
-                                            $("#divload").css({ 'display': 'none' });
-                                            if (data.Result == "1") {
+                        });
+                    }
+                }
+            });
+            //Load Cities according to the Previous Selected State
+        }
+        else {
+            $.ajax({
+                url: '/SaleOrder/BindAllCityList', type: 'post', dataType: 'json',
+                //data: { 'statename': statename },
+                success: function (data) {
+                    $("#divload").css({ 'display': 'none' });
+                    if (data.Result == "1") {
 
-                                                $("#CityID").html(""); // clear before appending new list
-                                                $("#CityID").empty();
-                                                $("#CityID").append(
-                                                      $('<option></option>').val(0).html('Select City'));
-                                                $.each(data.lstVendors, function (index, Sectorcount) {
-                                                    $("#CityID").append(
-                                                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                        $("#CityID").html(""); // clear before appending new list
+                        $("#CityID").empty();
+                        $("#CityID").append(
+                              $('<option></option>').val(0).html('Select City'));
+                        $.each(data.lstVendors, function (index, Sectorcount) {
+                            $("#CityID").append(
+                                  $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
 
-                                                });
+                        });
 
-                                            }
-                                        }
-                                    });
-                                    $('#Width').prop("readonly", true);
-                                    $('#Height').prop("readonly", true);
-                                    $('#ToDate').prop("readonly", false);
-                                    $('#divState').hide();
-                                }
+                    }
+                }
+            });
+            $('#Width').prop("readonly", true);
+            $('#Height').prop("readonly", true);
+            $('#ToDate').prop("readonly", false);
+            $('#divState').hide();
+        }
 
-                                if (poValue == "1") {
-                                    $('#divPONumber').show();
-                                    $('#divPOImage').show();
-                                }
-                                else if (poValue == "2") {
-                                    $('#divPONumber').hide();
-                                    $('#divPOImage').hide();
-                                }
-                                else if (poValue == "3") {
-                                    $('#divPONumber').hide();
-                                    $('#divPOImage').show();
-                                }
+        if (poValue == "1") {
+            $('#divPONumber').show();
+            $('#divPOImage').show();
+        }
+        else if (poValue == "2") {
+            $('#divPONumber').hide();
+            $('#divPOImage').hide();
+        }
+        else if (poValue == "3") {
+            $('#divPONumber').hide();
+            $('#divPOImage').show();
+        }
 
-                            });
+    });
 
-                            function getCustomerCampaigns(customerID) {
-                                debugger
-                                $("#divload").css({ 'display': '' });
-                                var customerCode = customerID.value;
-                                var afterComma = customerCode.substr(customerCode.indexOf("(") + 1);
-                                var citycode = afterComma.substr(0, afterComma.length - 1);
+    function getCustomerCampaigns(customerID) {
+        debugger
+        $("#divload").css({ 'display': '' });
+        var customerCode = customerID.value;
+        var afterComma = customerCode.substr(customerCode.indexOf("(") + 1);
+        var citycode = afterComma.substr(0, afterComma.length - 1);
 
-                                //alert(citycode);
-                                var campaigns = [];
-                                $.ajax({
-                                    url: '/SaleOrder/GetAllCampaigns',
-                                    type: 'Post',
-                                    data: { 'customerCode': citycode },
-                                    success: function (response) {
-                                        $("#divload").css({ 'display': 'none' });
-                                        if (response != null) {
-                                            $(response.lstCompaign).each(function (index, item) { // GETTING ERROR HERE
-                                                campaigns.push(item.CreativeName + "(" + item.CampaignNo + ")");
-                                            });
-                                            const field = document.getElementById('CampaignNumber');
-                                            const ac = new Autocomplete(field, {
-                                                source: campaigns,
-                                                maximumItems: 5,
-                                                threshold: 1,
-                                                onSelectItem: (event, ui) => {
-                                                    var str = ui.item.label;
-                                                    var afterComma = str.substr(str.indexOf("(") + 1);
-                                                    var citycode = afterComma.substr(0, afterComma.length - 1);
-                                                    $('#CampaignID').val(citycode);
-                                                }
-                                            });
-                                            //$('#CampaignNumber').autocomplete({
-                                            //    source: campaigns,
-                                            //    select: function (event, ui) {
-                                            //        var str = ui.item.label;
-                                            //        var afterComma = str.substr(str.indexOf("(") + 1);
-                                            //        var citycode = afterComma.substr(0, afterComma.length - 1);
-                                            //        $('#CampaignID').val(citycode);
+        //alert(citycode);
+        var campaigns = [];
+        $.ajax({
+            url: '/SaleOrder/GetAllCampaigns',
+            type: 'Post',
+            data: { 'customerCode': citycode },
+            success: function (response) {
+                $("#divload").css({ 'display': 'none' });
+                if (response != null) {
+                    $(response.lstCompaign).each(function (index, item) { // GETTING ERROR HERE
+                        campaigns.push(item.CreativeName + "(" + item.CampaignNo + ")");
+                    });
 
-                                            //    }
-                                            //})
-                                            $('#CustomerAddress').val(response.Address);
-                                        }
-                                        else {
+                    $('#CampaignNumber').autocomplete({
+                        source: campaigns,
+                        select: function (event, ui) {
+                            var str = ui.item.label;
+                            var afterComma = str.substr(str.indexOf("(") + 1);
+                            var citycode = afterComma.substr(0, afterComma.length - 1);
+                            $('#CampaignID').val(citycode);
 
-                                        }
-                                    }, error: function () { alert('Some Thing wrong !'); }
-                                });
-                            }
+                        }
+                    })
+                    $('#CustomerAddress').val(response.Address);
+                }
+                else {
 
-                            function validateLine() {
-                                $(".errortext").removeClass("errortext");
-                                //Validate SO Details before adding Lines
-                                if ($('#SalesOrderNo').val() == '') {
-                                    $("#SalesOrderNo").addClass('errortext');
-                                    $('#SalesOrderNo').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#OrderDate').val() == '') {
-                                    $("#OrderDate").addClass('errortext');
-                                    $('#OrderDate').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#PaymentTermsID').val() == "") {
-                                    $("#PaymentTermsID").addClass('errortext');
-                                    $('#PaymentTermsID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#CustomerName').val() == '') {
-                                    $("#CustomerName").addClass('errortext');
-                                    $('#CustomerName').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#CampaignNumber').val() == '') {
-                                    $("#CampaignNumber").addClass('errortext');
-                                    $('#CampaignNumber').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#SalesPersonID').val() == "0") {
-                                    $("#SalesPersonID").addClass('errortext');
-                                    $('#SalesPersonID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#OperationExecutiveID').val() == "0") {
-                                    $("#OperationExecutiveID").addClass('errortext');
-                                    $('#OperationExecutiveID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#BillingSnapsID').val() == "0") {
-                                    $("#BillingSnapsID").addClass('errortext');
-                                    $('#BillingSnapsID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
+                }
+            }, error: function () { alert('Some Thing wrong !'); }
+        });
+    }
 
-                                if ($('#POReceived').val() == "0") {
-                                    $("#POReceived").addClass('errortext');
-                                    $('#POReceived').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
+    function validateLine() {
+        $(".errortext").removeClass("errortext");
+        //Validate SO Details before adding Lines
+        if ($('#SalesOrderNo').val() == '') {
+            $("#SalesOrderNo").addClass('errortext');
+            $('#SalesOrderNo').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#OrderDate').val() == '') {
+            $("#OrderDate").addClass('errortext');
+            $('#OrderDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#PaymentTermsID').val() == "") {
+            $("#PaymentTermsID").addClass('errortext');
+            $('#PaymentTermsID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CustomerName').val() == '') {
+            $("#CustomerName").addClass('errortext');
+            $('#CustomerName').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CampaignNumber').val() == '') {
+            $("#CampaignNumber").addClass('errortext');
+            $('#CampaignNumber').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#SalesPersonID').val() == "0") {
+            $("#SalesPersonID").addClass('errortext');
+            $('#SalesPersonID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#OperationExecutiveID').val() == "0") {
+            $("#OperationExecutiveID").addClass('errortext');
+            $('#OperationExecutiveID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#BillingSnapsID').val() == "0") {
+            $("#BillingSnapsID").addClass('errortext');
+            $('#BillingSnapsID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
 
-                                if ($('#POReceived').val() == "1") {
-                                    if ($('#PONumber').val() == '') {
-                                        $("#PONumber").addClass('errortext');
-                                        $('#PONumber').focus();
-                                        $("#divload").css({ 'display': 'none' });
-                                        return false;
-                                    }
-                                }
-                                else if ($('#POReceived').val() == "3") {
-                                    if ($('#POImagePath').val() == '') {
-                                        $("#POImagePath").addClass('errortext');
-                                        $('#POImagePath').focus();
-                                        $("#divload").css({ 'display': 'none' });
-                                        return false;
-                                    }
-                                }
-                                //Validate SO Details before adding Lines
-                                if ($('#ServiceID').val() == "0") {
-                                    $("#ServiceID").addClass('errortext');
-                                    $("#divload").css({ 'display': 'none' });
-                                    $('#ServiceID').focus();
-                                    return false;
-                                }
-                                if ($('#CityID').val() == "0") {
-                                    $("#CityID").addClass('errortext');
-                                    $('#CityID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#VendorID').val() == "0") {
-                                    $("#VendorID").addClass('errortext');
-                                    $("#divload").css({ 'display': 'none' });
-                                    $('#VendorID').focus();
-                                    return false;
-                                }
+        if ($('#POReceived').val() == "0") {
+            $("#POReceived").addClass('errortext');
+            $('#POReceived').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+
+        if ($('#POReceived').val() == "1") {
+            if ($('#PONumber').val() == '') {
+                $("#PONumber").addClass('errortext');
+                $('#PONumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#POReceived').val() == "3") {
+            if ($('#POImagePath').val() == '') {
+                $("#POImagePath").addClass('errortext');
+                $('#POImagePath').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        //Validate SO Details before adding Lines
+        if ($('#ServiceID').val() == "0") {
+            $("#ServiceID").addClass('errortext');
+            $("#divload").css({ 'display': 'none' });
+            $('#ServiceID').focus();
+            return false;
+        }
+        if ($('#CityID').val() == "0") {
+            $("#CityID").addClass('errortext');
+            $('#CityID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#VendorID').val() == "0") {
+            $("#VendorID").addClass('errortext');
+            $("#divload").css({ 'display': 'none' });
+            $('#VendorID').focus();
+            return false;
+        }
 
         var serviceType = $('#ServiceID').find('option:selected').text();
         if (serviceType != "Retail Branding") {
@@ -786,203 +763,203 @@
             }
         }
 
-                                if ($('#MediaTypeID').val() == "0") {
-                                    $("#MediaTypeID").addClass('errortext');
-                                    $('#MediaTypeID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#FromDate').val() == "") {
-                                    $("#FromDate").addClass('errortext');
-                                    $('#FromDate').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#Width').val() == "") {
-                                    $("#Width").addClass('errortext');
-                                    $('#Width').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#Height').val() == "") {
-                                    $("#Height").addClass('errortext');
-                                    $('#Height').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#Side').val() == "") {
-                                    $("#Side").addClass('errortext');
-                                    $('#Side').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#Unit').val() == "") {
-                                    $("#Unit").addClass('errortext');
-                                    $('#Unit').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#Area').val() == "") {
-                                    $("#Area").addClass('errortext');
-                                    $('#Area').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#Amt').val() == "") {
-                                    $("#Amt").addClass('errortext');
-                                    $('#Amt').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#Rate').val() == "") {
-                                    $("#Rate").addClass('errortext');
-                                    $('#Rate').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#TotalAmount').val() == "") {
-                                    $("#TotalAmount").addClass('errortext');
-                                    $('#TotalAmount').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#TDS').val() == "") {
-                                    $("#TDS").addClass('errortext');
-                                    $('#TDS').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#Discount').val() == "") {
-                                    $("#Discount").addClass('errortext');
-                                    $('#Discount').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#CGST').val() == "") {
-                                    $("#CGST").addClass('errortext');
-                                    $('#CGST').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#SGST').val() == "") {
-                                    $("#SGST").addClass('errortext');
-                                    $('#SGST').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#IGST').val() == "") {
-                                    $("#IGST").addClass('errortext');
-                                    $('#IGST').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#FinalAmount').val() == "") {
-                                    $("#FinalAmount").addClass('errortext');
-                                    $('#FinalAmount').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
+        if ($('#MediaTypeID').val() == "0") {
+            $("#MediaTypeID").addClass('errortext');
+            $('#MediaTypeID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#FromDate').val() == "") {
+            $("#FromDate").addClass('errortext');
+            $('#FromDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Width').val() == "") {
+            $("#Width").addClass('errortext');
+            $('#Width').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Height').val() == "") {
+            $("#Height").addClass('errortext');
+            $('#Height').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Side').val() == "") {
+            $("#Side").addClass('errortext');
+            $('#Side').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Unit').val() == "") {
+            $("#Unit").addClass('errortext');
+            $('#Unit').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Area').val() == "") {
+            $("#Area").addClass('errortext');
+            $('#Area').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Amt').val() == "") {
+            $("#Amt").addClass('errortext');
+            $('#Amt').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Rate').val() == "") {
+            $("#Rate").addClass('errortext');
+            $('#Rate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#TotalAmount').val() == "") {
+            $("#TotalAmount").addClass('errortext');
+            $('#TotalAmount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#TDS').val() == "") {
+            $("#TDS").addClass('errortext');
+            $('#TDS').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#Discount').val() == "") {
+            $("#Discount").addClass('errortext');
+            $('#Discount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CGST').val() == "") {
+            $("#CGST").addClass('errortext');
+            $('#CGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#SGST').val() == "") {
+            $("#SGST").addClass('errortext');
+            $('#SGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#IGST').val() == "") {
+            $("#IGST").addClass('errortext');
+            $('#IGST').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#FinalAmount').val() == "") {
+            $("#FinalAmount").addClass('errortext');
+            $('#FinalAmount').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
 
-                                var serviceID = $('#ServiceID').val();
-                                if (serviceID != null && serviceID != '' && serviceID != '0') {
-                                    $('#ServiceID').val(serviceID);
-                                    document.getElementById("hdServiceID").value = serviceID;
-                                    $('#ServiceID').attr("disabled", "disabled");
-                                }
+        var serviceID = $('#ServiceID').val();
+        if (serviceID != null && serviceID != '' && serviceID != '0') {
+            $('#ServiceID').val(serviceID);
+            document.getElementById("hdServiceID").value = serviceID;
+            $('#ServiceID').attr("disabled", "disabled");
+        }
 
-                            }
+    }
 
-                            function editLine(saleorderdetailsid, linestatus) {
-                                $.ajax({
-                                    url: '/SaleOrder/LoadDataForEdit',
-                                    type: 'Post',
-                                    data: { 'saleorderdetailsid': saleorderdetailsid, 'linestatus': linestatus },
-                                    success: function (response) {
-                                        //Bind DDLs to select the Previous filled Data for edit
-                                        $("#MediaTypeID").html(""); // clear before appending new list
-                                        $("#MediaTypeID").empty();
-                                        $("#MediaTypeID").append($('<option></option>').val(0).html('Select Media Type'));
-                                        $.each(response.lstMediaType, function (index, Sectorcount) {
-                                            $("#MediaTypeID").append(
-                                                  $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
-                                        });
+    function editLine(saleorderdetailsid, linestatus) {
+        $.ajax({
+            url: '/SaleOrder/LoadDataForEdit',
+            type: 'Post',
+            data: { 'saleorderdetailsid': saleorderdetailsid, 'linestatus': linestatus },
+            success: function (response) {
+                //Bind DDLs to select the Previous filled Data for edit
+                $("#MediaTypeID").html(""); // clear before appending new list
+                $("#MediaTypeID").empty();
+                $("#MediaTypeID").append($('<option></option>').val(0).html('Select Media Type'));
+                $.each(response.lstMediaType, function (index, Sectorcount) {
+                    $("#MediaTypeID").append(
+                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                });
 
-                                        $("#VendorID").html(""); // clear before appending new list
-                                        $("#VendorID").empty();
-                                        $("#VendorID").append($('<option></option>').val(0).html('Select Vendor'));
-                                        $.each(response.lstVendors, function (index, Sectorcount) {
-                                            $("#VendorID").append(
-                                                  $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
-                                        });
+                $("#VendorID").html(""); // clear before appending new list
+                $("#VendorID").empty();
+                $("#VendorID").append($('<option></option>').val(0).html('Select Vendor'));
+                $.each(response.lstVendors, function (index, Sectorcount) {
+                    $("#VendorID").append(
+                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                });
 
-                                        $("#SiteID").html(""); // clear before appending new list
-                                        $("#SiteID").empty();
-                                        $("#SiteID").append($('<option></option>').val(0).html('Select Site'));
-                                        $.each(response.ddlSites, function (index, Sectorcount) {
-                                            $("#SiteID").append(
-                                                  $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                $("#SiteID").html(""); // clear before appending new list
+                $("#SiteID").empty();
+                $("#SiteID").append($('<option></option>').val(0).html('Select Site'));
+                $.each(response.ddlSites, function (index, Sectorcount) {
+                    $("#SiteID").append(
+                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
 
-                                        });
-                                        //Bind DDLs to select the Previous filled Data for edit
+                });
+                //Bind DDLs to select the Previous filled Data for edit
 
-                                        //$('#SiteID').attr("disabled", "disabled");
-                                        $('#SaleOrderDetailsID').val(saleorderdetailsid);
-                                        $('#LineStatus').val(linestatus);
-                                        $('#HSNCode').val(response.HSNCode);
-                                        $('#CityID').val(response.City);
-                                        $('#SiteID').val(response.SiteID);
-                                        $('#Description').val(response.Description);
-                                        $('#ServiceID').val(response.ServiceID);
-                                        $('#MediaTypeID').val(response.MediaTypeID);
-                                        $('#VendorID').val(response.VendorID);
-                                        $('#FromDate').val(response.FromDate);
-                                        $('#ToDate').val(response.ToDate);
-                                        $('#Width').val(response.Width);
-                                        $('#Height').val(response.Height);
-                                        $('#Side').val(response.Side);
-                                        $('#Unit').val(response.Unit);
-                                        $('#Area').val(response.Area);
-                                        $('#Rate').val(response.Rate);
-                                        $('#TotalAmount').val(response.Amt);
-                                        $('#TDS').val(response.TDS);
-                                        $('#Discount').val(response.Discount);
-                                        $('#CGST').val(response.CGST);
-                                        $('#SGST').val(response.SGST);
-                                        $('#IGST').val(response.IGST);
-                                        $('#FinalAmount').val(response.FinalAmount);
-                                        $('#Amt').val(response.Amt);
-                                        $('#btnUpdateLine').show();
-                                        $('#btnAddLine').hide();
+                //$('#SiteID').attr("disabled", "disabled");
+                $('#SaleOrderDetailsID').val(saleorderdetailsid);
+                $('#LineStatus').val(linestatus);
+                $('#HSNCode').val(response.HSNCode);
+                $('#CityID').val(response.City);
+                $('#SiteID').val(response.SiteID);
+                $('#Description').val(response.Description);
+                $('#ServiceID').val(response.ServiceID);
+                $('#MediaTypeID').val(response.MediaTypeID);
+                $('#VendorID').val(response.VendorID);
+                $('#FromDate').val(response.FromDate);
+                $('#ToDate').val(response.ToDate);
+                $('#Width').val(response.Width);
+                $('#Height').val(response.Height);
+                $('#Side').val(response.Side);
+                $('#Unit').val(response.Unit);
+                $('#Area').val(response.Area);
+                $('#Rate').val(response.Rate);
+                $('#TotalAmount').val(response.Amt);
+                $('#TDS').val(response.TDS);
+                $('#Discount').val(response.Discount);
+                $('#CGST').val(response.CGST);
+                $('#SGST').val(response.SGST);
+                $('#IGST').val(response.IGST);
+                $('#FinalAmount').val(response.FinalAmount);
+                $('#Amt').val(response.Amt);
+                $('#btnUpdateLine').show();
+                $('#btnAddLine').hide();
 
-                                        var serviceName = response.ServiceName;
-                                        if (serviceName == "Fabrication" || serviceName == "Printing") {
-                                            document.getElementById('spStartDate').innerHTML = serviceName + " Date";
-                                        }
-                                        else {
-                                            document.getElementById('spStartDate').innerHTML = "Start Date";
-                                        }
+                var serviceName = response.ServiceName;
+                if (serviceName == "Fabrication" || serviceName == "Printing") {
+                    document.getElementById('spStartDate').innerHTML = serviceName + " Date";
+                }
+                else {
+                    document.getElementById('spStartDate').innerHTML = "Start Date";
+                }
 
-                                        if (serviceName == "Retail Branding") {
-                                            $('#divState').show();
-                                        }
-                                        else {
-                                            $('#divState').hide();
-                                        }
+                if (serviceName == "Retail Branding") {
+                    $('#divState').show();
+                }
+                else {
+                    $('#divState').hide();
+                }
 
-                                        if (response.ServiceType == "Single") {
-                                            $('#FromDate').attr("disabled", false);
-                                            $('#ToDate').attr("disabled", "disabled");
-                                            document.getElementById('spEndDate').innerHTML = "NA";
-                                        }
-                                        else if (response.ServiceType == "Double") {
-                                            $('#FromDate').attr("disabled", false);
-                                            $('#ToDate').attr("disabled", false);
-                                            document.getElementById('spEndDate').innerHTML = "End Date";
-                                        }
-                                    }
-                                });
+                if (response.ServiceType == "Single") {
+                    $('#FromDate').attr("disabled", false);
+                    $('#ToDate').attr("disabled", "disabled");
+                    document.getElementById('spEndDate').innerHTML = "NA";
+                }
+                else if (response.ServiceType == "Double") {
+                    $('#FromDate').attr("disabled", false);
+                    $('#ToDate').attr("disabled", false);
+                    document.getElementById('spEndDate').innerHTML = "End Date";
+                }
+            }
+        });
 
-                            }
+    }
 
     function deleteLine(saleorderdetailsid, linestatus) {
         var r = confirm("Are you sure you want to delete this Line ?");
@@ -1004,206 +981,206 @@
         }
     }
 
-                            function readURL(input) {
-                                if (input.files && input.files[0]) {
-                                    var reader = new FileReader();
-                                    reader.onload = function (e) {
-                                        $('#ContentPlaceHolder1_imgProductImage')
-                                            .attr('src', e.target.result);
-                                    };
-                                    reader.readAsDataURL(input.files[0]);
-                                }
-                            }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ContentPlaceHolder1_imgProductImage')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-                            function onPOchange() {
-                                $("#divload").css({ 'display': '' });
-                                var poValue = $('#POReceived').val();
+    function onPOchange() {
+        $("#divload").css({ 'display': '' });
+        var poValue = $('#POReceived').val();
 
-                                if (poValue == "1") {
-                                    $('#divPONumber').show();
-                                    $('#divPOImage').show();
-                                }
-                                else if (poValue == "2") {
-                                    $('#divPONumber').hide();
-                                    $('#divPOImage').hide();
-                                }
-                                else if (poValue == "3") {
-                                    $('#divPONumber').hide();
-                                    $('#divPOImage').show();
-                                }
-                                $("#divload").css({ 'display': 'none' });
-                            }
+        if (poValue == "1") {
+            $('#divPONumber').show();
+            $('#divPOImage').show();
+        }
+        else if (poValue == "2") {
+            $('#divPONumber').hide();
+            $('#divPOImage').hide();
+        }
+        else if (poValue == "3") {
+            $('#divPONumber').hide();
+            $('#divPOImage').show();
+        }
+        $("#divload").css({ 'display': 'none' });
+    }
 
-                            function stateChange() {
-                                var statename = $('#StateName').val();
+    function stateChange() {
+        var statename = $('#StateName').val();
 
-                                $.ajax({
-                                    url: '/SaleOrder/StateChange', type: 'post', dataType: 'json',
-                                    data: { 'statename': statename },
-                                    success: function (data) {
-                                        if (data.Result == "1") {
+        $.ajax({
+            url: '/SaleOrder/StateChange', type: 'post', dataType: 'json',
+            data: { 'statename': statename },
+            success: function (data) {
+                if (data.Result == "1") {
 
-                                            $("#CityID").html(""); // clear before appending new list
-                                            $("#CityID").empty();
-                                            $("#CityID").append(
-                                                  $('<option></option>').val(0).html('Select City'));
-                                            $.each(data.lstVendors, function (index, Sectorcount) {
-                                                $("#CityID").append(
-                                                      $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    $("#CityID").html(""); // clear before appending new list
+                    $("#CityID").empty();
+                    $("#CityID").append(
+                          $('<option></option>').val(0).html('Select City'));
+                    $.each(data.lstVendors, function (index, Sectorcount) {
+                        $("#CityID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
 
-                                            });
-                                        }
-                                    }
-                                });
-                                $("#divload").css({ 'display': 'none' });
-                            }
+                    });
+                }
+            }
+        });
+        $("#divload").css({ 'display': 'none' });
+    }
 
-                            function onServiceChange() {
-                                $("#divload").css({ 'display': '' });
-                                $('#CityID').val(0);
-                                $('#VendorID').val(0);
-                                $('#SiteID').val(0);
-                                var ServiceID = $('#ServiceID').val();
-                                var serviceType = $('#ServiceID').find('option:selected').text();
+    function onServiceChange() {
+        $("#divload").css({ 'display': '' });
+        $('#CityID').val(0);
+        $('#VendorID').val(0);
+        $('#SiteID').val(0);
+        var ServiceID = $('#ServiceID').val();
+        var serviceType = $('#ServiceID').find('option:selected').text();
 
-                                if (serviceType == "Others") {
-                                    document.getElementById('spStartDate').innerHTML = "Start Date";
-                                    document.getElementById('spStartDateDisplay').innerHTML = "Start Date";
-                                }
-                                else {
-                                    document.getElementById('spStartDateDisplay').innerHTML = serviceType + " Date";
-                                    document.getElementById('spStartDate').innerHTML = serviceType + " Date";
-                                }
+        if (serviceType == "Others") {
+            document.getElementById('spStartDate').innerHTML = "Start Date";
+            document.getElementById('spStartDateDisplay').innerHTML = "Start Date";
+        }
+        else {
+            document.getElementById('spStartDateDisplay').innerHTML = serviceType + " Date";
+            document.getElementById('spStartDate').innerHTML = serviceType + " Date";
+        }
 
-                                if (serviceType == "Retail Branding") {
-                                    $('#divState').show();
-                                    $('#SiteID').attr("disabled", "disabled");
-                                    $('#Width').prop("readonly", false);
-                                    $('#Height').prop("readonly", false);
-                                    $('#ToDate').prop("readonly", true);
+        if (serviceType == "Retail Branding") {
+            $('#divState').show();
+            $('#SiteID').attr("disabled", "disabled");
+            $('#Width').prop("readonly", false);
+            $('#Height').prop("readonly", false);
+            $('#ToDate').prop("readonly", true);
 
-                                    document.getElementById('spSelectSite').innerText = "NA";
-                                }
-                                else {
-                                    $.ajax({
-                                        url: '/SaleOrder/BindAllCityList', type: 'post', dataType: 'json',
-                                        //data: { 'statename': statename },
-                                        success: function (data) {
-                                            $("#divload").css({ 'display': 'none' });
-                                            if (data.Result == "1") {
+            document.getElementById('spSelectSite').innerText = "NA";
+        }
+        else {
+            $.ajax({
+                url: '/SaleOrder/BindAllCityList', type: 'post', dataType: 'json',
+                //data: { 'statename': statename },
+                success: function (data) {
+                    $("#divload").css({ 'display': 'none' });
+                    if (data.Result == "1") {
 
-                                                $("#CityID").html(""); // clear before appending new list
-                                                $("#CityID").empty();
-                                                $("#CityID").append(
-                                                      $('<option></option>').val(0).html('Select City'));
-                                                $.each(data.lstVendors, function (index, Sectorcount) {
-                                                    $("#CityID").append(
-                                                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                        $("#CityID").html(""); // clear before appending new list
+                        $("#CityID").empty();
+                        $("#CityID").append(
+                              $('<option></option>').val(0).html('Select City'));
+                        $.each(data.lstVendors, function (index, Sectorcount) {
+                            $("#CityID").append(
+                                  $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
 
-                                                });
+                        });
 
-                                            }
-                                        }
-                                    });
-                                    $('#SiteID').attr("disabled", false);
-                                    $('#Width').prop("readonly", true);
-                                    $('#Height').prop("readonly", true);
-                                    $('#ToDate').prop("readonly", false);
+                    }
+                }
+            });
+            $('#SiteID').attr("disabled", false);
+            $('#Width').prop("readonly", true);
+            $('#Height').prop("readonly", true);
+            $('#ToDate').prop("readonly", false);
 
-                                    document.getElementById('spSelectSite').innerText = "Select Site";
-                                    $('#divState').hide();
-                                }
+            document.getElementById('spSelectSite').innerText = "Select Site";
+            $('#divState').hide();
+        }
 
-                                $.ajax({
-                                    url: '/SaleOrder/ServiceType', type: 'post', dataType: 'json',
-                                    data: { 'serviceID': ServiceID },
-                                    success: function (data) {
-                                        $("#divload").css({ 'display': 'none' });
-                                        if (data.ServiceType == "Single") {
-                                            $('#FromDate').attr("disabled", false);
-                                            $('#ToDate').attr("disabled", "disabled");
-                                            document.getElementById('spEndDate').innerHTML = "NA";
-                                        }
-                                        else if (data.ServiceType == "Double") {
-                                            $('#FromDate').attr("disabled", false);
-                                            $('#ToDate').attr("disabled", false);
-                                            document.getElementById('spEndDate').innerHTML = "End Date";
-                                        }
+        $.ajax({
+            url: '/SaleOrder/ServiceType', type: 'post', dataType: 'json',
+            data: { 'serviceID': ServiceID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.ServiceType == "Single") {
+                    $('#FromDate').attr("disabled", false);
+                    $('#ToDate').attr("disabled", "disabled");
+                    document.getElementById('spEndDate').innerHTML = "NA";
+                }
+                else if (data.ServiceType == "Double") {
+                    $('#FromDate').attr("disabled", false);
+                    $('#ToDate').attr("disabled", false);
+                    document.getElementById('spEndDate').innerHTML = "End Date";
+                }
 
-                                        if (data.Result == "1") {
+                if (data.Result == "1") {
 
-                                            $("#MediaTypeID").html("");
-                                            $("#MediaTypeID").empty();
-                                            $("#MediaTypeID").append($('<option></option>').val(0).html('Select Media Type'));
-                                            $.each(data.lstMediaType, function (index, Sectorcount) {
-                                                $("#MediaTypeID").append(
-                                                      $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
-                                            });
+                    $("#MediaTypeID").html("");
+                    $("#MediaTypeID").empty();
+                    $("#MediaTypeID").append($('<option></option>').val(0).html('Select Media Type'));
+                    $.each(data.lstMediaType, function (index, Sectorcount) {
+                        $("#MediaTypeID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    });
 
-                                            if (serviceType != 'Display') {
-                                                $("#VendorID").html("");
-                                                $("#VendorID").empty();
-                                                $("#VendorID").append($('<option></option>').val(0).html('Select Vendor'));
-                                                $.each(data.lstVendors, function (index, Sectorcount) {
-                                                    $("#VendorID").append(
-                                                          $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    if (serviceType != 'Display') {
+                        $("#VendorID").html("");
+                        $("#VendorID").empty();
+                        $("#VendorID").append($('<option></option>').val(0).html('Select Vendor'));
+                        $.each(data.lstVendors, function (index, Sectorcount) {
+                            $("#VendorID").append(
+                                  $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
 
-                                                });
+                        });
 
-                                            }
-                                            else {
-                                                $("#VendorID").empty();
-                                                $("#VendorID").append($('<option></option>').val(0).html('Select Vendor'));
+                    }
+                    else {
+                        $("#VendorID").empty();
+                        $("#VendorID").append($('<option></option>').val(0).html('Select Vendor'));
 
-                                                $("#SiteID").empty();
-                                                $("#SiteID").append($('<option></option>').val(0).html('Select Site'));
-                                            }
-                                        }
-                                    }
-                                });
+                        $("#SiteID").empty();
+                        $("#SiteID").append($('<option></option>').val(0).html('Select Site'));
+                    }
+                }
+            }
+        });
 
-                            }
+    }
 
-                            function onVendorChange() {
-                                $("#divload").css({ 'display': '' });
-                                $('#SiteID').val(0);
+    function onVendorChange() {
+        $("#divload").css({ 'display': '' });
+        $('#SiteID').val(0);
 
-                                document.getElementById("hdVendorID").value = $('#VendorID').val();
-                                $('#txtVendorName').val($('#VendorID').find(":selected").text());
+        document.getElementById("hdVendorID").value = $('#VendorID').val();
+        $('#txtVendorName').val($('#VendorID').find(":selected").text());
 
-                                var ServiceID = $('#ServiceID').val();
-                                var vendorID = $('#VendorID').val();
-                                var city = $('#CityID').val();
+        var ServiceID = $('#ServiceID').val();
+        var vendorID = $('#VendorID').val();
+        var city = $('#CityID').val();
 
-                                $.ajax({
-                                    url: '/SaleOrder/VendorChange', type: 'post', dataType: 'json',
-                                    data: { 'vendorID': vendorID, 'city': city, 'serviceID': ServiceID },
-                                    success: function (data) {
-                                        $("#divload").css({ 'display': 'none' });
-                                        if (data.Result == "1") {
+        $.ajax({
+            url: '/SaleOrder/VendorChange', type: 'post', dataType: 'json',
+            data: { 'vendorID': vendorID, 'city': city, 'serviceID': ServiceID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "1") {
 
-                                            $("#SiteID").html(""); // clear before appending new list
-                                            $("#SiteID").empty();
-                                            $("#SiteID").append(
-                                                  $('<option></option>').val(0).html('Select Site'));
-                                            $.each(data.ddlSites, function (index, Sectorcount) {
-                                                $("#SiteID").append(
-                                                      $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
+                    $("#SiteID").html(""); // clear before appending new list
+                    $("#SiteID").empty();
+                    $("#SiteID").append(
+                          $('<option></option>').val(0).html('Select Site'));
+                    $.each(data.ddlSites, function (index, Sectorcount) {
+                        $("#SiteID").append(
+                              $('<option></option>').val(Sectorcount.Value).html(Sectorcount.Text));
 
-                                            });
+                    });
 
-                                        }
-                                    }
-                                });
-                            }
+                }
+            }
+        });
+    }
 
-                            function onCityChange() {
-                                $("#divload").css({ 'display': '' });
-                                $('#VendorID').val(0);
-                                $('#SiteID').val(0);
+    function onCityChange() {
+        $("#divload").css({ 'display': '' });
+        $('#VendorID').val(0);
+        $('#SiteID').val(0);
 
-                                var cityID = $('#CityID').val();
-                                var serviceID = $('#ServiceID').val();
+        var cityID = $('#CityID').val();
+        var serviceID = $('#ServiceID').val();
 
         $.ajax({
             url: '/SaleOrder/CityChange', type: 'post', dataType: 'json',
@@ -1226,56 +1203,56 @@
             }
         });
 
-                                $("#divload").css({ 'display': 'none' });
-                            }
+        $("#divload").css({ 'display': 'none' });
+    }
 
-                            function fonSiteChange() {
-                                $("#divload").css({ 'display': '' });
-                                var siteID = $('#SiteID').val();
-                                var serviceID = $('#ServiceID').val();
+    function fonSiteChange() {
+        $("#divload").css({ 'display': '' });
+        var siteID = $('#SiteID').val();
+        var serviceID = $('#ServiceID').val();
 
-                                $.ajax({
-                                    url: '/SaleOrder/SiteChange', type: 'post', dataType: 'json',
-                                    data: { 'siteID': siteID },
-                                    success: function (data) {
-                                        $("#divload").css({ 'display': 'none' });
-                                        if (data.Result == "1") {
-                                            if (data.IsDummySite == "True") {
-                                                $('#Height').removeAttr("readonly");
-                                                $('#Width').removeAttr("readonly");
-                                            }
-                                            else {
-                                                $('#Height').attr("readonly", "readonly");
-                                                $('#Width').attr("readonly", "readonly");
-                                            }
+        $.ajax({
+            url: '/SaleOrder/SiteChange', type: 'post', dataType: 'json',
+            data: { 'siteID': siteID },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "1") {
+                    if (data.IsDummySite == "True") {
+                        $('#Height').removeAttr("readonly");
+                        $('#Width').removeAttr("readonly");
+                    }
+                    else {
+                        $('#Height').attr("readonly", "readonly");
+                        $('#Width').attr("readonly", "readonly");
+                    }
 
-                                            $('#tblSiteInfo').show();
-                                            document.getElementById('spSiteInfo').innerHTML = data.SiteInfo + ", Facing : " + data.Facing + ", Media Type : " + data.MediaType + ", Media Vehicle : " + data.MediaVehicle;
-                                            $("#imgSite").attr("src", data.SiteImage);
-                                            $('#Side').val(data.Side);
-                                            $('#Height').val(data.Height);
-                                            $('#Width').val(data.Width);
-                                            $('#Area').val(data.Area);
-                                            $('#Unit').val(data.Unit);
-                                            $('#Rate').val(data.Rate);
-                                            if (serviceID == "2" || serviceID == "6") {
-                                                $('#MediaTypeID').val(data.MediaTypeID);
-                                            }
-                                            document.getElementById("hdVendorID").value = data.VendorID;
-                                            calculateAmount1();
-                                        }
-                                    }
-                                });
-                            }
+                    $('#tblSiteInfo').show();
+                    document.getElementById('spSiteInfo').innerHTML = data.SiteInfo + ", Facing : " + data.Facing + ", Media Type : " + data.MediaType + ", Media Vehicle : " + data.MediaVehicle;
+                    $("#imgSite").attr("src", data.SiteImage);
+                    $('#Side').val(data.Side);
+                    $('#Height').val(data.Height);
+                    $('#Width').val(data.Width);
+                    $('#Area').val(data.Area);
+                    $('#Unit').val(data.Unit);
+                    $('#Rate').val(data.Rate);
+                    if (serviceID == "2" || serviceID == "6") {
+                        $('#MediaTypeID').val(data.MediaTypeID);
+                    }
+                    document.getElementById("hdVendorID").value = data.VendorID;
+                    calculateAmount1();
+                }
+            }
+        });
+    }
 
     function calculateArea() {
         $("#divload").css({ 'display': '' });
         var height, width, Side, Unit, area = 1;
 
-                                height = $('#Height').val();
-                                width = $('#Width').val();
-                                Side = $('#Side').val();
-                                Unit = $('#Unit').val();
+        height = $('#Height').val();
+        width = $('#Width').val();
+        Side = $('#Side').val();
+        Unit = $('#Unit').val();
 
         area = (Number)(height) * (Number)(width) * (Number)(Side) * (Number)(Unit);
         $('#Area').val(area.toFixed(2));
@@ -1306,156 +1283,156 @@
         //$('#TotalAmount').val(amount.toFixed(2));
         //Changed By alok chauhan on 12 Feb 2020
 
-                                calculateAmount2();
-                                calculateAmount3();
-                                $("#divload").css({ 'display': 'none' });
-                            }
+        calculateAmount2();
+        calculateAmount3();
+        $("#divload").css({ 'display': 'none' });
+    }
 
-                            function calculateAmount2() {
-                                $("#divload").css({ 'display': '' });
-                                var tds, discount, amount, amounttoSubtract = 0;
+    function calculateAmount2() {
+        $("#divload").css({ 'display': '' });
+        var tds, discount, amount, amounttoSubtract = 0;
 
 
-                                tds = $('#TDS').val();
-                                discount = $('#Discount').val();
-                                amount = $('#TotalAmount').val();
+        tds = $('#TDS').val();
+        discount = $('#Discount').val();
+        amount = $('#TotalAmount').val();
 
-                                amounttoSubtract = (Number)(tds) + (Number)(discount);
-                                //alert("Sub : " + amounttoSubtract + "\nPrev : " + amount);
-                                amount = amount - amounttoSubtract;
-                                $('#FinalAmount').val(amount.toFixed(2));
-                                calculateAmount3();
-                                $("#divload").css({ 'display': 'none' });
-                            }
+        amounttoSubtract = (Number)(tds) + (Number)(discount);
+        //alert("Sub : " + amounttoSubtract + "\nPrev : " + amount);
+        amount = amount - amounttoSubtract;
+        $('#FinalAmount').val(amount.toFixed(2));
+        calculateAmount3();
+        $("#divload").css({ 'display': 'none' });
+    }
 
-                            function calculateAmount3() {
-                                var totalamount = 0;
-                                var cgstpercent, sgstpercent, igstpercent, cgstvalue, sgstvalue, igstvalue, amount = 0;
-                                cgstpercent = $('#CGST').val();
-                                sgstpercent = $('#SGST').val();
-                                igstpercent = $('#IGST').val();
+    function calculateAmount3() {
+        var totalamount = 0;
+        var cgstpercent, sgstpercent, igstpercent, cgstvalue, sgstvalue, igstvalue, amount = 0;
+        cgstpercent = $('#CGST').val();
+        sgstpercent = $('#SGST').val();
+        igstpercent = $('#IGST').val();
 
-                                amount = $('#TotalAmount').val();
+        amount = $('#TotalAmount').val();
 
-                                cgstvalue = amount * cgstpercent / 100;
-                                sgstvalue = amount * sgstpercent / 100;
-                                igstvalue = amount * igstpercent / 100;
+        cgstvalue = amount * cgstpercent / 100;
+        sgstvalue = amount * sgstpercent / 100;
+        igstvalue = amount * igstpercent / 100;
 
-                                totalamount = (Number)(amount) + (Number)(cgstvalue) + (Number)(sgstvalue) + (Number)(igstvalue);
-                                $('#FinalAmount').val(totalamount.toFixed(2));
+        totalamount = (Number)(amount) + (Number)(cgstvalue) + (Number)(sgstvalue) + (Number)(igstvalue);
+        $('#FinalAmount').val(totalamount.toFixed(2));
 
-                                //Calculate TDS & Discount
-                                var tds, discount, amount, amounttoSubtract = 0;
+        //Calculate TDS & Discount
+        var tds, discount, amount, amounttoSubtract = 0;
 
-                                tds = $('#TDS').val();
-                                discount = $('#Discount').val();
-                                amount = $('#FinalAmount').val();
+        tds = $('#TDS').val();
+        discount = $('#Discount').val();
+        amount = $('#FinalAmount').val();
 
-                                amounttoSubtract = (Number)(tds) + (Number)(discount);
-                                amount = amount - amounttoSubtract;
-                                $('#FinalAmount').val(amount.toFixed(2));
-                                //Calculate TDS & Discount
-                            }
+        amounttoSubtract = (Number)(tds) + (Number)(discount);
+        amount = amount - amounttoSubtract;
+        $('#FinalAmount').val(amount.toFixed(2));
+        //Calculate TDS & Discount
+    }
 
-                            function calculateRateFromAmount() {
-                                var rate = (Number)($('#Amt').val()) / (Number)($('#Area').val());
+    function calculateRateFromAmount() {
+        var rate = (Number)($('#Amt').val()) / (Number)($('#Area').val());
 
-                                $('#Rate').val(rate);
-                                calculateAmount1();
-                            }
+        $('#Rate').val(rate);
+        calculateAmount1();
+    }
 
-                            function isNumber(evt) {
-                                var charCode = (evt.which) ? evt.which : evt.keyCode;
-                                if (charCode != 46 && charCode > 31
-                                  && (charCode < 48 || charCode > 57))
-                                    return false;
+    function isNumber(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+          && (charCode < 48 || charCode > 57))
+            return false;
 
-                                return true;
-                            }
+        return true;
+    }
 
-                            function validateVendor() {
-                                $("#divload").css({ 'display': '' });
-                                $(".errortext").removeClass("errortext");
-                                if ($('#SalesOrderNo').val() == '') {
-                                    $("#SalesOrderNo").addClass('errortext');
-                                    $('#SalesOrderNo').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#OrderDate').val() == '') {
-                                    $("#OrderDate").addClass('errortext');
-                                    $('#OrderDate').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#PaymentTermsID').val() == "") {
-                                    $("#PaymentTermsID").addClass('errortext');
-                                    $('#PaymentTermsID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#CustomerName').val() == '') {
-                                    $("#CustomerName").addClass('errortext');
-                                    $('#CustomerName').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#CampaignNumber').val() == '') {
-                                    $("#CampaignNumber").addClass('errortext');
-                                    $('#CampaignNumber').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#SalesPersonID').val() == "0") {
-                                    $("#SalesPersonID").addClass('errortext');
-                                    $('#SalesPersonID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#OperationExecutiveID').val() == "0") {
-                                    $("#OperationExecutiveID").addClass('errortext');
-                                    $('#OperationExecutiveID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#BillingSnapsID').val() == "0") {
-                                    $("#BillingSnapsID").addClass('errortext');
-                                    $('#BillingSnapsID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
+    function validateVendor() {
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        if ($('#SalesOrderNo').val() == '') {
+            $("#SalesOrderNo").addClass('errortext');
+            $('#SalesOrderNo').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#OrderDate').val() == '') {
+            $("#OrderDate").addClass('errortext');
+            $('#OrderDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#PaymentTermsID').val() == "") {
+            $("#PaymentTermsID").addClass('errortext');
+            $('#PaymentTermsID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CustomerName').val() == '') {
+            $("#CustomerName").addClass('errortext');
+            $('#CustomerName').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CampaignNumber').val() == '') {
+            $("#CampaignNumber").addClass('errortext');
+            $('#CampaignNumber').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#SalesPersonID').val() == "0") {
+            $("#SalesPersonID").addClass('errortext');
+            $('#SalesPersonID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#OperationExecutiveID').val() == "0") {
+            $("#OperationExecutiveID").addClass('errortext');
+            $('#OperationExecutiveID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#BillingSnapsID').val() == "0") {
+            $("#BillingSnapsID").addClass('errortext');
+            $('#BillingSnapsID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
 
-                                if ($('#POReceived').val() == "0") {
-                                    $("#POReceived").addClass('errortext');
-                                    $('#POReceived').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
+        if ($('#POReceived').val() == "0") {
+            $("#POReceived").addClass('errortext');
+            $('#POReceived').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
 
-                                if ($('#POReceived').val() == "1") {
-                                    if ($('#PONumber').val() == '') {
-                                        $("#PONumber").addClass('errortext');
-                                        $('#PONumber').focus();
-                                        $("#divload").css({ 'display': 'none' });
-                                        return false;
-                                    }
-                                }
-                                else if ($('#POReceived').val() == "3") {
-                                    if ($('#POImagePath').val() == '') {
-                                        $("#POImagePath").addClass('errortext');
-                                        $('#POImagePath').focus();
-                                        $("#divload").css({ 'display': 'none' });
-                                        return false;
-                                    }
-                                }
+        if ($('#POReceived').val() == "1") {
+            if ($('#PONumber').val() == '') {
+                $("#PONumber").addClass('errortext');
+                $('#PONumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#POReceived').val() == "3") {
+            if ($('#POImagePath').val() == '') {
+                $("#POImagePath").addClass('errortext');
+                $('#POImagePath').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
 
-                                var rows = document.getElementById("file_export").getElementsByTagName("tr").length;
-                                if ((Number)(rows) <= 1) {
-                                    alert("Add values in Lines");
-                                    $('#SiteID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
+        var rows = document.getElementById("file_export").getElementsByTagName("tr").length;
+        if ((Number)(rows) <= 1) {
+            alert("Add values in Lines");
+            $('#SiteID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
 
         var result = confirm('Are you sure you want to save the Changes ?');
         if (result == false) {
@@ -1465,94 +1442,94 @@
         //$("#divload").css({ 'display': 'none' });
     }
 
-                            function validateFormForPostSO() {
-                                $("#divload").css({ 'display': '' });
-                                $(".errortext").removeClass("errortext");
-                                if ($('#SalesOrderNo').val() == '') {
-                                    $("#SalesOrderNo").addClass('errortext');
-                                    $('#SalesOrderNo').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#OrderDate').val() == '') {
-                                    $("#OrderDate").addClass('errortext');
-                                    $('#OrderDate').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#PaymentTermsID').val() == "") {
-                                    $("#PaymentTermsID").addClass('errortext');
-                                    $('#PaymentTermsID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#CustomerName').val() == '') {
-                                    $("#CustomerName").addClass('errortext');
-                                    $('#CustomerName').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#CampaignNumber').val() == '') {
-                                    $("#CampaignNumber").addClass('errortext');
-                                    $('#CampaignNumber').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#SalesPersonID').val() == "0") {
-                                    $("#SalesPersonID").addClass('errortext');
-                                    $('#SalesPersonID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#OperationExecutiveID').val() == "0") {
-                                    $("#OperationExecutiveID").addClass('errortext');
-                                    $('#OperationExecutiveID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#BillingSnapsID').val() == "0") {
-                                    $("#BillingSnapsID").addClass('errortext');
-                                    $('#BillingSnapsID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
+    function validateFormForPostSO() {
+        $("#divload").css({ 'display': '' });
+        $(".errortext").removeClass("errortext");
+        if ($('#SalesOrderNo').val() == '') {
+            $("#SalesOrderNo").addClass('errortext');
+            $('#SalesOrderNo').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#OrderDate').val() == '') {
+            $("#OrderDate").addClass('errortext');
+            $('#OrderDate').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#PaymentTermsID').val() == "") {
+            $("#PaymentTermsID").addClass('errortext');
+            $('#PaymentTermsID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CustomerName').val() == '') {
+            $("#CustomerName").addClass('errortext');
+            $('#CustomerName').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#CampaignNumber').val() == '') {
+            $("#CampaignNumber").addClass('errortext');
+            $('#CampaignNumber').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#SalesPersonID').val() == "0") {
+            $("#SalesPersonID").addClass('errortext');
+            $('#SalesPersonID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#OperationExecutiveID').val() == "0") {
+            $("#OperationExecutiveID").addClass('errortext');
+            $('#OperationExecutiveID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#BillingSnapsID').val() == "0") {
+            $("#BillingSnapsID").addClass('errortext');
+            $('#BillingSnapsID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
 
-                                if ($('#POReceived').val() == "0") {
-                                    $("#POReceived").addClass('errortext');
-                                    $('#POReceived').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#POReceived').val() == "2") {
-                                    $("#POReceived").addClass('errortext');
-                                    $('#POReceived').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
-                                if ($('#POReceived').val() == "1") {
-                                    if ($('#PONumber').val() == '') {
-                                        $("#PONumber").addClass('errortext');
-                                        $('#PONumber').focus();
-                                        $("#divload").css({ 'display': 'none' });
-                                        return false;
-                                    }
-                                }
-                                else if ($('#POReceived').val() == "3") {
-                                    if ($('#POImagePath').val() == '') {
-                                        $("#POImagePath").addClass('errortext');
-                                        $('#POImagePath').focus();
-                                        $("#divload").css({ 'display': 'none' });
-                                        return false;
-                                    }
-                                }
+        if ($('#POReceived').val() == "0") {
+            $("#POReceived").addClass('errortext');
+            $('#POReceived').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#POReceived').val() == "2") {
+            $("#POReceived").addClass('errortext');
+            $('#POReceived').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
+        if ($('#POReceived').val() == "1") {
+            if ($('#PONumber').val() == '') {
+                $("#PONumber").addClass('errortext');
+                $('#PONumber').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
+        else if ($('#POReceived').val() == "3") {
+            if ($('#POImagePath').val() == '') {
+                $("#POImagePath").addClass('errortext');
+                $('#POImagePath').focus();
+                $("#divload").css({ 'display': 'none' });
+                return false;
+            }
+        }
 
-                                var rows = document.getElementById("file_export").getElementsByTagName("tr").length;
-                                if ((Number)(rows) <= 1) {
-                                    alert("Add values in Lines");
-                                    $('#SiteID').focus();
-                                    $("#divload").css({ 'display': 'none' });
-                                    return false;
-                                }
+        var rows = document.getElementById("file_export").getElementsByTagName("tr").length;
+        if ((Number)(rows) <= 1) {
+            alert("Add values in Lines");
+            $('#SiteID').focus();
+            $("#divload").css({ 'display': 'none' });
+            return false;
+        }
 
         var result = confirm('Are you sure you want to save the Changes ?');
         if (result == false) {
@@ -1562,46 +1539,46 @@
         //$("#divload").css({ 'display': 'none' });
     }
 
-                            function getstatecity() {
-                                $("#divload").css({ 'display': '' });
-                                $.ajax({
-                                    url: "/Master/GetStateCity",
-                                    Type: "Get",
-                                    DataType: "JSON",
-                                    data: { PinCode: $("#Pincode").val() },
-                                    success: function (data) {
-                                        $("#divload").css({ 'display': 'none' });
-                                        if (data.Result == "1") {
-                                            $("#StateName").val(data.StateName);
-                                            $("#City").val(data.City);
-                                        }
-                                        else {
-                                            $("#StateName").val('');
-                                            $("#City").val('');
-                                            $("#PinCode").val('');
-                                            alert('Invalid PinCode');
-                                            $('#PinCode').focus();
-                                        }
-                                    }
-                                });
-                            }
+    function getstatecity() {
+        $("#divload").css({ 'display': '' });
+        $.ajax({
+            url: "/Master/GetStateCity",
+            Type: "Get",
+            DataType: "JSON",
+            data: { PinCode: $("#Pincode").val() },
+            success: function (data) {
+                $("#divload").css({ 'display': 'none' });
+                if (data.Result == "1") {
+                    $("#StateName").val(data.StateName);
+                    $("#City").val(data.City);
+                }
+                else {
+                    $("#StateName").val('');
+                    $("#City").val('');
+                    $("#PinCode").val('');
+                    alert('Invalid PinCode');
+                    $('#PinCode').focus();
+                }
+            }
+        });
+    }
 
 </script>
-  @*<script>
-      $('#CustomerName').autocomplete({
-          source: cityuse,
-          select: function (event, ui) {
-              var str = ui.item.label;
-              var afterComma = str.substr(str.indexOf("(") + 1);
-              var citycode = afterComma.substr(0, afterComma.length - 1);
-              $('#CustomerCode').val(citycode);
-          }
-      })
+@*<script>
+          $('#CustomerName').autocomplete({
+              source: cityuse,
+              select: function (event, ui) {
+                  var str = ui.item.label;
+                  var afterComma = str.substr(str.indexOf("(") + 1);
+                  var citycode = afterComma.substr(0, afterComma.length - 1);
+                  $('#CustomerCode').val(citycode);
+              }
+          })
 
 
-     
 
-    
-</script>*@     
+
+
+    </script>*@
 
 <!-- ✅ load jQuery UI ✅ -->

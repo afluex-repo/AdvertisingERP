@@ -1,19 +1,13 @@
 ﻿@model AdvertisingERP.Models.Vendor
 
-
 @{
     ViewBag.Title = "VendorList";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 <style>
     .mt-btn {
-        margin-top: 32px;
-    }
-
-    .errortext {
-        border: 1px solid red !important;
-        background-color: #ff00003b !important;
-    }
+        margin-top: 20px;
+    }   
 </style>
 
 @using (Html.BeginForm("VendorList", "Vendor", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
