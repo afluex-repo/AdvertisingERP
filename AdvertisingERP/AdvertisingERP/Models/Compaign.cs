@@ -22,7 +22,7 @@ namespace AdvertisingERP.Models
         {
             SqlParameter[] para ={    new SqlParameter ("@PK_CamapignID", CompaignId),
                                       new SqlParameter ("@CampaignNo",CampaignNo),
-                                      new SqlParameter ("@CustomerCode",CustomerId), };
+                                      new SqlParameter ("@CustomerCode","CUST0008"), };
             DataSet ds = DBHelper.ExecuteQuery("GetCampaigns", para);
             return ds;
         }
