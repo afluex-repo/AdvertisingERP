@@ -92,8 +92,16 @@
                                     <td>@item.EndDate</td>
                                     <td>@item.Decription</td>
                                     <td>
-                                        <a href="/Compaign/CampaignMaster?CompaignId=@item.CompaignId" class="label label-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        &nbsp; @*<a href="/Compaign/DeleteCompaign?CompaignId=@item.CompaignId" onclick="return confirm('Sure you want to delete this Campaign ?');" class="label label-danger">Delete</a>*@
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-light">
+                                                <a href="/Compaign/CampaignMaster?CompaignId=@item.CompaignId" class="label label-primary">  <i class="bx bx-pencil me-0"></i></a>
+                                            </button>
+                                            <button type="button" class="btn btn-light">
+                                                <a href="/Compaign/DeleteCompaign?CompaignId=@item.CompaignId" onclick="return confirm('Sure you want to delete this Vendor ?');" class="label label-danger">  <i class="bx bx-trash-alt me-0"></i>
+                                            </button>
+
+                                        </div>
+                                       
                                     </td>
                                 </tr>
                                     }

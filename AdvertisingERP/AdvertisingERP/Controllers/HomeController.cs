@@ -20,7 +20,7 @@ namespace AdvertisingERP.Controllers
         }
         public ActionResult Login()
         {
-            Session.Abandon();
+           // Session.Abandon();
             if (TempData["Login"] == null)
             {
                 ViewBag.errormsg = "none";
