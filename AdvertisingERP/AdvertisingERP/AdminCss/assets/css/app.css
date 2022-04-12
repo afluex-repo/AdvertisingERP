@@ -48,8 +48,7 @@ a {
 .wrapper {
 
 	width: 100%;
-    position: inherit;
-	/*position: relative;*/
+	position: relative;
 
 }
 
@@ -198,8 +197,6 @@ a {
 	left: 250px;
 
 	right: 0;
-
-    bottom: 0;
 
 	text-align: center;
 
@@ -4296,7 +4293,3 @@ body.bg-theme15 {
 	}
 
 }
- .errortext {
-        border: 2px solid red !important;
-        background-color: #ff00003b !important;
-    }

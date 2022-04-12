@@ -649,6 +649,7 @@
     <Content Include="AdminCss\assets\flags\4x3\zw.svg" />
     <Content Include="AdminCss\assets\fonts\boxiconsd41d.svg" />
     <Content Include="AdminCss\assets\fonts\LineIcons.svg" />
+    <Content Include="AdminCss\assets\images\autocomplete.js" />
     <Content Include="AdminCss\assets\images\avatars\avatar-1.png" />
     <Content Include="AdminCss\assets\images\avatars\avatar-10.png" />
     <Content Include="AdminCss\assets\images\avatars\avatar-11.png" />
@@ -746,8 +747,10 @@
     <Content Include="AdminCss\assets\images\products\16.png" />
     <Content Include="AdminCss\assets\images\products\17.png" />
     <Content Include="AdminCss\assets\images\products\19.png" />
+    <Content Include="AdminCss\assets\images\user.png" />
     <Content Include="AdminCss\assets\js\app.js" />
     <Content Include="AdminCss\assets\js\bootstrap.bundle.min.js" />
+    <Content Include="AdminCss\assets\js\CustomJs.js" />
     <Content Include="AdminCss\assets\js\dashboard-alternate.js" />
     <Content Include="AdminCss\assets\js\dashboard-analytics.js" />
     <Content Include="AdminCss\assets\js\dashboard-digital-marketing.js" />
@@ -1643,7 +1646,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58325</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58328/</IISUrl>
+          <IISUrl>http://localhost:58326/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

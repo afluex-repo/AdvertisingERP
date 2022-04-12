@@ -26,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
     <link href="~/AdminCss/assets/css/app.css" rel="stylesheet">
     <link href="~/AdminCss/assets/css/icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
     <title>Advertising ERP</title>
     <style>
         #divload {
@@ -67,7 +67,7 @@
             </div>
             <ul class="metismenu" id="menu">
                 <li>
-                    <a href="javascript:;">
+                    <a href="~/Admin/DashBoard">
                         <div class="parent-icon">
                             <i class='bx bx-home-circle'></i>
                         </div>
@@ -83,10 +83,10 @@
                         <div class="menu-title">Master</div>
                     </a>
                     <ul>
-                        <li><a href="#"><i class="bx bx-right-arrow-alt"></i>Site Master</a></li>
-                        <li><a href="#"> <i class="bx bx-right-arrow-alt"></i> Service Master</a></li>
-                        <li><a href="#"> <i class="bx bx-right-arrow-alt"></i> Financial Year</a></li>
-                        <li><a href="#"> <i class="bx bx-right-arrow-alt"></i> Bank Master</a></li>
+                        <li><a href="/Master/SiteMaster"><i class="bx bx-right-arrow-alt"></i>Site Master</a></li>
+                        <li><a href="/Master/Servicemaster"> <i class="bx bx-right-arrow-alt"></i> Service Master</a></li>
+                        <li><a href="/Master/FinancialYear"> <i class="bx bx-right-arrow-alt"></i> Financial Year</a></li>
+                        <li><a href="/Master/BankMaster"> <i class="bx bx-right-arrow-alt"></i> Bank Master</a></li>
                     </ul>
                     
                 </li>
@@ -574,7 +574,7 @@
                     </div>
                     <div class="user-box dropdown">
                         <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="~/AdminCss/assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+                            <img src="~/AdminCss/assets/images/user.png" class="user-img" alt="user avatar">
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0">@Session["Username"]</p>
                                 <p class="designattion mb-0">@Session["EmailId"]</p>
@@ -615,12 +615,14 @@
     <script src="~/AdminCss/assets/js/bootstrap.bundle.min.js"></script>
     <!--plugins-->
     <script src="~/AdminCss/assets/js/jquery.min.js"></script>
+
     <script src="~/AdminCss/assets/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="~/AdminCss/assets/plugins/metismenu/js/metisMenu.min.js"></script>
     <script src="~/AdminCss/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js"></script>
     <script src="~/AdminCss/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
     <script src="~/AdminCss/assets/plugins/datatable/js/dataTables.bootstrap5.min.js"></script>
     <script src="~/AdminCss/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+   
 
     <!-- <script>
         $(document).ready(function() {
@@ -637,11 +639,11 @@
 	  $(document).ready(function() {
 	  $('#example').DataTable()
 	});
-         $(function () {
-        Pace.on("done", function () {
-            $("#contents").fadeIn(1000);
-        });
-    });
+    //     $(function () {
+    //    Pace.on("done", function () {
+    //        $("#contents").fadeIn(1000);
+    //    });
+    //});
     </script>
 
 

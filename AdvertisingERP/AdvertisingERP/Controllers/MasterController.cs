@@ -85,7 +85,7 @@ namespace AdvertisingERP.Controllers
 
             ViewBag.ddlMediaType = ddlMediaType;
             #endregion BindMediaType
-            if ((SiteId) != "" && SiteId != null)
+            if (SiteId != "" && SiteId != null)
             {
                 ViewBag.Isvisible = "none";
                 Master objmaster = new Master();
@@ -143,7 +143,10 @@ namespace AdvertisingERP.Controllers
                 }
                 if (postedFile != null)
                 {
-                    model.SiteImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    model.SiteImage = "../assets/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+
+                    //model.SiteImage = "/SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+
                     postedFile.SaveAs(Path.Combine(Server.MapPath(model.SiteImage)));
                 }
                 DataTable dt = new DataTable();
@@ -327,8 +330,8 @@ namespace AdvertisingERP.Controllers
                 #endregion BindMediaType
             }
             catch (Exception ex)
-            { 
-            
+            {
+
             }
             return View(model);
         }
@@ -442,7 +445,7 @@ namespace AdvertisingERP.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         Session["dt"] = null;
-                        TempData["SiteError"] = "Site Saved Successfully";
+                        TempData["Sitesuccess"] = "Site Saved Successfully";
                         ViewBag.saverrormsg = "";
                         ViewBag.errormsg = "none";
                     }
@@ -739,7 +742,7 @@ namespace AdvertisingERP.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         Session["dt"] = null;
-                        TempData["SiteError"] = "Site Updated Successfully";
+                        TempData["Sitesuccess"] = "Site Updated Successfully";
                         ViewBag.saverrormsg = "";
                         ViewBag.errormsg = "none";
                     }
@@ -801,7 +804,6 @@ namespace AdvertisingERP.Controllers
             return RedirectToAction("SiteList");
         }
         #endregion SiteMaster Start
-
         #region ServiceMasterStart
         public ActionResult ServiceMaster(string ServiceId)
         {
@@ -874,7 +876,7 @@ namespace AdvertisingERP.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
 
-                        TempData["ServiceError"] = "Service Save Successfully";
+                        TempData["ServiceSuccess"] = "Service Save Successfully";
 
                     }
                     else
@@ -964,7 +966,7 @@ namespace AdvertisingERP.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         Session["dt"] = null;
-                        TempData["ServiceError"] = "Service Updated Successfully";
+                        TempData["ServiceSuccess"] = "Service Updated Successfully";
 
 
                     }
@@ -1016,8 +1018,8 @@ namespace AdvertisingERP.Controllers
             ViewBag.saverrormsg = "";
             return RedirectToAction("ServiceList");
         }
-        #endregion ServiceMaster End
 
+        #endregion ServiceMaster End
         #region FinancialYear
 
         public ActionResult FinancialYear(Master model)
@@ -1038,17 +1040,17 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["success"] = "Financial Year saved successfully";
+                        TempData["Financialsuccess"] = "Financial Year saved successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
-                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Financialerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["error"] = ex.Message;
+                TempData["Financialerror"] = ex.Message;
             }
             return RedirectToAction("FinancialYear");
         }
@@ -1094,23 +1096,53 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["success"] = "Financial year updated successfully";
+                        TempData["Financialsuccess"] = "Financial year updated successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
-                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Financialerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["error"] = ex.Message;
+                TempData["Financialerror"] = ex.Message;
             }
             return RedirectToAction("FinancialYearList");
         }
 
-        #endregion
+        //public ActionResult DeleteFinancialYear(string FinancialId)
+        //{
+        //    Master obj = new Master();
+        //    try
+        //    {
+        //        obj.DeletedBy = Session["UserID"].ToString();
+        //        obj.FinancialYearID = Crypto.Decrypt(FinancialId);
+        //        DataSet ds = new DataSet();
 
+        //        ds = obj.DeleteFinancialYear();
+        //        if (ds != null && ds.Tables.Count > 0)
+        //        {
+        //            if (ds.Tables[0].Rows[0][0].ToString() == "1")
+        //            {
+        //                TempData["FinancialYearDelete"] = "Financial Year Deleted Successfully";
+        //            }
+        //            else
+        //            {
+        //                TempData["FinancialYearDelete"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["FinancialYearDelete"] = ex.Message;
+        //    }
+
+        //    ViewBag.saverrormsg = "";
+        //    return RedirectToAction("FinancialYearList");
+        //}
+
+        #endregion
         #region BankMaster
 
         public ActionResult BankMaster(string bid)
@@ -1142,17 +1174,17 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["success"] = "Bank saved successfully";
+                        TempData["Banksuccess"] = "Bank saved successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
-                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Bankerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["error"] = ex.Message;
+                TempData["Bankerror"] = ex.Message;
             }
             return RedirectToAction("BankMaster");
         }
@@ -1199,19 +1231,50 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
-                        TempData["success"] = "Bank updated successfully";
+                        TempData["Banksuccess"] = "Bank updated successfully";
                     }
                     else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
                     {
-                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Bankerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["error"] = ex.Message;
+                TempData["Bankerror"] = ex.Message;
             }
             return RedirectToAction("BankMaster");
+        }
+
+        public ActionResult DeleteBank(string bid)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.BankID = Crypto.Decrypt(bid);
+                DataSet ds = new DataSet();
+
+                ds = obj.DeleteBank();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["BankDelete"] = "Bank Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["BankDelete"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["BankDelete"] = ex.Message;
+            }
+
+            ViewBag.saverrormsg = "";
+            return RedirectToAction("BankList");
         }
 
         #endregion

@@ -29,6 +29,35 @@
         </div>
         <hr />
         <div class="card">
+            @if (@TempData["Banksuccess"] != null)
+            {
+                <div class="alert border-0 alert-dismissible fade show py-2">
+                    <div class="d-flex align-items-center">
+                        <div class="font-35 text-white">
+                            <i class="bx bxs-check-circle" style="color:green"></i>
+                        </div>
+                        <div class="ms-3">
+                            <div class="text-white">@TempData["Banksuccess"]!</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            }
+            @if (@TempData["Bankerror"] != null)
+            {
+                <div class="alert border-0 alert-dismissible fade show py-2">
+                    <div class="d-flex align-items-center">
+                        <div class="font-35 text-white">
+                            <i class="bx bxs-check-circle" style="color:green"></i>
+                        </div>
+                        <div class="ms-3">
+                            <div class="text-white">@TempData["Bankerror"]!</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
             <div class="card-body">
                 <div class="p-4 border rounded">
                     <div class="row g-3">
@@ -44,11 +73,11 @@
                         <div class="col-12">
                             @if (Model.BankID != null)
                             {
-                                <input type="submit" value="Update Bank" class="btn btn-light px-5" name="UpdateService" onclick="return validateservice();" />
+                                <input type="submit" value="Update Bank" class="btn btn-light px-5" name="UpdateBank" onclick="return validateservice();" />
                             }
                             else
                             {
-                                <input type="submit" value="Save Bank" class="btn btn-light px-5" name="SaveService" onclick="return validateservice();" />
+                                <input type="submit" value="Save Bank" class="btn btn-light px-5" name="SaveBank" onclick="return validateservice();" />
 
                                 <a href="/Master/BankMaster" class="btn btn-dark">Reset</a>
                             }
