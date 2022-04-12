@@ -1618,6 +1618,8 @@
     <Content Include="Views\Master\ServiceMaster.cshtml" />
     <Content Include="Views\Master\SiteList.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
+    <Content Include="Views\PurchaseOrder\EditPO.cshtml" />
+    <Content Include="Views\PurchaseOrder\PO.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
