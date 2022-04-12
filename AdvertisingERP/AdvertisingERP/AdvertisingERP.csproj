@@ -1613,7 +1613,6 @@
     <Content Include="Views\Master\BankList.cshtml" />
     <Content Include="Views\Master\BankMaster.cshtml" />
     <Content Include="Views\Master\FinancialYear.cshtml" />
-    <Content Include="Views\Master\DataTable.cshtml" />
     <Content Include="Views\Master\FinancialYearList.cshtml" />
     <Content Include="Views\Master\ServiceList.cshtml" />
     <Content Include="Views\Master\ServiceMaster.cshtml" />
