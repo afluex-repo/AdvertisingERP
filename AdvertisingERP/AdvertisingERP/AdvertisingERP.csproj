@@ -750,6 +750,7 @@
     <Content Include="AdminCss\assets\images\user.png" />
     <Content Include="AdminCss\assets\js\app.js" />
     <Content Include="AdminCss\assets\js\bootstrap.bundle.min.js" />
+    <Content Include="AdminCss\assets\js\CustomJs.js" />
     <Content Include="AdminCss\assets\js\dashboard-alternate.js" />
     <Content Include="AdminCss\assets\js\dashboard-analytics.js" />
     <Content Include="AdminCss\assets\js\dashboard-digital-marketing.js" />
