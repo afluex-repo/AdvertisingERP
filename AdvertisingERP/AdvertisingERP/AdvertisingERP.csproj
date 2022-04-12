@@ -677,7 +677,6 @@
     <Content Include="AdminCss\assets\images\bg-themes\4.png" />
     <Content Include="AdminCss\assets\images\bg-themes\5.png" />
     <Content Include="AdminCss\assets\images\bg-themes\6.png" />
-    <Content Include="AdminCss\assets\images\bg-themes\change-password.jpg" />
     <Content Include="AdminCss\assets\images\errors-images\505-error.png" />
     <Content Include="AdminCss\assets\images\favicon-32x32.png" />
     <Content Include="AdminCss\assets\images\gallery\01.png" />
@@ -1614,14 +1613,13 @@
     <Content Include="Views\Master\BankList.cshtml" />
     <Content Include="Views\Master\BankMaster.cshtml" />
     <Content Include="Views\Master\FinancialYear.cshtml" />
-    <Content Include="Views\Master\DataTable.cshtml" />
     <Content Include="Views\Master\FinancialYearList.cshtml" />
     <Content Include="Views\Master\ServiceList.cshtml" />
     <Content Include="Views\Master\ServiceMaster.cshtml" />
     <Content Include="Views\Master\SiteList.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
-    <Content Include="Views\Home\UserProfile.cshtml" />
-    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\PurchaseOrder\EditPO.cshtml" />
+    <Content Include="Views\PurchaseOrder\PO.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1649,7 +1647,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58325</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58326/</IISUrl>
+          <IISUrl>http://localhost:58327/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -1545,7 +1545,6 @@ namespace AdvertisingERP.Controllers
 
             model.SalesOrderNo = Crypto.Decrypt(no);
             DataSet ds = model.PrintSO();
-
             model.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
             model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
             ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderDate"].ToString();
@@ -2396,6 +2395,6 @@ namespace AdvertisingERP.Controllers
             return View(model);
         }
         #endregion
-
+     
     }
 }
