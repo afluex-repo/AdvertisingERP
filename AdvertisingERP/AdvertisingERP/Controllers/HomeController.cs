@@ -111,7 +111,14 @@ namespace AdvertisingERP.Controllers
 
 
         }
-
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
         public ActionResult ForgetPassword()
         {
             return View();

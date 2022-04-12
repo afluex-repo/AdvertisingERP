@@ -677,6 +677,7 @@
     <Content Include="AdminCss\assets\images\bg-themes\4.png" />
     <Content Include="AdminCss\assets\images\bg-themes\5.png" />
     <Content Include="AdminCss\assets\images\bg-themes\6.png" />
+    <Content Include="AdminCss\assets\images\bg-themes\change-password.jpg" />
     <Content Include="AdminCss\assets\images\errors-images\505-error.png" />
     <Content Include="AdminCss\assets\images\favicon-32x32.png" />
     <Content Include="AdminCss\assets\images\gallery\01.png" />
@@ -1619,6 +1620,8 @@
     <Content Include="Views\Master\ServiceMaster.cshtml" />
     <Content Include="Views\Master\SiteList.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
