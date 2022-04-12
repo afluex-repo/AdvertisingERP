@@ -34,7 +34,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="/SaleOrder/GenerateSaleOrder" class="btn btn-outline-info px-5 float-right">Sale Order No List</a>
+                    <a href="/SaleOrder/GenerateSaleOrder" class="btn btn-light list-button px-5 float-right">Sale Order No List</a>
 
                 </div>
             </div>
@@ -254,8 +254,8 @@
                                         }
                                         else
                                         {
-                                            <input type="submit" id="btnAddLine" name="btnAddLine" value="Add Line" class="btn btn-sm btn-info" onclick="return validateLine();" />
-                                            <input type="submit" id="btnUpdateLine" name="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();" class="btn btn-sm btn-info" />
+                                            <input type="submit" id="btnAddLine" name="btnAddLine" value="Add Line" class="btn btn-light list-button" onclick="return validateLine();" />
+                                            <input type="submit" id="btnUpdateLine" name="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();" class="btn btn-light list-button" />
                                         }
                                     </td>
                                 </tr>
@@ -377,7 +377,7 @@
                                 {
                                     if (Model.PostStatus == "False")
                                     {
-                                        <input type="submit" value="Post Sale Order" class="btn btn-success" id="UpdateSaleOrder" name="UpdateSaleOrder" onclick="return validateFormForPostSO();" />
+                                        <input type="submit" value="Post Sale Order" class="btn btn-light list-button" id="UpdateSaleOrder" name="UpdateSaleOrder" onclick="return validateFormForPostSO();" />
                                     }
                                     else
                                     {
@@ -388,7 +388,7 @@
                                 }
                                 else
                                 {
-                                    <input type="submit" value="Save Sale Order" class="btn btn-outline-success px-5" id="SaveSaleOrder" name="SaveSaleOrder" onclick="return validateVendor();" />
+                                    <input type="submit" value="Save Sale Order" class="btn btn-light list-button px-5" id="SaveSaleOrder" name="SaveSaleOrder" onclick="return validateVendor();" />
                                 }
                                 //}
                             }
