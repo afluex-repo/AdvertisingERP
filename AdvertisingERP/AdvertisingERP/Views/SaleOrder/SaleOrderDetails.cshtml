@@ -4,7 +4,18 @@
     ViewBag.Title = "SaleOrderDetails";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<script>
+    jQuery('.mydatepicker, #OrderDate, .input-group.date').datepicker(
+        {
+            dateFormat: 'dd/mm/yy',
+            changeYear: true,
+            changeMonth: true
+        });
+</script>
 @using (Html.BeginForm("SaleOrderDetails", "SaleOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
     <div class="page-content">
@@ -406,13 +417,6 @@
             transform: scale(3); /* (300% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         }
 </style>
-
-@*<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
-<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>*@
-@*<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>*@
-
-
-
 <script>
 
     $(document).ready(function () {
