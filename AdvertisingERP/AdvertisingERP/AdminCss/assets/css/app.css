@@ -48,8 +48,7 @@ a {
 .wrapper {
 
 	width: 100%;
-
-	position: relative
+	position: relative;
 
 }
 
@@ -3956,7 +3955,8 @@ body.bg-theme15 {
 
 	.page-footer {
 
-		left: 0
+		left: 0;
+        bottom: auto;
 
 	}
 
