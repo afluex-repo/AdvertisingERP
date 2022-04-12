@@ -22,7 +22,7 @@ namespace AdvertisingERP.Models
         {
             SqlParameter[] para ={    new SqlParameter ("@PK_CamapignID", CompaignId),
                                       new SqlParameter ("@CampaignNo",CampaignNo),
-                                      new SqlParameter ("@CustomerCode",CustomerId), };
+                                      new SqlParameter ("@CustomerCode","CUST0008"), };
             DataSet ds = DBHelper.ExecuteQuery("GetCampaigns", para);
             return ds;
         }
@@ -30,8 +30,8 @@ namespace AdvertisingERP.Models
         public DataSet CampaignEntry()
         {
             SqlParameter[] para ={    
-                                      new SqlParameter ("@CustomerCode","CUST0001"),
-                                       new SqlParameter ("@CreativeName","Test"),
+                                      new SqlParameter ("@CustomerCode",CustomerId),
+                                       new SqlParameter ("@CreativeName",CreativeName),
                                         new SqlParameter ("@StartDate",StartDate),
                                          new SqlParameter ("@EndDate",EndDate),
                                           //new SqlParameter ("@StartDate","01/04/2022"),

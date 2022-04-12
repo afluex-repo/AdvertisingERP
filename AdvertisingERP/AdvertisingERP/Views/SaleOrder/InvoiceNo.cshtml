@@ -3,6 +3,12 @@
     ViewBag.Title = "InvoiceNo";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
+
+<style>
+    .px-5{
+        margin-top:4px;
+    }
+</style>
 @using (Html.BeginForm("InvoiceNo", "SaleOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
     <div class="page-content">
@@ -37,7 +43,7 @@
             <div class="card-body">
                 <div class="p-4 border rounded">
                     <div class="row g-3">
-                        <div class="col-md-6">
+                        <div class="col-md-6 mt-2">
                             <label class="index-1">Invoice No </label>
 
                             @Html.TextBoxFor(m => m.InvoiceNo, new { @class = "form-control", @Placeholder = "Invoice No", @readonly = "true" })
@@ -102,7 +108,7 @@
      </div>
 }
 
-        <script src="~/assets/libs/jquery/dist/jquery.min.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <script>
     $(document).ready(function () {
         $("#InvoiceNo").val("CAA/2019-20/");
