@@ -14,14 +14,19 @@ namespace AdvertisingERP.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             HttpSessionStateBase session = filterContext.HttpContext.Session;
-            if (session != null && session["UserID"] == null)
+            if (session.IsNewSession || session["UserID"] == null)
             {
-                //filterContext.Result = new RedirectToRouteResult(
-                //    new RouteValueDictionary {
-                 RedirectToAction("Login", "Home");   
-                                //});
+                // filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                // new { action = "Login", Controller = "Home" }));
+                RedirectToAction("Login", "Home");
+
+            }
+            else
+            {
+                base.OnActionExecuting(filterContext);
             }
         }
+    
     //{
     //    // code involving this.Session // edited to simplify
     //    HttpSessionStateBase session = filterContext.HttpContext.Session;
@@ -50,7 +55,7 @@ namespace AdvertisingERP.Controllers
     //        //      new { action = "Index", Controller = "Home" }));
     //        //}
     //    }
-    //    base.OnActionExecuting(filterContext); // re-added in edit
+       // re-added in edit
 
     //}
 
