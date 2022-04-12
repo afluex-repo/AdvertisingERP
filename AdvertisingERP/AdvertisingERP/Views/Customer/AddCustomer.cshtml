@@ -75,8 +75,8 @@
                             </div>
                             <div class="col-md-4 mt-2"><label for="input-5">Director Name </label>@Html.TextBoxFor(m => m.DirectorName, new { @class = "form-control ", @Placeholder = "Director Name" })</div>
                             <div class="col-md-4 mt-2">
-                                <label for="input-5">Director Contact </label>
-                                @Html.TextBoxFor(m => m.DirectorContact, new { @class = "form-control ", @Placeholder = "Director Contact", @onkeypress = "return isNumber(event);", @maxlength = "10" })
+                                <label for="input-5">Director Mobile </label>
+                                @Html.TextBoxFor(m => m.DirectorContact, new { @class = "form-control ", @Placeholder = "Director Mobile", @onkeypress = "return isNumber(event);", @maxlength = "10" })
                             </div>
                             <div class="col-md-4 mt-2">
                                 <label for="input-5">Pincode <span style="color: red;">*</span></label>
@@ -180,7 +180,7 @@
                                     ID Image
                                 </label>
                                 <input type="file" name="postedFile" onchange="readURL(this)" />
-                                <img id="imgID" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;" src="@Model.IdImage" />
+                                <img id="imgID" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;margin-top:20px;" src="@Model.IdImage" />
                             </div>
 
                             <div class="col-md-4 mt-2">
@@ -189,7 +189,7 @@
                                 </label>
                                 <input type="file" name="postedFile" onchange="readURL1(this)" />
                                 <br />
-                                <img id="imgPAN" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;" src="@Model.PanImage" />
+                                <img id="imgPAN" class="fileinput-preview thumbnail" style="width: 150px; height: 100px;margin-top:20px;" src="@Model.PanImage" />
                             </div>
                         </div>
                         <br />
