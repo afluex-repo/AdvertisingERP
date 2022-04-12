@@ -48,8 +48,8 @@ a {
 .wrapper {
 
 	width: 100%;
-
-	position: relative
+    position: inherit;
+	/*position: relative;*/
 
 }
 
@@ -198,6 +198,8 @@ a {
 	left: 250px;
 
 	right: 0;
+
+    bottom: 0;
 
 	text-align: center;
 
@@ -3956,7 +3958,8 @@ body.bg-theme15 {
 
 	.page-footer {
 
-		left: 0
+		left: 0;
+        bottom: auto;
 
 	}
 

@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 
 }
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 @using (Html.BeginForm("CampaignMaster", "Compaign", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
@@ -47,7 +49,9 @@
                             @Html.TextBoxFor(m => m.CreativeName, new { @class = "form-control", @Placeholder = "Creative Name", @onchange = "return endDateChange();" })
                         </div>
                         <div class="col-md-4">
-                            <label for="input-1">Start Date <span style="color: red;">*</span></label> @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", @Placeholder = "Start Date", @onchange = "return endDateChange();" })
+                            <label class="form-label">Date:</label>
+                            <input type="text" id="datepicker">
+                            @*<label for="input-1">Start Date <span style="color: red;">*</span></label> @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", @Placeholder = "Start Date", @onchange = "return endDateChange();" })*@
                         </div>
                         <div class="col-md-4">
                             <label for="input-1">End Date <span style="color: red;">*</span></label>
@@ -99,7 +103,12 @@
     </div>
 }
 <script>
-    jQuery(".mydatepicker, #datepicker, .input-group.date").datepicker({
+    $(function () {
+        $("#EndDate").datepicker();
+    });
+</script>
+<script>
+    jQuery(".mydatepicker, #datepicker, #EndDate, .input-group.date").datepicker({
         dateFormat: "dd/mm/yy",
 
         changeYear: true,
@@ -174,3 +183,4 @@
         $("#Decription").val($("#CreativeName").val() + " (" + $("#StartDate").val() + " to " + $("#EndDate").val() + ")");
     }
 </script>
+
