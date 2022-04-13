@@ -4,10 +4,9 @@
     ViewBag.Title = "PO";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-
-@using (Html.BeginForm("PO", "PurchaseOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
-{
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
