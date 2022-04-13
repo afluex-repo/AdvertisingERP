@@ -50,7 +50,7 @@
                 <div class="card-body">
                     <div class="p-4 border rounded">
                         <div class="row g-3">
-                            <div class="col-md-4">
+                            <div class="col-md-4 mt-2">
                                 <label for="input-1">Company Name <span style="color: red;">*</span></label>
                                 @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @Placeholder = "Company Name" }) @Html.HiddenFor(m => m.CompanyId, new { @Placeholder = "Site Name" })
                             </div>
@@ -212,6 +212,7 @@
     </div>
 
 }
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function () {
         $("#divload").css({ display: "none" });
