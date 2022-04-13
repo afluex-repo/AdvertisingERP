@@ -1620,6 +1620,8 @@
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\PurchaseOrder\EditPO.cshtml" />
     <Content Include="Views\PurchaseOrder\PO.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1647,7 +1649,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58325</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58327/</IISUrl>
+          <IISUrl>http://localhost:58322/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
