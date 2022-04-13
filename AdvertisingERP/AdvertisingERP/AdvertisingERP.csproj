@@ -1620,6 +1620,8 @@
     <Content Include="Views\Shared\AdminLayout.cshtml" />
     <Content Include="Views\PurchaseOrder\EditPO.cshtml" />
     <Content Include="Views\PurchaseOrder\PO.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
