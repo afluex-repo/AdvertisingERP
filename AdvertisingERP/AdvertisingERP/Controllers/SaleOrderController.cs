@@ -1545,10 +1545,10 @@ namespace AdvertisingERP.Controllers
 
             model.SalesOrderNo = Crypto.Decrypt(no);
             DataSet ds = model.PrintSO();
-            model.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
-            model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
-            ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderDate"].ToString();
-            ViewBag.InvoiceNumber = ds.Tables[0].Rows[0]["InvoiceNumber"].ToString();
+            //model.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
+           // model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
+            //ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderDate"].ToString();
+          //  ViewBag.InvoiceNumber = ds.Tables[0].Rows[0]["InvoiceNumber"].ToString();
 
             if (ds != null && ds.Tables[1].Rows.Count > 0)
             {

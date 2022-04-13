@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+@using (Html.BeginForm("PO", "PurchaseOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -59,7 +62,7 @@
                         
                             <label class="index-1">PO Date<span style="color: red">*</span></label>
                            
-                                @Html.TextBoxFor(m => m.PODate, new { @class = "form-control mydatepicker", @Placeholder = "Order Date" })
+                                @Html.TextBoxFor(m => m.PODate, new { @class = "form-control datepicker", @Placeholder = "Order Date" })
                            
                        
                     </div>
@@ -157,8 +160,8 @@
             changeYear: true,
             changeMonth: true
         });
-
 </script>
+
 <script>
 
     $(document).ready(function () {
