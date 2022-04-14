@@ -4,9 +4,7 @@
     ViewBag.Title = "SaleOrderDetails";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <style>
     .zoom {
         background-color: none;
@@ -108,7 +106,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Sales Person <span style="color: red">*</span></label>
                                 <div class="col-md-9">
-                                    @Html.DropDownListFor(m => m.SalesPersonID, new SelectList(ViewBag.ddlSalesPerson, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.SalesPersonID, new SelectList(ViewBag.ddlSalesPerson, "Value", "Text"), new { @class = "form-select" })
                                 </div>
                             </div>
                         </div>
@@ -116,7 +114,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Operation Executive <span style="color: red">*</span></label>
                                 <div class="col-md-9">
-                                    @Html.DropDownListFor(m => m.OperationExecutiveID, new SelectList(ViewBag.ddlOperationExecutive, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.OperationExecutiveID, new SelectList(ViewBag.ddlOperationExecutive, "Value", "Text"), new { @class = "form-select" })
                                 </div>
                             </div>
                         </div>
@@ -124,7 +122,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Billing Snaps <span style="color: red">*</span></label>
                                 <div class="col-md-9">
-                                    @Html.DropDownListFor(m => m.BillingSnapsID, new SelectList(ViewBag.ddlBillingSnaps, "Value", "Text"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.BillingSnapsID, new SelectList(ViewBag.ddlBillingSnaps, "Value", "Text"), new { @class = "form-select" })
                                 </div>
                             </div>
                         </div>
@@ -132,7 +130,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">PO Received ? <span style="color: red">*</span></label>
                                 <div class="col-md-9">
-                                    @Html.DropDownListFor(m => m.POReceived, new SelectList(ViewBag.ddlPOReceived, "Value", "Text"), new { @class = "form-control", @onchange = "return onPOchange();" })
+                                    @Html.DropDownListFor(m => m.POReceived, new SelectList(ViewBag.ddlPOReceived, "Value", "Text"), new { @class = "form-select", @onchange = "return onPOchange();" })
                                 </div>
                             </div>
                         </div>
@@ -156,7 +154,7 @@
                             <div class="form-group row">
                                 <label class="control-label col-md-3">Service <span style="color: red">*</span></label>
                                 <div class="col-md-9">
-                                    @Html.DropDownListFor(m => m.ServiceID, new SelectList(ViewBag.ddlServices, "Value", "Text"), new { @class = "form-control", @onchange = "return onServiceChange();" })
+                                    @Html.DropDownListFor(m => m.ServiceID, new SelectList(ViewBag.ddlServices, "Value", "Text"), new { @class = "form-select", @onchange = "return onServiceChange();" })
                                     <input type="hidden" id="hdServiceID" name="hdServiceID" />
                                 </div>
                             </div>
@@ -214,10 +212,10 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        @Html.DropDownListFor(m => m.CityID, new SelectList(ViewBag.ddlCity, "Value", "Text"), new { @class = "form-control", @onchange = "return onCityChange();", @style = "width:150px" })
+                                        @Html.DropDownListFor(m => m.CityID, new SelectList(ViewBag.ddlCity, "Value", "Text"), new { @class = "form-select", @onchange = "return onCityChange();", @style = "width:150px" })
                                     </td>
                                     <td>
-                                        @Html.DropDownListFor(m => m.VendorID, new SelectList(ViewBag.ddlVendors, "Value", "Text"), new { @class = "form-control", @onchange = "return onVendorChange();", @style = "width:150px" })
+                                        @Html.DropDownListFor(m => m.VendorID, new SelectList(ViewBag.ddlVendors, "Value", "Text"), new { @class = "form-select", @onchange = "return onVendorChange();", @style = "width:150px" })
                                         <input type="text" id="txtVendorName" readonly="readonly" style="width: 150px; display: none" />
                                         <input type="hidden" id="hdVendorID" />
                                         <input type="hidden" id="hdVendorName" />
@@ -225,7 +223,7 @@
                                     <td>
                                         @Html.HiddenFor(m => m.SaleOrderDetailsID)
                                         @Html.HiddenFor(m => m.LineStatus)
-                                        @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSites, "Value", "Text"), new { @class = "form-control", onchange = "return fonSiteChange();", @style = "width:150px" })
+                                        @Html.DropDownListFor(m => m.SiteID, new SelectList(ViewBag.ddlSites, "Value", "Text"), new { @class = "form-select", onchange = "return fonSiteChange();", @style = "width:150px" })
                                     </td>
                                     <td>
                                         @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @placeholder = "Description", @style = "width:150px", @value = "" })
@@ -258,7 +256,7 @@
                                         else
                                         {
                                             <input type="submit" id="btnAddLine" name="btnAddLine" value="Add Line" class="btn btn-light list-button" onclick="return validateLine();" />
-                                            <input type="submit" id="btnUpdateLine" name="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();" class="btn btn-light list-button" />
+                               <input type="submit" id="btnUpdateLine" name="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();"   class="btn btn-light list-button" />
                                         }
                                     </td>
                                 </tr>

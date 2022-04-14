@@ -91,7 +91,7 @@
                       
                             <label class="index-1">Sale Order No</label>
                           
-                                @Html.DropDownListFor(m => m.SaleOrderNumber, new SelectList(ViewBag.ddlsaleorderno, "Value", "Text"), new { @class = "form-control", @onchange = "return saleOrderChange();" })
+                                @Html.DropDownListFor(m => m.SaleOrderNumber, new SelectList(ViewBag.ddlsaleorderno, "Value", "Text"), new { @class = "form-select", @onchange = "return saleOrderChange();" })
                                 @Html.HiddenFor(m => m.SaleOrderNumberID)
                            
                        

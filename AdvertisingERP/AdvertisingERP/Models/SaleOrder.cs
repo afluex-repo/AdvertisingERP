@@ -103,6 +103,7 @@ namespace AdvertisingERP.Models
         public string ConcernPerson1 { get;  set; }
         public string CompanyMobile { get;  set; }
         public string Email { get;  set; }
+        public string OtherCharges { get; set; }
         #endregion
 
         #region InvoiceNo
@@ -388,7 +389,9 @@ namespace AdvertisingERP.Models
                                   new SqlParameter("@SalesPersonID", SalesPersonID),
                                   new SqlParameter("@OperationExecutiveID", OperationExecutiveID),
                                   new SqlParameter("@BillingSnapsID", BillingSnapsID),
-                                  new SqlParameter("@AddedBy", AddedBy)  };
+                                  new SqlParameter("@AddedBy", AddedBy),
+                                  new SqlParameter("@OtherCharges",0)
+            };
             DataSet ds = DBHelper.ExecuteQuery("_SalesOrderInsert", para);
             return ds;
         }
