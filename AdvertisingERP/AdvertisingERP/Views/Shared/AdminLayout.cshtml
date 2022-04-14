@@ -26,6 +26,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
     <link href="~/AdminCss/assets/css/app.css" rel="stylesheet">
     <link href="~/AdminCss/assets/css/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     @*<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">*@
     <title>Advertising ERP</title>
     <style>
@@ -195,7 +198,7 @@
         <header>
             <div class="topbar d-flex align-items-center">
                 <nav class="navbar navbar-expand">
-                    <div class="mobile-toggle-menu" style="display:none">
+                    <div class="mobile-toggle-menu">
                         <i class='bx bx-menu'></i>
                     </div>
                     <div class="search-bar flex-grow-1" >
@@ -572,7 +575,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="user-box dropdown">
+                    <div class="user-box dropdown ms-auto">
                         <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="~/AdminCss/assets/images/user.png" class="user-img" alt="user avatar">
                             <div class="user-info ps-3">
@@ -583,14 +586,14 @@
 
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
+                                <a class="dropdown-item" href="/Home/UserProfile"><i class="bx bx-user"></i><span>Profile</span></a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="javascript:;"><i class="bx bx-cog"></i><span>Change Password</span></a>
+                                <a class="dropdown-item" href="/Home/ChangePassword"><i class="bx bx-cog"></i><span>Change Password</span></a>
                             </li>
-                            <li>
+                            @*<li>
                                 <a class="dropdown-item" href="javascript:;"><i class='bx bx-home-circle'></i><span>Setting</span></a>
-                            </li>
+                            </li>*@
                             <li>
                                 <a class="dropdown-item" href="/home/login"><i class='bx bx-dollar-circle'></i><span>Logout</span></a>
                             </li>
@@ -607,14 +610,15 @@
             <!--end overlay-->
             <!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
             <!--End Back To Top Button-->
-            <footer class="page-footer">
-                <p class="mb-0">Copyright © 2021. All right reserved.</p>
-            </footer>
+        <footer class="page-footer">
+            <p class="mb-0">Copyright © 2021. All right reserved.</p>
+        </footer>
         </div>
+    
     
     <script src="~/AdminCss/assets/js/bootstrap.bundle.min.js"></script>
     <!--plugins-->
-    @*<script src="~/AdminCss/assets/js/jquery.min.js"></script>*@
+    @*<script src="~/admincss/assets/js/jquery.min.js"></script>*@
 
     <script src="~/AdminCss/assets/plugins/simplebar/js/simplebar.min.js"></script>
     <script src="~/AdminCss/assets/plugins/metismenu/js/metisMenu.min.js"></script>
