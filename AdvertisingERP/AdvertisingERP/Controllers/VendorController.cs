@@ -91,6 +91,7 @@ namespace AdvertisingERP.Controllers
                     objVendor.ConcerPerson2Designation = ds.Tables[0].Rows[0]["ConcernPerson2Designation"].ToString();
                     objVendor.PANNO = ds.Tables[0].Rows[0]["PANNO"].ToString();
                     objVendor.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
+                    objVendor.ServiceTypeName= ds.Tables[0].Rows[0]["ServiceTypeID"].ToString();
 
                     if (ds.Tables[1].Rows.Count > 0)
                     {
