@@ -46,8 +46,37 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-
                         <div class="card">
+                            @if (@TempData["ServiceDelete"] != null)
+                            {
+                                <div class="alert border-0 alert-dismissible fade show py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div class="font-35 text-white">
+                                            <i class="bx bxs-check-circle" style="color:green"></i>
+                                        </div>
+                                        <div class="ms-3">
+                                            <div class="text-white">@TempData["ServiceDelete"]!</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+
+                            }
+                            @*@if (@TempData["SiteError"] != null)
+                                {
+                                    <div class="alert border-0 alert-dismissible fade show py-2">
+                                        <div class="d-flex align-items-center">
+                                            <div class="font-35 text-white">
+                                                <i class="bx bxs-check-circle" style="color:green"></i>
+                                            </div>
+                                            <div class="ms-3">
+                                                <div class="text-white">@TempData["SiteError"]!</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                }*@
+
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -95,11 +124,19 @@
                                                             <td>@item.IGST</td>
                                                             <td>@item.SGST</td>
                                                             <td>
-                                                                <a href="/Master/ServiceMaster?ServiceId=@item.ServiceId" class="text-warning" title="Edit"><i class="bx bx-edit"></i></a>
-                                                                &nbsp;
-                                                                <a href="/Master/DeleteService?ServiceId=@item.ServiceId" onclick="return confirm('Do you want to delete this Service ?');" class="label label-danger"><i class="bx bx-trash"></i></a>
-                                                            </td>
+                                                                <div class="btn-group" role="group" aria-label="Basic example">
+                                                                    <button type="button" class="btn btn-light">
+                                                                        <a href="/Master/ServiceMaster?ServiceId=@item.ServiceId" class="text-warning" title="Edit"><i class="bx bx-pencil"></i>
+                                                                        </a>
+                                                                    </button>
 
+                                                                    <button type="button" class="btn btn-light">
+                                                                        <a href="/Master/DeleteService?ServiceId=@item.ServiceId" onclick="return confirm('Do you want to delete this Service ?');" class="label label-danger"><i class="bx bx-trash-alt"></i>
+                                                                        </a>
+                                                                    </button>
+
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     }
                                                 }

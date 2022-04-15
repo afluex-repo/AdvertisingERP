@@ -20,6 +20,10 @@ namespace AdvertisingERP.Controllers
             List<Compaign> lst = new List<Compaign>();
             obj.CustomerId = string.IsNullOrEmpty(customerCode) ? null : customerCode;
             DataSet ds = obj.GetCampaigns();
+            if (ds != null && ds.Tables[2].Rows.Count > 0)
+            {
+                obj.Address = ds.Tables[2].Rows[0]["Address"].ToString();
+            }
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -28,12 +32,11 @@ namespace AdvertisingERP.Controllers
                     objCampaign.CompaignId = dr["PK_CamapignID"].ToString();
                     objCampaign.CampaignNo = dr["CampaignNo"].ToString();
                     objCampaign.CreativeName = dr["DisplayCreativeName"].ToString();
-                   
+
                     lst.Add(objCampaign);
                 }
                 obj.lstCompaign = lst;
             }
-            obj.Address = ds.Tables[2].Rows[0]["Address"].ToString();
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
 
@@ -1545,11 +1548,10 @@ namespace AdvertisingERP.Controllers
 
             model.SalesOrderNo = Crypto.Decrypt(no);
             DataSet ds = model.PrintSO();
-
-            model.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
-            model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
-            ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderDate"].ToString();
-            ViewBag.InvoiceNumber = ds.Tables[0].Rows[0]["InvoiceNumber"].ToString();
+            //model.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
+           // model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
+            //ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderDate"].ToString();
+          //  ViewBag.InvoiceNumber = ds.Tables[0].Rows[0]["InvoiceNumber"].ToString();
 
             if (ds != null && ds.Tables[1].Rows.Count > 0)
             {
@@ -2396,6 +2398,6 @@ namespace AdvertisingERP.Controllers
             return View(model);
         }
         #endregion
-
+     
     }
 }

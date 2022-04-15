@@ -48,8 +48,7 @@ a {
 .wrapper {
 
 	width: 100%;
-
-	position: relative
+	position: relative;
 
 }
 
@@ -185,7 +184,7 @@ a {
 
 .page-content {
 
-	padding: 1.5rem 1.5rem 0 1.5rem
+	padding: 1.5rem 1.5rem 1.5rem 1.5rem;
 
 }
 
@@ -193,11 +192,13 @@ a {
 
 	background: rgb(0 0 0 / 20%);
 
-	position: absolute;
+	position: fixed;
 
 	left: 250px;
 
 	right: 0;
+   
+    bottom: 0;
 
 	text-align: center;
 
@@ -3956,7 +3957,8 @@ body.bg-theme15 {
 
 	.page-footer {
 
-		left: 0
+		left: 0;
+        bottom: 0;
 
 	}
 

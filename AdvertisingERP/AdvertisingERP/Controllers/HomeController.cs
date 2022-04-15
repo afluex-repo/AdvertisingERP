@@ -20,12 +20,13 @@ namespace AdvertisingERP.Controllers
         }
         public ActionResult Login()
         {
-           // Session.Abandon();
+            // Session.Abandon();
+            Home obj = new Home();
             if (TempData["Login"] == null)
             {
                 ViewBag.errormsg = "none";
             }
-            return View();
+            return View(obj);
         }
         [HttpPost]
         [ActionName("Login")]
@@ -111,7 +112,14 @@ namespace AdvertisingERP.Controllers
 
 
         }
-
+        public ActionResult UserProfile()
+        {
+            return View();
+        }
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
         public ActionResult ForgetPassword()
         {
             return View();

@@ -750,6 +750,7 @@
     <Content Include="AdminCss\assets\images\user.png" />
     <Content Include="AdminCss\assets\js\app.js" />
     <Content Include="AdminCss\assets\js\bootstrap.bundle.min.js" />
+    <Content Include="AdminCss\assets\js\CustomJs.js" />
     <Content Include="AdminCss\assets\js\dashboard-alternate.js" />
     <Content Include="AdminCss\assets\js\dashboard-analytics.js" />
     <Content Include="AdminCss\assets\js\dashboard-digital-marketing.js" />
@@ -1612,12 +1613,15 @@
     <Content Include="Views\Master\BankList.cshtml" />
     <Content Include="Views\Master\BankMaster.cshtml" />
     <Content Include="Views\Master\FinancialYear.cshtml" />
-    <Content Include="Views\Master\DataTable.cshtml" />
     <Content Include="Views\Master\FinancialYearList.cshtml" />
     <Content Include="Views\Master\ServiceList.cshtml" />
     <Content Include="Views\Master\ServiceMaster.cshtml" />
     <Content Include="Views\Master\SiteList.cshtml" />
     <Content Include="Views\Shared\AdminLayout.cshtml" />
+    <Content Include="Views\PurchaseOrder\EditPO.cshtml" />
+    <Content Include="Views\PurchaseOrder\PO.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1645,7 +1649,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58325</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58326/</IISUrl>
+          <IISUrl>http://localhost:58322/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
