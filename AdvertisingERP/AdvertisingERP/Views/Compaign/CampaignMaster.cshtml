@@ -122,9 +122,7 @@
             changeMonth: true
 
         });
-
 </script>
-
 
 <script>
 
@@ -139,7 +137,6 @@
                         $(response).each(function (index, item) {
                             cityuse.push(item.CompanyName + "(" + item.CustomerCode + ")");
                         });
-
                         $("#CustomerName").autocomplete({
                             source: cityuse,
                             select: function (event, ui) {
