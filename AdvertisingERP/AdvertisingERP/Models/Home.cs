@@ -7,11 +7,17 @@ using System.Web;
 
 namespace AdvertisingERP.Models
 {
-    public class Home
+    public class Home:Common
     {
         public string LoginId { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+
+        public string PK_VendorID { get; set; }
+        public string Address { get; set; }
+        public string ProfilePic { get; set; }
+        
+
         public DataSet Login()
         {
             //LoginProc
@@ -32,5 +38,6 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("", para);
             return ds;
         }
+        
     }
 }
