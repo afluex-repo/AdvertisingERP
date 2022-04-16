@@ -577,7 +577,9 @@
                     </div>
                     <div class="user-box dropdown ms-auto">
                         <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="~/AdminCss/assets/images/user.png" class="user-img" alt="user avatar">
+                            @*<img src="~/AdminCss/assets/images/user.png" class="user-img" alt="user avatar">*@
+                            <img src="@Session["ProfilePic"]" class="user-img" alt="user avatar">
+                            
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0">@Session["Username"]</p>
                                 <p class="designattion mb-0">@Session["EmailId"]</p>
@@ -586,10 +588,10 @@
 
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="/Home/UserProfile"><i class="bx bx-user"></i><span>Profile</span></a>
+                                <a class="dropdown-item" href="/Admin/Profile"><i class="bx bx-user"></i><span>Profile</span></a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="/Home/ChangePassword"><i class="bx bx-cog"></i><span>Change Password</span></a>
+                                <a class="dropdown-item" href="/Admin/ChangePassword"><i class="bx bx-cog"></i><span>Change Password</span></a>
                             </li>
                             @*<li>
                                 <a class="dropdown-item" href="javascript:;"><i class='bx bx-home-circle'></i><span>Setting</span></a>

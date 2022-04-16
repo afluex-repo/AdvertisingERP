@@ -55,7 +55,7 @@ namespace AdvertisingERP.Controllers
                         }
                         model.lstbill = lstbill;
                     }
-                    
+
                 }
             }
             catch (Exception ex)
@@ -359,7 +359,7 @@ namespace AdvertisingERP.Controllers
             Admin model = new Models.Admin();
             List<Admin> lst = new List<Admin>();
             model.InvoiceNo = InvoiceNo;
-          
+
             DataSet ds = model.UpdateInvoiceNo();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {
@@ -374,5 +374,56 @@ namespace AdvertisingERP.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Profile()
+        {
+            Admin model = new Admin();
+            try
+            {
+                model.AddedBy = Session["LoginID"].ToString();
+                DataSet ds = model.GetUserProfileDetails();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    ViewBag.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                    ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["ContactNo"].ToString();
+                    ViewBag.Email = ds.Tables[0].Rows[0]["EmailId"].ToString();
+                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+        public ActionResult UpdatePassword(string Password,string NewPassword)
+        {
+            Admin model = new Admin();
+            model.Password = Password;
+            model.NewPassword = NewPassword;
+            model.UpdatedBy = Session["UserID"].ToString();
+            DataSet ds = model.ChangePassword();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    TempData["msg"] = "Change password successfully";
+                }
+                else
+                {
+                    TempData["msgerro"] =ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }
