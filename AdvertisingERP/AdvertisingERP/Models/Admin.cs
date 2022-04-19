@@ -48,6 +48,12 @@ namespace AdvertisingERP.Models
         public string InvoiceNo { get; set; }
         public string SalesOrderNo { get; set; }
         public string StartDate { get; set; }
+        public string LoginId { get; set; }
+
+        public string Password { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmPassword { get; set; }
+
 
         public DataSet GetDashboardDetails()
         {
@@ -87,6 +93,9 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdatePaymentStatus", para);
             return ds;
         }
+        
+
+
         #region SaveEmails
 
         public DataSet SaveEmails()
@@ -122,6 +131,29 @@ namespace AdvertisingERP.Models
         }
 
         #endregion
+        
+        public DataSet GetUserProfileDetails()
+        {
+            SqlParameter[] para =
+                {
+                new SqlParameter("@LoginId",LoginId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetUserProfileDetails", para);
+            return ds;
+        }
+
+
+        public DataSet ChangePassword()
+        {
+            SqlParameter[] para =
+                {
+                new SqlParameter("@OldPassword",Password),
+                 new SqlParameter("@NewPassword",NewPassword),
+                  new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ChangePassword", para);
+            return ds;
+        }
 
     }
 }

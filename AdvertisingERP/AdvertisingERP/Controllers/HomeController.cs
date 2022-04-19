@@ -74,29 +74,22 @@ namespace AdvertisingERP.Controllers
                         Session["LoginID"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["Username"] = ds.Tables[0].Rows[0]["Name"].ToString();
                         Session["EmailId"] = ds.Tables[0].Rows[0]["EmailId"].ToString();
-
+                        Session["ProfilePic"] = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                        
                         return RedirectToAction("DashBoard","Admin");
-                      
                     }
                     else
                     {
                         ViewBag.errormsg = "";
                         TempData["Login"] = "Incorrect LoginId Or Password";
                         return RedirectToAction("Login");
-                      
                     }
-                    
-                    
-
-
                 }
                 else
                 {
                     ViewBag.errormsg = "";
                     TempData["Login"] = "Incorrect LoginId Or Password";
                     return RedirectToAction("Login");
-                   
-
                 }
             }
             catch (Exception ex)
@@ -106,11 +99,6 @@ namespace AdvertisingERP.Controllers
                 return RedirectToAction("Login");
                
             }
-
-          
-
-
-
         }
         public ActionResult UserProfile()
         {
@@ -120,6 +108,8 @@ namespace AdvertisingERP.Controllers
         {
             return View();
         }
+        
+
         public ActionResult ForgetPassword()
         {
             return View();
