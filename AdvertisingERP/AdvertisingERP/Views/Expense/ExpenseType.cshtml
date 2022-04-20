@@ -64,26 +64,31 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <label for="validationCustom01" class="form-label">Expense Type<span style="color: red">*</span></label>
-                            @Html.DropDownListFor(m => m.ExpenseType, new SelectList(ViewBag.ddlExpenseType, "Value", "Text"), new { @class = "form-select" })
+                            @Html.DropDownListFor(m => m.FK_ExpenseTypeId, new SelectList(ViewBag.ddlExpenseType, "Value", "Text"), new { @class = "form-select" })
                         </div>
                         <div class="col-md-4">
                             <label for="validationCustom01" class="form-label">Expense Name<span style="color: red">*</span></label>
                             @Html.TextBoxFor(m => m.ExpenseName, new { @class = "form-control", @Placeholder = "Expense Name" })
                         </div>
-                        <div class="col-md-4 mt-5">
-                            <input type="hidden" id="ExpenseId" name="ExpenseId" value="@Model.ExpenseId" />
-                            @if (Model.ExpenseId == null)
-                            {
-                                <input type="submit" value="Submit" class="btn btn-light px-5" name="btnsave" onclick="return validateservice();" />
-                                <a href="/Expense/ExpenseList" class="btn btn-light list-button">Back To List</a>
-                            }
-                            else
-                            {
-                                <input type="submit" value="Update" class="btn btn-light px-5" name="btnupdate" onclick="return validateservice();" />
-                                <a href="/Expense/ExpenseList" class="btn btn-light list-button">Back To List</a>
-                            }
-                        </div>
                     </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-4 mt-5">
+                                <input type="hidden" id="ExpenseId" name="ExpenseId" value="@Model.ExpenseId" />
+                                @if (Model.ExpenseId == null)
+                                {
+                                    <input type="submit" value="Submit" class="btn btn-light px-5" name="btnsave" onclick="return validateservice();" />
+                                    <a href="/Expense/ExpenseList" class="btn btn-light list-button">Back To List</a>
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Update" class="btn btn-light px-5" name="btnupdate" onclick="return validateservice();" />
+                                    <a href="/Expense/ExpenseList" class="btn btn-light list-button">Back To List</a>
+                                }
+                            </div>
+
+
+                        </div>
                 </div>
             </div>
         </div>
@@ -98,9 +103,9 @@
     });
     function validateservice() {
         $(".errortext").removeClass("errortext");
-        if ($('#ExpenseTypeId').val() == '0') {
-            $("#ExpenseTypeId").addClass('errortext');
-            $('#ExpenseTypeId').focus();
+        if ($('#FK_ExpenseTypeId').val() == '0') {
+            $("#FK_ExpenseTypeId").addClass('errortext');
+            $('#FK_ExpenseTypeId').focus();
             return false;
         }
         if ($('#ExpenseName').val() == '') {
