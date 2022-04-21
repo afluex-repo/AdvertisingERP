@@ -91,16 +91,18 @@
                                                         <tr>
                                                             <td>
                                                                 @if (item.SaleOrderNumber != null && item.SaleOrderNumber != "")
-                                                                {
-                                                                    <a href="/PurchaseOrder/PrintPO?poNumber=@item.EncryptKey" target="_blank" class="label label-primary">Print</a>
-                                                                }
+                                                                { <button type="button" class="btn btn-light">
+                                                                      <a href="/PurchaseOrder/PrintPO?poNumber=@item.EncryptKey" target="_blank" class="label label-primary" title="Print"><i class="bx bx-printer me-0"></i></a>
+                                                                   </button> }
                                                                 else
-                                                                { 
-                                                                    <a href="/PurchaseOrder/PO?purchaseno=@item.EncryptKey" title="Edit" class="btn btn-light"><i class="fadeIn animated bx bx-message-square-edit font-22 text-success"></i></a>
-                                                                }
-                                                                &nbsp;&nbsp;&nbsp;
-                                                                <a href="/PurchaseOrder/EditPO?pon=@item.EncryptKey" title="Force Edit" class="btn btn-light"><i class="fadeIn animated bx bx-message-square-edit font-22 text-danger"></i></a>
-                                                            </td>
+                                                                {
+                                                                    <button type="button" class="btn btn-light">
+                                                                        <a href="/PurchaseOrder/PO?purchaseno=@item.EncryptKey" title="Edit" class="label label-primary"><i class="bx bx-pencil me-0 text-success"></i></a>
+                                                                       </button> }
+                                                                        &nbsp;&nbsp;&nbsp;
+                                                                <button type="button" class="btn btn-light">
+                                                                    <a href="/PurchaseOrder/EditPO?pon=@item.EncryptKey" title="Force Edit" class="label label-primary"><i class="bx bx-pencil me-0 text-danger"></i></a></button>
+</td>
                                                             <td>@item.SaleOrderNumber</td>
                                                             <td>@item.PONumber</td>
                                                             <td>@item.PODate</td>

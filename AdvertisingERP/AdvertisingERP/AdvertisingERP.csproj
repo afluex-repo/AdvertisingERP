@@ -1631,6 +1631,7 @@
     <Content Include="Views\Expense\ExpenseType.cshtml" />
     <Content Include="Views\Expense\ExpenseTypeList.cshtml" />
     <Content Include="Views\Expense\ExpenseList.cshtml" />
+    <Content Include="Views\PurchaseOrder\PrintPO.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
