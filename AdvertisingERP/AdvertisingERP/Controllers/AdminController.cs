@@ -484,10 +484,12 @@ namespace AdvertisingERP.Controllers
                     {
                         msg = true;
                         Session["ProfilePic"] = obj.ProfilePic;
+
                     }
                     else
                     {
                         msg = false;
+                       
                     }
                 }
             }
