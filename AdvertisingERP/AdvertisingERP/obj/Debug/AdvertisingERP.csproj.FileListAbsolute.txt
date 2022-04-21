@@ -479,3 +479,4 @@ D:\Reena\Repo\AdvertisingERP\AdvertisingERP\AdvertisingERP\bin\System.Web.Http.W
 D:\Reena\Repo\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.csprojResolveAssemblyReference.cache
 D:\Reena\Repo\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.dll
 D:\Reena\Repo\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.pdb
+E:\Repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.csprojResolveAssemblyReference.cache
