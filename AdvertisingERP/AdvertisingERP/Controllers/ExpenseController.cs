@@ -132,7 +132,8 @@ namespace AdvertisingERP.Controllers
                         count1 = count1 + 1;
                     }
                 }
-                ViewBag.ddlExpenseType = ddlExpenseType;
+                model.ddlExpenseType = ddlExpenseType;
+                
             }
          
                 int count4 = 0;
