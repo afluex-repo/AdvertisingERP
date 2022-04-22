@@ -383,14 +383,15 @@ namespace AdvertisingERP.Controllers
                 model.AddedBy = Session["LoginID"].ToString();
                 DataSet ds = model.GetUserProfileDetails();
                 if (ds != null && ds.Tables.Count > 0)
-                {
-                    ViewBag.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
-                    ViewBag.Password = ds.Tables[0].Rows[0]["Password"].ToString();
-                    ViewBag.Name = ds.Tables[0].Rows[0]["Name"].ToString();
-                    ViewBag.MobileNo = ds.Tables[0].Rows[0]["ContactNo"].ToString();
-                    ViewBag.Email = ds.Tables[0].Rows[0]["EmailId"].ToString();
-                    ViewBag.Address = ds.Tables[0].Rows[0]["Address"].ToString();
-                    ViewBag.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
+                { 
+                    model.Pk_Id = ds.Tables[0].Rows[0]["Pk_Id"].ToString();
+                    model.LoginId = ds.Tables[0].Rows[0]["LoginId"].ToString();
+                    model.Password = ds.Tables[0].Rows[0]["Password"].ToString();
+                    model.Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                    model.MobileNo = ds.Tables[0].Rows[0]["ContactNo"].ToString();
+                    model.Email = ds.Tables[0].Rows[0]["EmailId"].ToString();
+                    model.Address = ds.Tables[0].Rows[0]["Address"].ToString();
+                    model.ProfilePic = ds.Tables[0].Rows[0]["ProfilePic"].ToString();
                 }
             }
             catch (Exception ex)
@@ -398,6 +399,41 @@ namespace AdvertisingERP.Controllers
 
             }
             return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Profile")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateProfile(Admin model, HttpPostedFileBase ProfilePic)
+        {
+            try
+            {
+
+                if (ProfilePic != null)
+                {
+                    model.ProfilePic = "../ProfilePic/" + Guid.NewGuid() + Path.GetExtension(ProfilePic.FileName);
+                    ProfilePic.SaveAs(Path.Combine(Server.MapPath(model.ProfilePic)));
+                }
+
+                model.UpdatedBy = Session["UserID"].ToString();
+                DataSet ds = model.UpdateProfile();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "Profile updated successfully";
+                    }
+                    else
+                    {
+                        TempData["msgerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["msgerror"] = ex.Message;
+            }
+            return RedirectToAction("Profile", "Admin");
         }
 
         public ActionResult ChangePassword()
@@ -424,6 +460,40 @@ namespace AdvertisingERP.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        
+
+
+        public JsonResult UpdateProfilePic(string UserId)
+        {
+            Admin obj = new Admin();
+            bool msg = false;
+            if (Request.Files.Count > 0)
+            {
+                HttpFileCollectionBase files = Request.Files;
+                HttpPostedFileBase file = files[0];
+
+                string fileName = file.FileName;
+                obj.Pk_Id = UserId;
+                obj.ProfilePic = "../ProfilePic/" + Guid.NewGuid() + Path.GetExtension(file.FileName);
+                file.SaveAs(Path.Combine(Server.MapPath(obj.ProfilePic)));
+                obj.UpdatedBy= Session["UserID"].ToString();
+                DataSet ds = obj.UpdateProfilePic();
+
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        msg = true;
+                        Session["ProfilePic"] = obj.ProfilePic;
+                    }
+                    else
+                    {
+                        msg = false;
+                    }
+                }
+            }
+            return Json(msg, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

@@ -478,3 +478,4 @@ E:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\b
 E:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\bin\System.Web.Http.WebHost.xml
 E:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.dll
 E:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.pdb
+E:\SachinMishraProject\repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.csprojResolveAssemblyReference.cache

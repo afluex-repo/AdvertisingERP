@@ -53,7 +53,9 @@ namespace AdvertisingERP.Models
         public string Password { get; set; }
         public string NewPassword { get; set; }
         public string ConfirmPassword { get; set; }
-
+        public string ProfilePic { get; set; }
+        public string Pk_Id { get; set; }
+        
 
         public DataSet GetDashboardDetails()
         {
@@ -154,6 +156,35 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("ChangePassword", para);
             return ds;
         }
+
+        public DataSet UpdateProfile()
+        {
+            SqlParameter[] para =
+                {
+                  new SqlParameter("@Pk_Id",Pk_Id),
+                 new SqlParameter("@Name",Name),
+                  new SqlParameter("@EmailId",Email),
+                      new SqlParameter("@ContactNo",MobileNo),
+                 new SqlParameter("@LoginId",LoginId),
+                  new SqlParameter("@Password",Password),
+                     new SqlParameter("@Address",Address),
+                      new SqlParameter("@UserImage",ProfilePic),
+                 new SqlParameter("@UpdatedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProfile", para);
+            return ds;
+        }
+
+        public DataSet UpdateProfilePic()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_Id",Pk_Id ),
+                                      new SqlParameter("@UserImage", ProfilePic),
+                                       new SqlParameter("@UpdatedBy", UpdatedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProfilePic", para);
+            return ds;
+        }
+
 
     }
 }
