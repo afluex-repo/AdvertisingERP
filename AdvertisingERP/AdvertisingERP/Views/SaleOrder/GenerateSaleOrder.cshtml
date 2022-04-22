@@ -87,12 +87,8 @@
                                                         @if (item.PostStatus == "True")
                                                         {
                                                             <button type="button" class="btn btn-light">
-                                                                <div class="d-flex align-items-center theme-icons shadow-sm p-2 cursor-pointer rounded">
-                                                                    <div class="font-22 text-white">
-                                                                    </div>
-                                                                    <div class="ms-2">printer</div>
-                                                                </div>
-                                                                <a href="/SaleOrder/SaleOrderDetails?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary">View</a>
+                                                                <a href="/SaleOrder/SaleOrderDetails?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary"><i class="bx bx-show-alt me-0"></i></a>
+                                                               
                                                             </button>
                                                         }
                                                         else

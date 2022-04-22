@@ -18,7 +18,7 @@
 </style>
 <div class="page-content">
     <!--breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    @*<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Purchase Order</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
@@ -31,7 +31,7 @@
             </nav>
         </div>
 
-    </div>
+    </div>*@
     <hr />
     <div class="container border">
         <div class="row" style="background:black">
@@ -75,11 +75,11 @@
                                     <h5 class="pl-2 text-uppercase text-white">Invoice Details</h5>
                                 </div>
                                 <div style="min-height:100px;" class="mt-4">
-                                    PurchasOrder No :@ViewBag.PurchasOrderNo
+                                    PurchasOrder No : @ViewBag.PurchasOrderNo
                                     <br />
                                     Date : @DateTime.Now.ToString("dd/MM/yyyy")
                                     <br />
-                                    PO Oder Date:@ViewBag.PODate
+                                    PO Oder Date : @ViewBag.PODate
                                     <br />
                                     Description   : @ViewBag.Description
                                 </div>

@@ -634,6 +634,7 @@ namespace AdvertisingERP.Controllers
                         model.SOStatus = ds.Tables[0].Rows[0]["Status"].ToString();
                         model.PostStatus = ds.Tables[0].Rows[0]["PostStatus"].ToString();
                         model.StateName = ds.Tables[0].Rows[0]["StateName"].ToString();
+                        model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
                     }
 
                     if (ds.Tables[1].Rows.Count > 0)
