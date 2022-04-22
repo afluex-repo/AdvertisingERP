@@ -92,10 +92,12 @@
                                                             <td>
                                                                 @if (item.SaleOrderNumber != null && item.SaleOrderNumber != "")
                                                                 {
-                                                                    <a href="/PurchaseOrder/PrintPO?poNumber=@item.EncryptKey" target="_blank" class="label label-primary">Print</a>
+                                                                    <button type="button" class="btn btn-light">
+                                                                        <a href="/PurchaseOrder/PrintPO?poNumber=@item.EncryptKey" target="_blank" class="label label-primary"><i class="bx bx-printer me-0"></i></a>
+                                                                    </button>
                                                                 }
                                                                 else
-                                                                { 
+                                                                {
                                                                     <a href="/PurchaseOrder/PO?purchaseno=@item.EncryptKey" title="Edit" class="btn btn-light"><i class="fadeIn animated bx bx-message-square-edit font-22 text-success"></i></a>
                                                                 }
                                                                 &nbsp;&nbsp;&nbsp;
