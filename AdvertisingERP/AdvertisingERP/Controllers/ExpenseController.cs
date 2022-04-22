@@ -114,7 +114,7 @@ namespace AdvertisingERP.Controllers
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     model.ExpenseId = ds.Tables[0].Rows[0]["PK_ExpenseId"].ToString();
-                    model.ExpenseType = ds.Tables[0].Rows[0]["ExpenseTypeName"].ToString();
+                    model.FK_ExpenseTypeId = ds.Tables[0].Rows[0]["FK_ExpenseTypeId"].ToString();
                     model.ExpenseName = ds.Tables[0].Rows[0]["ExpenseName"].ToString();
                 }
 
@@ -133,8 +133,7 @@ namespace AdvertisingERP.Controllers
                     }
                 }
                 model.ddlExpenseType = ddlExpenseType;
-
-
+                
             }
          
                 int count4 = 0;

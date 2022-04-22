@@ -1547,16 +1547,19 @@ namespace AdvertisingERP.Controllers
             ViewBag.IFSC = CompanyProfile.IFSC;
 
             model.SalesOrderNo = Crypto.Decrypt(no);
+            model.CustomerID = Crypto.Decrypt(SaleOrderId);
             DataSet ds = model.PrintSO();
             //model.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
            // model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
             //ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderDate"].ToString();
-          //  ViewBag.InvoiceNumber = ds.Tables[0].Rows[0]["InvoiceNumber"].ToString();
+       
 
-            if (ds != null && ds.Tables[1].Rows.Count > 0)
+            if (ds != null && ds.Tables[1].Rows.Count > 0 && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count>0)
             {
                 ViewBag.FinalAmount = 0;
                 ViewBag.CGST = ViewBag.SGST = ViewBag.IGST = 0;
+                ViewBag.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
+                ViewBag.InvoiceNumber = ds.Tables[0].Rows[0]["SalesOrderNo"].ToString();
                 foreach (DataRow r in ds.Tables[1].Rows)
                 {
                     SaleOrder obj = new SaleOrder();
@@ -1568,8 +1571,9 @@ namespace AdvertisingERP.Controllers
                     obj.Quantity = r["Quantity"].ToString();
                     obj.Rate = r["Rate"].ToString();
                     obj.TotalAmount = r["TotalAmount"].ToString();
+                   ViewBag.HSNCode= r["HSNCode"].ToString();
                     ViewBag.AmountInWords = r["FinalAmountWords"].ToString();
-
+                    ViewBag.Rate = r["Rate"].ToString();
                     ViewBag.CGST = Math.Round(Convert.ToDecimal(ViewBag.CGST) + Convert.ToDecimal(r["CGSTAmt"].ToString()), 2);
                     ViewBag.SGST = Math.Round(Convert.ToDecimal(ViewBag.SGST) + Convert.ToDecimal(r["SGSTAmt"].ToString()), 2);
                     ViewBag.IGST = Math.Round(Convert.ToDecimal(ViewBag.IGST) + Convert.ToDecimal(r["IGSTAmt"].ToString()), 2);

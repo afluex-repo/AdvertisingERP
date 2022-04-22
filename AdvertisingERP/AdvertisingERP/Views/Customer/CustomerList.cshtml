@@ -26,10 +26,10 @@
                     </ol>
                 </nav>
             </div>
-            <div class="alert alert-success" style="display: @ViewBag.saverrormsg;">
+            @*<div class="alert alert-success" style="display: @ViewBag.saverrormsg;">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                 <h5 class="text-success"><i class="fa fa-check-circle"></i>@TempData["CustomerError"]</h5>
-            </div>
+            </div>*@
             <div class="ms-auto">
                 <div class="btn-group">
                     <a href="/Customer/AddCustomer" class="btn btn-light list-button">Back To Customer</a>
@@ -38,6 +38,21 @@
         </div>
         <hr />
         <div class="card">
+            @if (@TempData["CustomerError"] != null)
+                {
+                <div class="alert border-0 alert-dismissible fade show py-2" style="display: @ViewBag.errormsg;">
+                    <div class="d-flex align-items-center">
+                        <div class="font-35 text-white">
+                            <i class="bx bxs-check-circle" style="color:green"></i>
+                        </div>
+                        <div class="ms-3">
+                            <div class="text-white">@TempData["CustomerError"]!</div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+
+            }
             <div class="card-body">
                 <div class="p-4 border rounded">
                     <div class="row g-3">
