@@ -90,7 +90,7 @@
                                                                 @if (item.LineStatus == "Mapped")
                                                                 {
                                                                     <button type="button" class="btn btn-light">
-                                                                        <a href="/SaleOrder/Invoice?InvoiceNo=@item.InvoiceNo" class="label label-primary" title="Print"><i class="bx bx-printer me-0"></i></a>
+                                                                        <a href="/SaleOrder/InvoicePrint?InvoiceNo=@item.InvoiceNo" class="label label-primary" title="Print"><i class="bx bx-printer me-0"></i></a>
                                                                     </button>
                                                                  
                                                                 }
@@ -127,7 +127,7 @@
             </div>
             }
 
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+            @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@
             <script>
                 $(document).ready(function () {
                     $("#InvoiceNo").val("CAA/2019-20/");

@@ -176,7 +176,8 @@
 
                                 <input type="file" name="postedFile" onchange="readURL1(this)" />
                                 <br />
-                                <img id="imgPAN" class="fileinput-preview thumbnail" style="width: 150px; height: 100px; margin-top:20px;" src="@Model.PanImage" />
+                                <img id="PanImage" class="fileinput-preview thumbnail" style="width: 150px; height: 100px; margin-top:20px;" src="@Model.PanImage" />
+                               
                             </div>
                         </div>
 
@@ -248,7 +249,7 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $("#imgPAN").attr("src", e.target.result);
+                $("#PanImage").attr("src", e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
         }

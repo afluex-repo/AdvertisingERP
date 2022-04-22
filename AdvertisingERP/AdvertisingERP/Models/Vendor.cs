@@ -110,6 +110,7 @@ namespace AdvertisingERP.Models
                                             new SqlParameter("@ServiceTypeID", ServiceTypeID),
                                             new SqlParameter("@ConcernPerson1Designation", ConcerPerson1Designation),
                                       new SqlParameter("@ConcernPerson2Designation", ConcerPerson2Designation),
+                                       new SqlParameter("@PanImage", PanImage),
                                  };
             DataSet ds = DBHelper.ExecuteQuery("UpdateVendorRegistration", para);
             return ds;
