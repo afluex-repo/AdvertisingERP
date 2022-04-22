@@ -14,6 +14,9 @@
     .descriptiontable {
         text-align: center;
     }
+    ul li{
+        list-style:none;
+    }
 </style>
 <div class="page-content">
     <!--breadcrumb-->
@@ -74,15 +77,15 @@
                                     <h5 class="pl-2 text-uppercase text-white">Invoice Details</h5>
                                 </div>
                                 <div style="min-height:100px;" class="mt-4">
-                                    Invoice No : @Model.InvoiceNo
-                                    <br />
-                                    Invoice Date  : @DateTime.Now.ToString("dd/MM/yyyy")
-                                    <br />
-                                    PO/Ref No : @ViewBag.PONumber
-                                    <br />
-                                    PO. Date : @ViewBag.PODate
-                                    <br />
-                                    Campian With Duration : @ViewBag.Description
+                                    <ul>
+                                        <li>  Invoice No : @Model.InvoiceNo</li>
+                                        <li> Invoice Date  : @DateTime.Now.ToString("dd/MM/yyyy")</li>
+                                        <li> PO/Ref No :  @ViewBag.PONumber</li>
+                                        <li> PO. Date : @ViewBag.PODate</li>
+                                        <li> Campian With Duration : @ViewBag.Description</li>
+                                    </ul>
+
+                                   
                                 </div>
                             </td>
                             <td style="width: 49%; float: left; text-align:left;">
@@ -90,16 +93,18 @@
                                     <h5 class="pl-2 text-uppercase text-white">Invoice To</h5>
                                 </div>
                                 <div style="min-height:100px;" class="mt-4">
-                                    Name :  @Model.CustomerName  
-                                    <br /> @Model.ConcernPerson1
-                                    <br />
-                                    Address : @Model.StoreName,@Model.CustomerAddress
-                                    <br />
-                                    Mobile No : @Model.CompanyMobile
-                                    <br />
-                                    Email : @Model.Email
-                                    <br />
-                                    Store Code/Type : @Model.StoreCode/@Model.StoreType
+
+                                    <ul>
+                                        <li>  Name :  @Model.CustomerName
+                                        <br />@Model.ConcernPerson1  </li>
+                                        <li>  Address : @Model.StoreName,@Model.CustomerAddress</li>
+                                        <li> Mobile No : @Model.CompanyMobile</li>
+                                        <li>   Email : @Model.Email</li>
+                                        <li>  Store Code/Type : @Model.StoreCode/@Model.StoreType</li>
+                                    </ul>
+                                  
+                                   
+                                   
                                 </div>
                             </td>
                         </tr>
