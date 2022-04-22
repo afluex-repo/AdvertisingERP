@@ -87,18 +87,18 @@
                                                         @if (item.PostStatus == "True")
                                                         {
                                                             <button type="button" class="btn btn-light">
-                                                                <a href="/SaleOrder/SaleOrderDetails?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary"><i class="bx bx-show-alt me-0"></i></a>
+                                                                <a href="/SaleOrder/SaleOrderDetails?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary" ><i class="bx bx-show-alt me-0"></i></a>
                                                                
                                                             </button>
                                                         }
                                                         else
                                                         {
                                                             <button type="button" class="btn btn-light">
-                                                                <a href="/SaleOrder/SaleOrderDetails?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary"><i class="bx bx-pencil me-0"></i></a>
+                                                                <a href="/SaleOrder/SaleOrderDetails?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary" ><i class="bx bx-pencil me-0"></i></a>
                                                             </button>
                                                         }
                                                         <button type="button" class="btn btn-light">
-                                                            <a href="/SaleOrder/PrintSO?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary"><i class="bx bx-printer me-0"></i></a>
+                                                            <a href="/SaleOrder/PrintSO?SaleOrderId=@item.SaleOrderIDEncrypt&no=@item.SaleOrderNoEncrypt" class="label label-primary" target="_blank"><i class="bx bx-printer me-0"></i></a>
                                                         </button>
                                                     </td>
                                                     <td>@item.SalesOrderNo</td>

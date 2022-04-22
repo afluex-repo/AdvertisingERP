@@ -15,6 +15,9 @@
     .descriptiontable {
         text-align: center;
     }
+     ul li{
+        list-style:none;
+    }
 </style>
 <div class="page-content">
     <!--breadcrumb-->
@@ -75,13 +78,14 @@
                                     <h5 class="pl-2 text-uppercase text-white">Invoice Details</h5>
                                 </div>
                                 <div style="min-height:100px;" class="mt-4">
-                                    PurchasOrder No : @ViewBag.PurchasOrderNo
-                                    <br />
-                                    Date : @DateTime.Now.ToString("dd/MM/yyyy")
-                                    <br />
-                                    PO Oder Date : @ViewBag.PODate
-                                    <br />
-                                    Description : @ViewBag.Description
+                                    <ul>
+                                        <li>Purchase Order No : @ViewBag.PurchasOrderNo</li>
+                                        <li> Date : @DateTime.Now.ToString("dd/MM/yyyy")</li>
+                                        <li>  PO Oder Date : @ViewBag.PODate</li>
+                                        <li> Description : @ViewBag.Description</li>
+                                    </ul>
+                                 
+                                   
                                 </div>
                             </td>
                             <td style="width: 49%; float: left; text-align:left;">
@@ -89,13 +93,14 @@
                                     <h5 class="pl-2 text-uppercase text-white">Invoice To</h5>
                                 </div>
                                 <div style="min-height:100px;" class="mt-4">
-                                Name :  @ViewBag.VendorName
-                                    <br />
-                               Address : @ViewBag.Address
-                                    <br />
-                               GSTNo :    @ViewBag.GSTNo
-                                    <br />
-                               ServiceName : @ViewBag.ServiceName
+                                    <ul>
+                                        <li>Name :  @ViewBag.VendorName</li>
+                                        <li> Address : @ViewBag.Address</li>
+                                        <li> GSTNo :    @ViewBag.GSTNo</li>
+                                        <li> Service Name : @ViewBag.ServiceName</li>
+                                    </ul>
+                                
+                                  
                                 </div>
                             </td>
                         </tr>
