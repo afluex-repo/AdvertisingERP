@@ -551,6 +551,8 @@ namespace AdvertisingERP.Controllers
                 model.dtPODetails = dtPODetails;
                 model.AddedBy = Session["UserID"].ToString();
 
+                model.PODate = string.IsNullOrEmpty(model.PODate) ? null : Common.ConvertToSystemDate(model.PODate, "dd/MM/yyyy");
+
                 DataSet ds = model.UpdatePurchaseOrder();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
