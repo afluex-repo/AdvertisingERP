@@ -44,8 +44,6 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("DeleteExpenseType", para);
             return ds;
         }
-
-
         public DataSet SaveExpense()
         {
             SqlParameter[] para = {
@@ -64,7 +62,7 @@ namespace AdvertisingERP.Models
             SqlParameter[] para = {
                 new SqlParameter("@PK_ExpenseId",ExpenseId)
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("GetExpenseList",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetExpenseList", para);
             return ds;
         }
 
@@ -79,6 +77,17 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateExpense", para);
             return ds;
         }
+
+
+        public DataSet DeleteExpense()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_ExpenseId",ExpenseId ),
+                                       new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteExpense", para);
+            return ds;
+        }
+
 
 
     }

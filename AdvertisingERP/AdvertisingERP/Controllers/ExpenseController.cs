@@ -242,6 +242,32 @@ namespace AdvertisingERP.Controllers
         }
 
 
+        public ActionResult DeleteExpense(Expense model, string Id)
+        {
+            try
+            {
+                model.ExpenseId = Id;
+                model.AddedBy = Session["UserID"].ToString();
+                DataSet ds = model.DeleteExpense();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+                        TempData["msg"] = "Expense deleted successfully";
+                    }
+                    else
+                    {
+                        TempData["msgerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msgerror"] = ex.Message;
+            }
+            return RedirectToAction("ExpenseList", "Expense");
+        }
+
 
     }
 }

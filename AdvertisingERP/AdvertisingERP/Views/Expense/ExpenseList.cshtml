@@ -90,7 +90,11 @@
                                                     <td>@item.ExpenseName</td>
                                                     <td><a href="/Expense/ExpenseType?Id=@item.ExpenseId" class="btn btn-light list-button"><i class='bx bxs-edit'></i>
                                                      
-                                                        </a></td>
+                                                        </a>
+                                                    
+                                                        <a href="/Expense/DeleteExpense?Id=@item.ExpenseId" class="btn btn-light list-button " onclick="return confirm('Are you sure you want to delete this expense ?')"><i class='bx bxs-trash'></i></a>
+                                                    
+                                                    </td>
                                                 </tr>
                                                 i++;
                                             }

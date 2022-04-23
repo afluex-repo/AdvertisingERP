@@ -51,6 +51,7 @@
             width: 300px;
         }
     </style>
+
 </head>
 <body class="bg-theme bg-theme1">
     <div id="divload"> <span class="glyphicon glyphicon-refresh w3-spin preloader-Icon"></span> <img src="~/AdminCss/assets/images/erpgif.gif" class="loadergif" /></div>
@@ -589,29 +590,29 @@
                         </ul>
                     </div>
                     <div class="user-box dropdown ms-auto">
-                       
+
                         <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @*<img src="~/AdminCss/assets/images/user.png" class="user-img" alt="user avatar">*@
                             <img src="@Session["ProfilePic"]" class="user-img" alt="user avatar">
-                          
+
                             <div class="user-info ps-3">
                                 <p class="user-name mb-0">@Session["Username"]</p>
                                 <p class="designattion mb-0">@Session["EmailId"]</p>
                             </div>
                         </a>
-                       
+
 
                         <ul class="dropdown-menu dropdown-menu-end">
-                                    <li>
-                                        <a class="dropdown-item" href="/Admin/Profile"><i class="bx bx-user"></i><span>Profile</span></a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="/Admin/ChangePassword"><i class="bx bx-cog"></i><span>Change Password</span></a>
-                                    </li>
+                            <li>
+                                <a class="dropdown-item" href="/Admin/Profile"><i class="bx bx-user"></i><span>Profile</span></a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="/Admin/ChangePassword"><i class="bx bx-cog"></i><span>Change Password</span></a>
+                            </li>
 
-                                    <li>
-                                        <a class="dropdown-item" href="/home/login"><i class='bx bx-dollar-circle'></i><span>Logout</span></a>
-                                    </li>
+                            <li>
+                                <a class="dropdown-item" href="/home/login"><i class='bx bx-dollar-circle'></i><span>Logout</span></a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -683,5 +684,37 @@
             $("#divload").fadeOut(1750);
         });
     </script>
+
+
+
+    <style>
+        .ui-widget-content {
+            border: 1px solid #dddddd;
+            background: #0c5b81;
+            color: #f6f6f6;
+        }
+
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+                border: 1px solid #e9e9e9;
+                background: #0f769c;
+                font-weight: normal;
+                color: #ffffff;
+            }
+
+        .ui-widget-header {
+            border: 1px solid #ffffff;
+            background: #0c5b81;
+            color: #333333;
+            font-weight: bold;
+        }
+
+        .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+            width: 45%;
+            background-color: #016185;
+            color: white;
+            border: 1px solid #ffffff;
+        }
+    </style>
+
 </body>
 </html>
