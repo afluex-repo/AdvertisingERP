@@ -37,6 +37,7 @@ namespace AdvertisingERP.Models
         public string IDType { get; set; }
         public string IDNumber { get; set; }
         public string CustomerCode { get; set; }
+        public string PK_CustomerID { get; set; }
         public string IdImage { get; set; }
         public List<Customer> lstcustomer { get; set; }
 

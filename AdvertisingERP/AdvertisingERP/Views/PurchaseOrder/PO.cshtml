@@ -245,7 +245,7 @@
         }
         $.ajax({
             url: '/PurchaseOrder/GetSaleOrderDetails',
-            data: { 'saleOrderNo': $('#SaleOrderNumber').val() },
+            data: { 'saleOrderNo':  $('#SaleOrderNumber').val() },
             type: 'Post',
             success: function (data) {
                 if (data != null) {

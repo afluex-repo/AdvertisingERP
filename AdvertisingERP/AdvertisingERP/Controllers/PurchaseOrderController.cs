@@ -379,7 +379,8 @@ namespace AdvertisingERP.Controllers
                 {
                     lst.Add(new SelectListItem { Text = dr["SalesOrderNo"].ToString() + '(' + dr["ServiceName"].ToString() + ')', Value = dr["PK_SalesOrderNoID"].ToString() });
                 }
-                obj.Result = "1";
+                //Value = dr["PK_SalesOrderNoID"].ToString() });
+            obj.Result = "1";
             }
             obj.lstsaleoredernolist = lst;
             return Json(obj, JsonRequestBehavior.AllowGet);
