@@ -64,7 +64,7 @@ namespace AdvertisingERP.Controllers
                     objsaleorder.SaleOrderNoEncrypt = Crypto.Encrypt(dr["SalesOrderNo"].ToString());
                     objsaleorder.SaleOrderIDEncrypt = Crypto.Encrypt(dr["PK_SalesOrderNoID"].ToString());
                     objsaleorder.PostStatus = dr["PostStatus"].ToString();
-
+                    objsaleorder.CustomerID= Crypto.Encrypt(dr["Pk_CustomerId"].ToString());
                     lst.Add(objsaleorder);
                 }
                 obj.lstsaleorder = lst;
@@ -762,6 +762,7 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
                     {
+                       
                         ds = model.GetSaleOrderDetails();
                         if (ds != null)
                         {
@@ -1550,9 +1551,9 @@ namespace AdvertisingERP.Controllers
             model.SalesOrderNo = Crypto.Decrypt(no);
             model.CustomerID = Crypto.Decrypt(SaleOrderId);
             DataSet ds = model.PrintSO();
-            //model.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
-           // model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
-            //ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderDate"].ToString();
+            model.CustomerName = ds.Tables[0].Rows[0]["CustomerName"].ToString();
+            model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
+            ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderDate"].ToString();
        
 
             if (ds != null && ds.Tables[1].Rows.Count > 0 && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count>0)

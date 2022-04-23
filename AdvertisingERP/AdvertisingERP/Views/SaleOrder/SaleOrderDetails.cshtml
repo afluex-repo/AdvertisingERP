@@ -82,6 +82,7 @@
                                 <div class="col-md-9">
                                     @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @Placeholder = "Customer Name", @onchange = "return getCustomerCampaigns(this);" })
                                     @Html.HiddenFor(m => m.CustomerCode)
+                                    @Html.HiddenFor(m => m.CustomerID)
                                 </div>
                             </div>
                         </div>
@@ -256,13 +257,14 @@
                                         else
                                         {
                                             <input type="submit" id="btnAddLine" name="btnAddLine" value="Add Line" class="btn btn-light list-button" onclick="return validateLine();" />
-                               <input type="submit" id="btnUpdateLine" name="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();"   class="btn btn-light list-button" />
+                                   <input type="submit" id="btnUpdateLine" name="btnUpdateLine" style="display: none" value="Update" onclick="return updateLine();"   class="btn btn-light list-button" />
                                         }
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-
+                        </div>
+                    <div class="table-responsive">
                         <table id="example2" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -283,7 +285,8 @@
                                 </tr>
                             </tbody>
                         </table>
-
+                        </div>
+                    <div class="table-responsive">
                         <table id="example" class="table table-striped table-bordered">
                             <thead>
                                 <tr>

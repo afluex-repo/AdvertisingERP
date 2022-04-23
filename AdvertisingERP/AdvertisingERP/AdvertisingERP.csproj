@@ -1376,7 +1376,6 @@
     <Content Include="assets\images\timeline\react.svg" />
     <Content Include="assets\js\app-script.js" />
     <Content Include="assets\js\bootstrap.min.js" />
-    <Content Include="assets\js\index.js" />
     <Content Include="assets\js\jquery.loading-indicator.html" />
     <Content Include="assets\js\jquery.min.js" />
     <Content Include="assets\js\pace.min.js" />
@@ -1512,6 +1511,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="EmailAttachments\5fb7d516-990f-4fa9-a55a-fb110625a820.JPG" />
+    <Content Include="EmailAttachments\70b1c152-4044-4cdc-b216-5b81706bb3b5.jpg" />
+    <Content Include="EmailAttachments\87099b96-0486-40db-a1c4-5d810dc2c968.JPG" />
+    <Content Include="EmailAttachments\bc8b8d03-3967-4ec9-a914-48dd85925951.png" />
+    <Content Include="EmailAttachments\c1e568e0-a7c7-4963-a62e-da0d6a789ad7.jpg" />
+    <Content Include="EmailAttachments\fcfb478d-9201-4967-a469-0fe51c3454dc.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
@@ -1566,10 +1571,26 @@
     <Content Include="cdnjs.cloudflare.com\ajax\libs\semantic-ui\2.3.1\themes\default\assets\fonts\outline-icons.woff" />
     <Content Include="cdnjs.cloudflare.com\ajax\libs\semantic-ui\2.3.1\themes\default\assets\fonts\outline-icons.woff2" />
     <Content Include="cdnjs.cloudflare.com\ajax\libs\semantic-ui\2.3.1\themes\default\assets\fonts\outline-iconsd41d.eot" />
+    <None Include="Properties\PublishProfiles\AdvertisingERP.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="SoftwareImages\120b1495-3eb4-434f-a3ce-f2850d557951.jpg" />
+    <Content Include="SoftwareImages\169c0483-02d2-4338-b974-3cf938aa17d2.jpg" />
+    <Content Include="SoftwareImages\4694e181-a998-439d-8652-cf1137afe699.jpg" />
+    <Content Include="SoftwareImages\4c3e9982-dfff-4e22-8286-a557fbf14124.png" />
+    <Content Include="SoftwareImages\51f3af0e-3c9c-48e2-893b-872fe42e1276.jpg" />
+    <Content Include="SoftwareImages\5379c6ea-1022-4040-a1d8-e31b201818af.jpg" />
+    <Content Include="SoftwareImages\5dc53ab2-e1d1-4cd1-a4e3-9daa200c4d20.jpg" />
+    <Content Include="SoftwareImages\7cc823d9-55e9-43e9-af84-d8b4bd7cb484.jpg" />
+    <Content Include="SoftwareImages\a42f6845-dd73-4d31-8d0d-504c0ea3859a.png" />
+    <Content Include="SoftwareImages\b97791b5-6c0e-4682-9c8c-5bb3e0dd5bfe.jpg" />
+    <Content Include="SoftwareImages\d367c8f7-9203-4c79-a00c-89053687b95c.jpg" />
+    <Content Include="SoftwareImages\d3c4324d-27ea-4053-add9-3d243a9df38a.jpg" />
+    <Content Include="SoftwareImages\d5be590f-47dd-4eea-b507-de31e5d61ad0.png" />
+    <Content Include="SoftwareImages\d8db3659-9a0d-465a-8ed2-f1d371f1f6ab.jpg" />
+    <Content Include="SoftwareImages\f77306aa-1a4c-4961-8e44-4dbfd73cf2bd.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1659,6 +1680,12 @@
     <Content Include="Views\Expense\ExpenseList.cshtml" />
     <Content Include="Views\PurchaseOrder\PrintPO.cshtml" />
     <Content Include="Views\SaleOrder\InvoicePrint.cshtml" />
+    <Content Include="SoftwareImages\00ad5774-2aad-4e32-9734-1143b16e4fa9.pdf" />
+    <Content Include="SoftwareImages\50578260-9405-4bae-8ab6-c4ec20e58c63.pdf" />
+    <Content Include="SoftwareImages\76471ad2-1fa3-4ecc-8e00-eb67c0cf2b77.pdf" />
+    <Content Include="SoftwareImages\8cf46ea4-fa68-4a9e-b1a9-5e292904c713.pdf" />
+    <Content Include="SoftwareImages\c9a7214a-3ee4-491b-ad97-70249ca6756b.pdf" />
+    <Content Include="SoftwareImages\f569ac96-aafb-4287-8bc0-b3e03988785e.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

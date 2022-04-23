@@ -65,7 +65,7 @@
                                 <div style="min-height:100px;" class="mt-4">
                                     <ul>
                                         <li>Order No   :  @ViewBag.InvoiceNumber</li>
-                                        <li>Order Date :  @DateTime.Now.ToString("dd/MM/yyyy")</li>
+                                        <li>Order Date :  @ViewBag.SaleOrderDate</li>
                                     </ul>
                                    
                                    
@@ -76,9 +76,11 @@
                                 <div class="p-1" style="background-color: #418fb2;">
                                     <h5 class="pl-2 text-uppercase text-white">Invoice To</h5>
                                 </div>
-                                <div style="min-height:100px;" class="mt-4">
-                                   @ViewBag.CustomerAddress
-                                </div>
+                                <br />
+                                @Model.CustomerName
+                                <br />
+                                @ViewBag.CustomerAddress
+                                <br />
                             </td>
                         </tr>
                     </table>
