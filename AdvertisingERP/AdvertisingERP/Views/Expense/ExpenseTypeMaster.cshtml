@@ -17,10 +17,18 @@
                         <li class="breadcrumb-item">
                             <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Expense Type Master</li>
+                        <li class="breadcrumb-item active" aria-current="page">Expense Type</li>
                     </ol>
                 </nav>
             </div>
+
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <a href="/Expense/ExpenseTypeList" class="btn btn-light list-button">Back To List</a>
+
+                </div>
+            </div>
+
         </div>
         <hr />
         <div class="card">
@@ -37,7 +45,6 @@
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-
             }
             @if (@TempData["msgerror"] != null)
             {
@@ -61,8 +68,7 @@
                             @Html.TextBoxFor(m => m.ExpenseType, new { @class = "form-control", @Placeholder = "Expense Type Name" })
                         </div>
                         <div class="col-md-4 mt-5">
-                            <input type="submit" value="Submit" class="btn btn-light px-5" name="btnsave" onclick="return validateservice();" />
-                            <a href="/Expense/ExpenseTypeList" class="btn btn-light list-button">Back To List</a>
+                            <input type="submit" value="Submit" class="btn btn-light px-4" name="btnsave" onclick="return validateservice();" />
                         </div>
                     </div>
                 </div>
