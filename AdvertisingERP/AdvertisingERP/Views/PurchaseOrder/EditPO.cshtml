@@ -237,7 +237,10 @@
                                                         <input type="text" name="txtDescription_@i" value="@item.Description" class="form-control" style="width:150px" />
                                                     </td>
                                                     <td>
-                                                        <a href="#" class="btn btn-sm btn-danger" onclick="return deletePOLine('@item.PK_PurchaseOrderDetailsID');">Delete</a>
+                                                        <button type="button" class="btn btn-light">
+                                                            <a href="#" class="label label-danger" onclick="return deletePOLine('@item.PK_PurchaseOrderDetailsID');"><i class="bx bx-trash-alt me-0"></i></a>                                                           
+                                                             @*<a href="#" class="btn btn-sm btn-danger" onclick="return deletePOLine('@item.PK_PurchaseOrderDetailsID');">Delete</a>*@
+                                                        </button>
                                                     </td>
                                                 </tr>
                                                 i++;

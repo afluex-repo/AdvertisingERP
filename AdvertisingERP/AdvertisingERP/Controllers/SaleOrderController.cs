@@ -634,6 +634,7 @@ namespace AdvertisingERP.Controllers
                         model.SOStatus = ds.Tables[0].Rows[0]["Status"].ToString();
                         model.PostStatus = ds.Tables[0].Rows[0]["PostStatus"].ToString();
                         model.StateName = ds.Tables[0].Rows[0]["StateName"].ToString();
+                        model.CustomerAddress = ds.Tables[0].Rows[0]["CustomerAddress"].ToString();
                     }
 
                     if (ds.Tables[1].Rows.Count > 0)
@@ -2402,6 +2403,79 @@ namespace AdvertisingERP.Controllers
             return View(model);
         }
         #endregion
-     
+        #region
+        public ActionResult InvoicePrint(string InvoiceNo)
+        {
+            SaleOrder model = new SaleOrder();
+            List<SaleOrder> lstSaleOrderDetails = new List<SaleOrder>();
+
+            ViewBag.CompanyName = CompanyProfile.CompanyName;
+            ViewBag.CompanyMobile = CompanyProfile.CompanyMobile;
+            ViewBag.CompanyEmail = CompanyProfile.CompanyEmail;
+            ViewBag.CompanyAddress = CompanyProfile.CompanyAddress;
+            ViewBag.BankName = CompanyProfile.BankName;
+            ViewBag.AccountNo = CompanyProfile.AccountNo;
+            ViewBag.IFSC = CompanyProfile.IFSC;
+            ViewBag.GSTIN = CompanyProfile.GSTIN;
+            ViewBag.PAN = CompanyProfile.PAN;
+            model.InvoiceNo = InvoiceNo;
+            DataSet ds = model.GetPrintInvoice();
+
+            //ViewBag.SaleOrderDate = ds.Tables[0].Rows[0]["SalesOrderNo"].ToString();
+            ViewBag.InvoiceNumber = ds.Tables[0].Rows[0]["InvoiceNo"].ToString();
+
+            ViewBag.Description = ds.Tables[0].Rows[0]["Description"].ToString();
+            if (ds != null && ds.Tables[1].Rows.Count > 0)
+            {
+                model.CustomerName = ds.Tables[0].Rows[0]["CompanyName"].ToString();
+                model.CustomerAddress = ds.Tables[0].Rows[0]["Address"].ToString();
+                model.InvoiceNo = ds.Tables[0].Rows[0]["InvoiceNo"].ToString();
+                model.GSTIN = ds.Tables[0].Rows[0]["GSTIN"].ToString();
+                model.StoreName = ds.Tables[0].Rows[0]["StoreName"].ToString();
+                model.StoreCode = ds.Tables[0].Rows[0]["StoreCode"].ToString();
+                model.StoreType = ds.Tables[0].Rows[0]["StoreType"].ToString();
+                model.ConcernPerson1 = ds.Tables[0].Rows[0]["ConcernPerson1"].ToString();
+                model.CompanyMobile = ds.Tables[0].Rows[0]["CompanyContactNo"].ToString();
+                model.Email = ds.Tables[0].Rows[0]["Email"].ToString();
+
+                ViewBag.FinalAmount = 0;
+                ViewBag.TotalWithoutGST = 0;
+                ViewBag.CGST = ViewBag.SGST = ViewBag.IGST = 0;
+                foreach (DataRow r in ds.Tables[1].Rows)
+                {
+                    SaleOrder obj = new SaleOrder();
+                    obj.Description = r["Description"].ToString();
+                    obj.ServiceName = r["ServiceName"].ToString();
+                    obj.Width = r["Width"].ToString();
+                    obj.Height = r["Height"].ToString();
+                    obj.SiteName = r["SiteName"].ToString();
+                    obj.Area = r["Area"].ToString();
+                    obj.Quantity = r["Quantity"].ToString();
+                    obj.Rate = r["Rate"].ToString(); obj.HSNCode = r["HSNCode"].ToString();
+                    obj.TotalAmount = r["TotalAmount"].ToString();
+                    ViewBag.PONumber = r["PONumber"].ToString();
+                    ViewBag.PODate = r["PODate"].ToString();
+
+
+                    ViewBag.TotalWithoutGST = Math.Round(Convert.ToDecimal(ViewBag.TotalWithoutGST) + Convert.ToDecimal(r["TotalAmount"].ToString()), 2);
+                    ViewBag.CGST = Math.Round(Convert.ToDecimal(ViewBag.CGST) + Convert.ToDecimal(r["CGSTAmt"].ToString()), 2);
+                    ViewBag.SGST = Math.Round(Convert.ToDecimal(ViewBag.SGST) + Convert.ToDecimal(r["SGSTAmt"].ToString()), 2);
+                    ViewBag.IGST = Math.Round(Convert.ToDecimal(ViewBag.IGST) + Convert.ToDecimal(r["IGSTAmt"].ToString()), 2);
+
+
+                    //ViewBag.FinalAmountGST = Convert.ToDecimal(ViewBag.FinalAmount) + Convert.ToDecimal(ViewBag.SGST) + Convert.ToDecimal(ViewBag.CGST) + Convert.ToDecimal(ViewBag.IGST);
+                    lstSaleOrderDetails.Add(obj);
+                }
+                ViewBag.AmountInWords = ds.Tables[2].Rows[0]["FinalAmountWords"].ToString();
+                ViewBag.FinalAmount = ds.Tables[2].Rows[0]["TotalAMt"].ToString();
+                model.lstsaleorder = lstSaleOrderDetails;
+            }
+
+
+
+            return View(model);
+        }
+
+        #endregion
     }
 }
