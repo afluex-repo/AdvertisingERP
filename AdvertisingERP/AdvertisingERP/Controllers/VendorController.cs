@@ -90,7 +90,7 @@ namespace AdvertisingERP.Controllers
                     objVendor.ConcerPerson1Designation = ds.Tables[0].Rows[0]["ConcernPerson1Designation"].ToString();
                     objVendor.ConcerPerson2Designation = ds.Tables[0].Rows[0]["ConcernPerson2Designation"].ToString();
                     objVendor.PANNO = ds.Tables[0].Rows[0]["PANNO"].ToString();
-                    objVendor.PanImage = ds.Tables[0].Rows[0]["PanImage"].ToString();
+                    objVendor.PanImage =  ds.Tables[0].Rows[0]["PanImage"].ToString();
                     objVendor.ServiceTypeName= ds.Tables[0].Rows[0]["ServiceTypeID"].ToString();
 
                     if (ds.Tables[1].Rows.Count > 0)
@@ -261,6 +261,7 @@ namespace AdvertisingERP.Controllers
         [ActionName("AddVendor")]
         [OnAction(ButtonName = "UpdateVendor")]
         public ActionResult UpdateVendor(Vendor obj, HttpPostedFileBase postedFile)
+
         {
             if (postedFile != null)
             {

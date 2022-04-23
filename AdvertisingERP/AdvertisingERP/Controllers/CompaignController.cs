@@ -22,6 +22,7 @@ namespace AdvertisingERP.Controllers
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
                     Customer objcustomer = new Customer();
+                    objcustomer.PK_CustomerID= (dr["PK_CustomerID"].ToString());
                     objcustomer.CustomerCode = (dr["CustomerCode"].ToString());
                     objcustomer.CompanyName = dr["CompanyName"].ToString();
                     lst.Add(objcustomer);

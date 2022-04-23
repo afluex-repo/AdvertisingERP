@@ -11,6 +11,7 @@ namespace AdvertisingERP.Models
     public class Expense
     {
         public string ExpenseTypeId { get; set; }
+        public string FK_ExpenseTypeId { get; set; }
         public string ExpenseId { get; set; }
         public string ExpenseType { get; set; }
         public string ExpenseName { get; set; }
@@ -48,7 +49,7 @@ namespace AdvertisingERP.Models
         public DataSet SaveExpense()
         {
             SqlParameter[] para = {
-                new SqlParameter("@ExpenseTypeName",ExpenseType ),
+                new SqlParameter("@FK_ExpenseTypeId",FK_ExpenseTypeId ),
                    new SqlParameter("@ExpenseName",ExpenseName ),
                                        new SqlParameter("@AddedBy", AddedBy)
                                   };
@@ -71,7 +72,7 @@ namespace AdvertisingERP.Models
         {
             SqlParameter[] para = {
                   new SqlParameter("@ExpenseId",ExpenseId),
-                new SqlParameter("@ExpenseTypeName",ExpenseType ),
+              new SqlParameter("@FK_ExpenseTypeId",FK_ExpenseTypeId ),
                    new SqlParameter("@ExpenseName",ExpenseName ),
                                        new SqlParameter("@AddedBy", AddedBy)
                                   };

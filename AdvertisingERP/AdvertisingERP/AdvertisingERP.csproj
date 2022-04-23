@@ -1389,10 +1389,37 @@
     <Content Include="assets\plugins\simplebar\css\simplebar.css" />
     <Content Include="assets\plugins\simplebar\js\simplebar.js" />
     <Content Include="assets\plugins\vectormap\jquery-jvectormap-2.0.2.html" />
+    <Content Include="assets\SoftwareImages\068945df-6d3c-4b5d-af0a-28ec68d0254a.PNG" />
+    <Content Include="assets\SoftwareImages\09a30819-ff8d-425b-b74c-89ebe2af02b9.png" />
+    <Content Include="assets\SoftwareImages\0a126c10-0886-4e60-b019-d6adc6ddf4ea.jpg" />
+    <Content Include="assets\SoftwareImages\18d650be-09c5-4cb1-9d3f-7e3f975ce482.jpg" />
     <Content Include="assets\SoftwareImages\1cd0b6e1-dca8-4c1f-a04c-dd4e6e94a7a5.jpg" />
+    <Content Include="assets\SoftwareImages\20b6de6b-b6ab-4b1f-8353-29a68ed28aec.jpg" />
+    <Content Include="assets\SoftwareImages\20e32f70-ed07-4165-8997-f5989bfc0203.png" />
+    <Content Include="assets\SoftwareImages\24a2035e-23ef-43ea-bf73-64df6c18de29.png" />
+    <Content Include="assets\SoftwareImages\402681a5-1399-4f73-83bd-d03b76fb651b.PNG" />
+    <Content Include="assets\SoftwareImages\4a4d72eb-6070-4af4-8497-7ca12f623a91.jpg" />
+    <Content Include="assets\SoftwareImages\51456ec2-d9ef-4c91-b2e0-86d1ccf81fe4.jpg" />
+    <Content Include="assets\SoftwareImages\5244335d-423a-4761-8a22-3402b60a400f.png" />
     <Content Include="assets\SoftwareImages\628ada92-e293-4b22-add8-25d399993f58.png" />
+    <Content Include="assets\SoftwareImages\6727f5c6-18dd-4f25-924f-27959259edb7.jpg" />
     <Content Include="assets\SoftwareImages\7100733d-dc00-40e5-8a23-da0f395f61d7.jpeg" />
+    <Content Include="assets\SoftwareImages\856425de-8342-4762-98b3-94b67e1b5770.jpg" />
+    <Content Include="assets\SoftwareImages\85fd2479-e6e1-492c-8560-30e8e63fcf08.jpg" />
+    <Content Include="assets\SoftwareImages\898b3785-bfa2-47fd-a128-125ff282b9d4.jpg" />
+    <Content Include="assets\SoftwareImages\98d1a597-82c0-46f9-a890-5bd2b039c93f.jpg" />
+    <Content Include="assets\SoftwareImages\a5ddd860-a644-4007-80ab-d33993d8e784.jpg" />
+    <Content Include="assets\SoftwareImages\a9bcadd0-2050-456d-ba5d-12770afebabd.png" />
+    <Content Include="assets\SoftwareImages\b3e933b8-315c-4a8a-b32e-9f7e9117383f.jpg" />
+    <Content Include="assets\SoftwareImages\c010682d-f2e8-45ff-95a3-0e7fba182dcd.png" />
+    <Content Include="assets\SoftwareImages\c8ae3dc4-2da4-4f4a-8080-95ff082b5a00.jpg" />
+    <Content Include="assets\SoftwareImages\cb512c36-146a-4c9e-8cbb-20248f00f965.jpg" />
     <Content Include="assets\SoftwareImages\cd2106dc-9e90-4c7a-aae5-70731ebfa5c0.jpeg" />
+    <Content Include="assets\SoftwareImages\d5369327-5c89-444d-a932-2adc4f386f1f.png" />
+    <Content Include="assets\SoftwareImages\dee19b93-0fdf-460b-8636-92f2f36ce7b6.jpg" />
+    <Content Include="assets\SoftwareImages\e0a19a20-c2c9-49c1-886f-b810a38e56df.jpg" />
+    <Content Include="assets\SoftwareImages\e28d7d23-733b-4a7a-b0ef-bfe9d54ba03e.png" />
+    <Content Include="assets\SoftwareImages\edbd83aa-4658-4b74-b534-ab26b2ea080a.jpg" />
     <Content Include="cdn.datatables.net\1.10.16\js\jquery.dataTables.min.js" />
     <Content Include="cdn.datatables.net\1.10.19\css\dataTables.bootstrap.min.css" />
     <Content Include="cdn.datatables.net\1.10.19\css\dataTables.bootstrap4.min.css" />
@@ -1484,6 +1511,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="EmailAttachments\5fb7d516-990f-4fa9-a55a-fb110625a820.JPG" />
+    <Content Include="EmailAttachments\70b1c152-4044-4cdc-b216-5b81706bb3b5.jpg" />
+    <Content Include="EmailAttachments\87099b96-0486-40db-a1c4-5d810dc2c968.JPG" />
+    <Content Include="EmailAttachments\bc8b8d03-3967-4ec9-a914-48dd85925951.png" />
+    <Content Include="EmailAttachments\c1e568e0-a7c7-4963-a62e-da0d6a789ad7.jpg" />
+    <Content Include="EmailAttachments\fcfb478d-9201-4967-a469-0fe51c3454dc.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
@@ -1543,6 +1576,21 @@
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="SoftwareImages\120b1495-3eb4-434f-a3ce-f2850d557951.jpg" />
+    <Content Include="SoftwareImages\169c0483-02d2-4338-b974-3cf938aa17d2.jpg" />
+    <Content Include="SoftwareImages\4694e181-a998-439d-8652-cf1137afe699.jpg" />
+    <Content Include="SoftwareImages\4c3e9982-dfff-4e22-8286-a557fbf14124.png" />
+    <Content Include="SoftwareImages\51f3af0e-3c9c-48e2-893b-872fe42e1276.jpg" />
+    <Content Include="SoftwareImages\5379c6ea-1022-4040-a1d8-e31b201818af.jpg" />
+    <Content Include="SoftwareImages\5dc53ab2-e1d1-4cd1-a4e3-9daa200c4d20.jpg" />
+    <Content Include="SoftwareImages\7cc823d9-55e9-43e9-af84-d8b4bd7cb484.jpg" />
+    <Content Include="SoftwareImages\a42f6845-dd73-4d31-8d0d-504c0ea3859a.png" />
+    <Content Include="SoftwareImages\b97791b5-6c0e-4682-9c8c-5bb3e0dd5bfe.jpg" />
+    <Content Include="SoftwareImages\d367c8f7-9203-4c79-a00c-89053687b95c.jpg" />
+    <Content Include="SoftwareImages\d3c4324d-27ea-4053-add9-3d243a9df38a.jpg" />
+    <Content Include="SoftwareImages\d5be590f-47dd-4eea-b507-de31e5d61ad0.png" />
+    <Content Include="SoftwareImages\d8db3659-9a0d-465a-8ed2-f1d371f1f6ab.jpg" />
+    <Content Include="SoftwareImages\f77306aa-1a4c-4961-8e44-4dbfd73cf2bd.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1631,6 +1679,14 @@
     <Content Include="Views\Expense\ExpenseType.cshtml" />
     <Content Include="Views\Expense\ExpenseTypeList.cshtml" />
     <Content Include="Views\Expense\ExpenseList.cshtml" />
+    <Content Include="Views\PurchaseOrder\PrintPO.cshtml" />
+    <Content Include="Views\SaleOrder\InvoicePrint.cshtml" />
+    <Content Include="SoftwareImages\00ad5774-2aad-4e32-9734-1143b16e4fa9.pdf" />
+    <Content Include="SoftwareImages\50578260-9405-4bae-8ab6-c4ec20e58c63.pdf" />
+    <Content Include="SoftwareImages\76471ad2-1fa3-4ecc-8e00-eb67c0cf2b77.pdf" />
+    <Content Include="SoftwareImages\8cf46ea4-fa68-4a9e-b1a9-5e292904c713.pdf" />
+    <Content Include="SoftwareImages\c9a7214a-3ee4-491b-ad97-70249ca6756b.pdf" />
+    <Content Include="SoftwareImages\f569ac96-aafb-4287-8bc0-b3e03988785e.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1659,7 +1715,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58325</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58325/</IISUrl>
+          <IISUrl>http://localhost:58326/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://localhost:58322/</CustomServerUrl>
