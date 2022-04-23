@@ -1282,13 +1282,5 @@ namespace AdvertisingERP.Controllers
         {
             return View();
         }
-
-
-        public ActionResult ExpenseTypeMaster()
-        {
-            return View();
-        }
-
-
     }
 }
