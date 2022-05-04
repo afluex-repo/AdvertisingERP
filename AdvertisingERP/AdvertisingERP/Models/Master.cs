@@ -48,6 +48,9 @@ namespace AdvertisingERP.Models
 
         public List<Master> lstFinancialYear { get; set; }
         public List<Master> lstBanks { get; set; }
+        public List<Master> lstcompany { get; set; }
+        public string CompanyName { get; set; }
+        public string Pk_CompanyID { get; set; }
 
         public DataSet SaveSite()
         {
@@ -224,6 +227,46 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("DeleteBankDetails", para);
             return ds;
         }
-
+        public DataSet GetCompanyList()
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Pk_CompanyID",Pk_CompanyID)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("GetCompany", para);
+            return ds;
+        }
+        public DataSet SaveCompany()
+        {
+            SqlParameter[] Para ={
+                new SqlParameter("@CompanyName",CompanyName),
+                new SqlParameter("@AddedBy",AddedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("SaveCompany", Para);
+            return
+                ds;
+        }
+        public DataSet UpdateCompany()
+        {
+            SqlParameter[] Para ={
+                new SqlParameter("@CompanyName",CompanyName),
+                new SqlParameter("@Pk_CompanyID",Pk_CompanyID),
+                new SqlParameter("@AddedBy",UpdatedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateCompany", Para);
+            return
+                ds;
+        }
+        public DataSet DeleteCompany()
+        {
+            SqlParameter[] Para ={
+               
+                new SqlParameter("@Pk_CompanyID",Pk_CompanyID),
+                new SqlParameter("@DeletedBy",DeletedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteCompany", Para);
+            return
+                ds;
+        }
     }
 }

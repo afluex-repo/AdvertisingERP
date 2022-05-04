@@ -1278,9 +1278,141 @@ namespace AdvertisingERP.Controllers
         }
 
         #endregion
+        #region Company Master --Get
+        public ActionResult CompanyMaster(string id)
+        {
+            Master model = new Master();
+            if (id != null)
+            {
+                model.Pk_CompanyID = Crypto.Decrypt(id);
+                DataSet ds = model.GetCompanyList();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Pk_CompanyID = ds.Tables[0].Rows[0]["Pk_CompanyID"].ToString();
+                    model.CompanyName = ds.Tables[0].Rows[0]["CompanyName"].ToString();
+                }
+            }
+            return View(model);
+            
+        }
+        [HttpPost]
+        [ActionName("CompanyMaster")]
+        [OnAction(ButtonName = "SaveCompany")]
+        public ActionResult CompanyMaster(Master model)
+        {
+            try
+            {
+                model.AddedBy = Session["UserID"].ToString();
+                DataSet ds = model.SaveCompany();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["success"] = "Company saved successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                    {
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return RedirectToAction("CompanyMaster");
+        }
+        public ActionResult CompanyList()
+        {
+            Master model = new Master();
+            try
+            {
+                DataSet ds = model.GetCompanyList();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    List<Master> lstCompany = new List<Master>();
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Master obj = new Master();
+                        obj.EncryptKey = Crypto.Encrypt(r["Pk_CompanyID"].ToString());
+                        obj.Pk_CompanyID = Crypto.Encrypt(r["Pk_CompanyID"].ToString());
+                        obj.CompanyName = r["CompanyName"].ToString();
+                       
+                        lstCompany.Add(obj);
+
+                    }
+                    model.lstcompany = lstCompany;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+        public ActionResult DeleteCompany(string id)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.Pk_CompanyID = Crypto.Decrypt(id);
+                DataSet ds = new DataSet();
+
+                ds = obj.DeleteCompany();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "Company  Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+
+            ViewBag.saverrormsg = "";
+            return RedirectToAction("CompanyList");
+        }
+        [HttpPost]
+        [ActionName("CompanyMaster")]
+        [OnAction(ButtonName = "Updatecompany")]
+        public ActionResult UpdateCompany(Master model)
+        {
+             
+            try
+            {
+                model.UpdatedBy = Session["UserID"].ToString();
+                DataSet ds = model.UpdateCompany();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["success"] = "Company updated successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                    {
+                        TempData["error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.Message;
+            }
+            return RedirectToAction("CompanyMaster");
+        }
+        #endregion
         public ActionResult DataTable()
         {
             return View();
         }
+       
     }
 }
