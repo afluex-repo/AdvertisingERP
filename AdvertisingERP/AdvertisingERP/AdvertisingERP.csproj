@@ -1583,6 +1583,9 @@
     <Content Include="SoftwareImages\8cf46ea4-fa68-4a9e-b1a9-5e292904c713.pdf" />
     <Content Include="SoftwareImages\c9a7214a-3ee4-491b-ad97-70249ca6756b.pdf" />
     <Content Include="SoftwareImages\f569ac96-aafb-4287-8bc0-b3e03988785e.pdf" />
+    <Content Include="Views\Master\CompanyMaster.cshtml" />
+    <Content Include="Views\Master\CompanyList.cshtml" />
+    <Content Include="Views\Expense\DrExpense.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

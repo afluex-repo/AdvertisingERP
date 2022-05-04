@@ -16,9 +16,19 @@ namespace AdvertisingERP.Models
         public string ExpenseType { get; set; }
         public string ExpenseName { get; set; }
         public string AddedBy { get; set; }
+        public string PK_CompanyID { get; set; }
+        public string Remark { get; set; }
+        public string Transactiondt { get; set; }
+        public string PK_DrExpenseID { get; set; }
+        public string PF_ExpenseNameID { get; set; }
+        public string PK_PaymentmodeId { get; set; }
         public List<Expense> lstExpenseType { get; set; }
         public List<Expense> lstExpense { get; set; }
         public List<SelectListItem> ddlExpenseType { get; set; }
+        public List<SelectListItem> ddlExpenseName { get; set; }
+
+
+        
 
 
         public DataSet SaveExpenseType()
@@ -44,8 +54,6 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("DeleteExpenseType", para);
             return ds;
         }
-
-
         public DataSet SaveExpense()
         {
             SqlParameter[] para = {
@@ -64,7 +72,7 @@ namespace AdvertisingERP.Models
             SqlParameter[] para = {
                 new SqlParameter("@PK_ExpenseId",ExpenseId)
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("GetExpenseList",para);
+            DataSet ds = DBHelper.ExecuteQuery("GetExpenseList", para);
             return ds;
         }
 
@@ -81,5 +89,32 @@ namespace AdvertisingERP.Models
         }
 
 
+        public DataSet DeleteExpense()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_ExpenseId",ExpenseId ),
+                                       new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteExpense", para);
+            return ds;
+        }
+
+        public DataSet GetPaymentMode()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("getpaymentmode");
+            return ds;
+        }
+         public DataSet getCompany()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetCompany");
+            return ds;
+        }
+        public DataSet GetExpenseTypeName()
+        {
+            SqlParameter[] para = { new SqlParameter("@FK_ExpenseTypeId",ExpenseId ),
+                                      
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetExpenseTypeName", para);
+            return ds;
+        }
     }
 }

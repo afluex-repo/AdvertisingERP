@@ -12,7 +12,7 @@
 @using (Html.BeginForm("EditPO", "PurchaseOrder", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
 
-     <div class="page-content">
+    <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Purchase Order</div>
@@ -238,8 +238,8 @@
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-light">
-                                                            <a href="#" class="label label-danger" onclick="return deletePOLine('@item.PK_PurchaseOrderDetailsID');"><i class="bx bx-trash-alt me-0"></i></a>                                                           
-                                                             @*<a href="#" class="btn btn-sm btn-danger" onclick="return deletePOLine('@item.PK_PurchaseOrderDetailsID');">Delete</a>*@
+                                                            <a href="#" class="label label-danger" onclick="return deletePOLine('@item.PK_PurchaseOrderDetailsID');"><i class="bx bx-trash-alt me-0"></i></a>
+                                                            @*<a href="#" class="btn btn-sm btn-danger" onclick="return deletePOLine('@item.PK_PurchaseOrderDetailsID');">Delete</a>*@
                                                         </button>
                                                     </td>
                                                 </tr>
