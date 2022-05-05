@@ -1,22 +1,20 @@
 ﻿@model AdvertisingERP.Models.Expense
+
 @{
-    ViewBag.Title = "DrExpense";
+    ViewBag.Title = "CrExpense";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
-
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-@using (Html.BeginForm("DrExpense", "Expense", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("CrExpense", "Expense", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
     <div class="page-content">
         <div class="content-wrapper">
             <div class="container-fluid">
-               
-
-                <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+                 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
                     <div class="breadcrumb-title pe-3">Master</div>
                     <div class="ps-3">
                         <nav aria-label="breadcrumb">
@@ -24,13 +22,13 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Dr Expense </li>
+                                <li class="breadcrumb-item active" aria-current="page">Cr Expense </li>
                             </ol>
                         </nav>
                     </div>
                     <div class="ms-auto">
                         <div class="btn-group">
-                            <a href="/Master/DrExpenseList" class="btn btn-light list-button">Dr  Expense List</a>
+                            <a href="/Master/CrExpenseList" class="btn btn-light list-button">Cr  Expense List</a>
 
                         </div>
                     </div>
@@ -64,7 +62,7 @@
 
 
                             <div class="card-body">
-                               
+
                                 <div class="table-responsive mt-5">
                                     <table id="example2" class="table table-striped table-bordered display">
                                         <thead>
@@ -73,8 +71,8 @@
                                                 <th>Expense Type<span style="color: red">*</span> </th>
                                                 <th>Expense Name<span style="color: red">*</span> </th>
                                                 <th>Payment Mode<span style="color: red">*</span> </th>
-                                                <th class="TransactionNo" style="display:none">Transaction No<span style="color: red">*</span> </th>
-
+                                                <th class="Chaque" style="display:none">Transaction No<span style="color: red">*</span> </th>
+                                                @*<th class="Chaque" style="display:none">Chaque Date<span style="color: red">*</span> </th>*@
                                                 <th>Amount<span style="color: red">*</span> </th>
                                                 <th>Payment Date <span style="color: red">*</span></th>
                                                 <th>Remark <span style="color: red">*</span></th>
@@ -96,19 +94,19 @@
                                                 </td>
                                                 <td>@Html.DropDownListFor(m => m.PK_PaymentmodeId, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-select PaymentmodeId", @onchange = "return GetchaqueDetails()" })</td>
 
-                                                <td class="TransactionNo" style="display:none">@Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-select TransactionNo", @placeholder = "Transaction No", @visual = "false" })</td>
+                                                <td class="Chaque" style="display:none">@Html.TextBoxFor(m => m.ChaqueNo, new { @class = "form-select ChaqueNo", @placeholder = "Transaction No", @visual = "false" })</td>
 
                                                 @*<td class="Chaque" style="display:none">@Html.TextBoxFor(m => m.ChaqueDate, new { @class = "form-select ", @placeholder = "Transaction Date", @visual = "false" })</td>*@
-                             <td>@Html.TextBoxFor(m => m.Amount, new { @class = "form-select Amount", @placeholder = "Amount ", @onkeypress = "return isNumberOrDecimal(event);" })</td>
-                           <td>@Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-select PaymentDate", @placrholder = "Payment Date", @readonly = "true", @onclick="pad2(n)" })</td>
-                            <td>@Html.TextBoxFor(m => m.Remark, new { @class = "form-select Remark" })</td>
+                                                <td>@Html.TextBoxFor(m => m.Amount, new { @class = "form-select Amount ", @placeholder = "Amount ", @visual = "false", @onkeypress = "return isNumberOrDecimal(event);" })</td>
+
+                                                <td>@Html.TextBoxFor(m => m.Transactiondt, new { @class = "form-select Transactiondt", @placrholder = "Payment Date" })</td>
+                                                <td>@Html.TextBoxFor(m => m.Remark, new { @class = "form-select Remark" })</td>
                                                 <td>
                                                     <input type="button" id="add" data-toggle="tooltip" data-original-title="Add" value="Add" style="width:80px" class="btn btn-success" />
                                                 </td>
                                             </tr>
                                     </table>
                                 </div>
-                          
                             </div>
                             <div id="orderItems">
                                 <table class="table  table-striped table-bordered" id="orderdetailsItems"></table>
@@ -118,7 +116,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
 
-                                        <input class="btn btn-success pull-left" type="submit" value="Save" id="btnsubmit" name="Save"  />
+                                        <input class="btn btn-success pull-left" type="submit" value="Save" id="btnsubmit" name="Save" />
 
                                     </div>
                                 </div>
@@ -128,7 +126,7 @@
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 }
 
 
@@ -142,7 +140,7 @@
 
 
 <script>
-   
+
     function GetExpenseName() {
                     debugger;
 
@@ -168,41 +166,18 @@
     function GetchaqueDetails()
     {
         debugger;
-        if($("#PK_PaymentmodeId").val()=='2' )
+        if($("#PK_PaymentmodeId").val()=='2')
         {
-            $('.TransactionNo').show();
-           
-        }
-        else if ($("#PK_PaymentmodeId").val() == '3') {
-            $('.TransactionNo').show();
+            $('.Chaque').show();
 
         }
-        else if ($("#PK_PaymentmodeId").val() == '4') {
-            $('.TransactionNo').show();
+        else if($("#PK_PaymentmodeId").val()=='1')
+            $('.Chaque').hide();
+
+
 
         }
-        else if ($("#PK_PaymentmodeId").val() == '5') {
-            $('.TransactionNo').show();
 
-        }
-        else if ($("#PK_PaymentmodeId").val() == '6') {
-            $('.TransactionNo').show();
-
-        }
-        else if ($("#PK_PaymentmodeId").val() == '10') {
-            $('.TransactionNo').show();
-
-        }
-        else if ($("#PK_PaymentmodeId").val() == '1') {
-            $('.TransactionNo').hide();
-
-        }
-        else if ($("#PK_PaymentmodeId").val() == '0') {
-            $('.TransactionNo').hide();
-
-        }
-     }
-   
     function isNumberOrDecimal(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode;
         if (charCode != 46 && charCode > 31
@@ -213,22 +188,8 @@
     }
 </script>
 <script>
-    function pad2(n) {
-        debugger;
-  return (n < 10 ? '0' : '') + n;
-}
 
-var date = new Date('#PaymentDate');
-var month = pad2(date.getMonth()+1);//months (0-11)
-var day = pad2(date.getDate());//day (1-31)
-var year= date.getFullYear();
-
-var formattedDate =  day+"/"+month+"/"+year;
-alert(formattedDate);
-</script>
-<script>
-    
-    jQuery('.mydatepicker, #PaymentDate,  .input-group.date').datepicker(
+    jQuery('.mydatepicker, #Transactiondt,  .input-group.date').datepicker(
         {
             dateFormat: 'dd/mm/yy',
             changeYear: true,
@@ -238,49 +199,43 @@ alert(formattedDate);
 
     $('#add').click(function () {
         debugger;
-        //jQuery.noConflict()
-        var isAllValid = true;  
-        if ($('#PK_CompanyID').val().trim() == '0') {
+        jQuery.noConflict()
+        var isAllValid = true;
+        if (!($('#PK_CompanyID').val().trim() != '0' && ($('#PK_CompanyID').val().trim()))) {
             $("#PK_CompanyID").addClass('errortext');
             $('#PK_CompanyID').focus();
             isAllValid = false;
-            return false();
+
         }
-        if ($('#FK_ExpenseTypeId').val().trim() == '0') {
+        if (!($('#FK_ExpenseTypeId').val().trim() != '0' && ($('#FK_ExpenseTypeId').val().trim()))) {
             $("#FK_ExpenseTypeId").addClass('errortext');
             $('#FK_ExpenseTypeId').focus();
             isAllValid = false;
-            return false();
         }
-        if ($('#PF_ExpenseNameID').val().trim() == '0') {
+        if (!($('#PF_ExpenseNameID').val().trim() != '0' && ($('#PF_ExpenseNameID').val().trim()))) {
             $("#PF_ExpenseNameID").addClass('errortext');
             $('#PF_ExpenseNameID').focus();
             isAllValid = false;
-            return false();
         }
-      if ($('#PK_PaymentmodeId').val().trim()  == '0') {
+      if (!($('#PK_PaymentmodeId').val().trim()  != '0' && ($('#PK_PaymentmodeId').val().trim()))) {
             $("#PK_PaymentmodeId").addClass('errortext');
             $('#PK_PaymentmodeId').focus();
             isAllValid = false;
-            return false();
       }
-      if ($('#Amount').val().trim() == '' ) {
+      if (!($('#Amount').val().trim() != '' && ($('#Amount').val().trim()))) {
           $("#Amount").addClass('errortext');
           $('#Amount').focus();
           isAllValid = false;
-          return false();
       }
-      if ($('#PaymentDate').val().trim() == '') {
-          $("#PaymentDate").addClass('errortext');
-          $('#PaymentDate').focus();
+      if (!($('#Transactiondt').val().trim() != '' && ($('#Transactiondt').val().trim()))) {
+          $("#Transactiondt").addClass('errortext');
+          $('#Transactiondt').focus();
           isAllValid = false;
-          return false();
       }
-      if ($('#Remark').val().trim() == '') {
+      if (!($('#Remark').val().trim() != '' && ($('#Remark').val().trim()))) {
           $("#Remark").addClass('errortext');
           $('#Remark').focus();
           isAllValid = false;
-          return false();
       }
         debugger
         if (isAllValid) {
@@ -290,19 +245,18 @@ alert(formattedDate);
             $('.ExpenseTypeId', $newRow).prop('disabled', true).val($('#FK_ExpenseTypeId').val());
             $('.ExpenseNameID', $newRow).prop('disabled', true).val($('#PF_ExpenseNameID').val());
             $('.PaymentmodeId', $newRow).prop('disabled', true).val($('#PK_PaymentmodeId').val());
-            //$('.PaymentDate', $newRow).prop('disabled', true).val($('#PaymentDate').val());
-            //$('.TransactionNo', $newRow).prop('disabled', true).val($('#TransactionNo').val());
-            //$('.Amount', $newRow).attr('disabled', true).val()($('#Amount').val());
+            //$('.Transactiondt', $newRow).prop('disabled', true).val($('#Transactiondt').val());
+            //$('.Amount', $newRow).prop('disabled', true).val()($('#Amount').val());
             //$('.Remark', $newRow).prop('disabled', true).val()($('#Remark').val());
             $('#add', $newRow).addClass('remove').val('Remove').removeClass('btn-success').addClass('btn-danger');
-       
-            $('#PK_CompanyID,#FK_ExpenseTypeId,#PF_ExpenseNameID,#PK_PaymentmodeId,#Amount,#PaymentDate,#Remark,#TransactionNo,#add', $newRow).removeAttr('id');
+
+            $('#PK_CompanyID,#FK_ExpenseTypeId,#PF_ExpenseNameID,#PK_PaymentmodeId,#Amount,#Transactiondt,#Remark,#add', $newRow).removeAttr('id');
             $('span.error', $newRow).remove();
-           
+
             $('#orderdetailsItems').append($newRow);
             //clear select data
             $('#PK_CompanyID,#FK_ExpenseTypeId,#PK_PaymentmodeId').val('0');
-            $('#PaymentDate,#Remark,#PF_ExpenseNameID,#Amount,#TransactionNo').val('');
+            $('#Transactiondt,#Remark,#PF_ExpenseNameID,#Amount').val('');
             $('#orderItemError').empty();
         }
 
@@ -320,15 +274,15 @@ alert(formattedDate);
         $('#orderdetailsItems tr').each(function (index, ele) {
            {
                 var orderItem = {
-                    Fk_CompanyId: ($('.CompanyID', this).val()),
+                    CustomerName: ($('.CompanyID', this).val()),
                     FK_ExpenseTypeId: $('.ExpenseTypeId', this).val(),
-                    PF_ExpenseID: $('.ExpenseNameID', this).val(),
-                    PK_PaymentId: $('.PaymentmodeId', this).val(),
-                    TransactionNo: $('.TransactionNo', this).val(),
+                    PF_ExpenseNameID: $('.ExpenseNameID', this).val(),
+                    PK_PaymentmodeId: $('.PaymentmodeId', this).val(),
+                    Transactiondt: $('.Transactiondt', this).val(),
+                    ChaqueNo: $('.ChaqueNo', this).val(),
                     Amount: $('.Amount', this).val(),
-                    PaymentDate: $('.formattedDate', this).val(),
                     Remark: $('.Remark', this).val()
-                    
+
                 }
                 list.push(orderItem);
             }
@@ -388,12 +342,14 @@ alert(formattedDate);
             $('#submit').text('Save');
         //}
     });
-   
+
 
 
 
 </script>
 
-            
+
+
+
 
 

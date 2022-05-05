@@ -18,10 +18,20 @@ namespace AdvertisingERP.Models
         public string AddedBy { get; set; }
         public string PK_CompanyID { get; set; }
         public string Remark { get; set; }
-        public string Transactiondt { get; set; }
+        public string PaymentDate { get; set; }
         public string PK_DrExpenseID { get; set; }
         public string PF_ExpenseNameID { get; set; }
         public string PK_PaymentmodeId { get; set; }
+        public string TransactionNo { get; set; }
+        public string ChaqueDate { get; set; }
+        public string Amount { get; set; }
+        public string LoginId { get; set; }
+        public string EntryType { get; set; }
+    
+
+
+
+        public DataTable dt { get; set; }
         public List<Expense> lstExpenseType { get; set; }
         public List<Expense> lstExpense { get; set; }
         public List<SelectListItem> ddlExpenseType { get; set; }
@@ -114,6 +124,31 @@ namespace AdvertisingERP.Models
                                       
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetExpenseTypeName", para);
+            return ds;
+        }
+        public DataSet SaveData()
+        {
+            SqlParameter[] para = { new SqlParameter("@dt",dt),
+                new SqlParameter("@EntryType",EntryType),
+                  new SqlParameter("@AddedBy",AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("SaveExpenseDetailsDr", para);
+            return ds;
+        }
+        public DataSet DrExpenseList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID",LoginId),
+                
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DrExpenseList", para);
+            return ds;
+        }
+        public DataSet CrExpenseList()
+        {
+            SqlParameter[] para = { new SqlParameter("@LoginID",LoginId),
+
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("CrExpenseList", para);
             return ds;
         }
     }
