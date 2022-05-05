@@ -586,4 +586,3 @@ D:\reena Pro\NewRapo\AdvertisingERP\AdvertisingERP\AdvertisingERP\bin\System.Web
 D:\reena Pro\NewRapo\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.dll
 D:\reena Pro\NewRapo\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.pdb
 D:\reena Pro\NewRapo\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.csprojResolveAssemblyReference.cache
-E:\Repository\AdvertisingERP\AdvertisingERP\AdvertisingERP\obj\Debug\AdvertisingERP.csprojResolveAssemblyReference.cache
