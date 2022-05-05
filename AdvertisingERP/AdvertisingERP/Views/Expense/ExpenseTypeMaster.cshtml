@@ -67,9 +67,19 @@
                             <label for="validationCustom01" class="form-label">Expense Type Name<span style="color: red">*</span></label>
                             @Html.TextBoxFor(m => m.ExpenseType, new { @class = "form-control", @Placeholder = "Expense Type Name" })
                         </div>
-                        <div class="col-md-4 mt-5">
-                            <input type="submit" value="Submit" class="btn btn-light px-4" name="btnsave" onclick="return validateservice();" />
-                        </div>
+                        @Html.HiddenFor(m=>m.ExpenseTypeId)
+                        @if (Model.ExpenseTypeId == null)
+                        {
+                            <div class="col-md-4 mt-5">
+                                <input type="submit" value="Submit" class="btn btn-light px-4" name="btnsave" onclick="return validateservice();" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-4 mt-5">
+                                <input type="submit" value="Update" class="btn btn-light px-4" name="btnupdate" onclick="return validateservice();" />
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

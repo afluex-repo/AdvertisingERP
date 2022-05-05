@@ -19,7 +19,7 @@ namespace AdvertisingERP.Controllers
             return View();
         }
 
-        public ActionResult ExpenseTypeMaster()
+        public ActionResult ExpenseTypeMaster(string Id)
         {
             return View();
         }
@@ -51,6 +51,41 @@ namespace AdvertisingERP.Controllers
             }
             return RedirectToAction("ExpenseTypeMaster", "Expense");
         }
+
+        [HttpPost]
+        [OnAction(ButtonName="btnupdate")]
+        [ActionName("ExpenseTypeMaster")]
+        public ActionResult UpdateExpenseTypeMaster(Expense model)
+        {
+            try
+            {
+                model.AddedBy= Session["UserID"].ToString();
+                DataSet ds = model.UpdateExpenseType();
+                if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+                {
+                    if(ds.Tables[0].Rows[0][0].ToString()=="1")
+                    {
+                        TempData["msg"] = "Expense type updated successfully";
+                    }
+                    else if(ds.Tables[0].Rows[0][0].ToString()=="0")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch(Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("ExpenseTypeMaster", "Expense");
+        }
+
+
+
 
         public ActionResult ExpenseTypeList()
         {
@@ -119,19 +154,19 @@ namespace AdvertisingERP.Controllers
                     model.FK_ExpenseTypeId = ds.Tables[0].Rows[0]["FK_ExpenseTypeId"].ToString();
                     model.ExpenseName = ds.Tables[0].Rows[0]["ExpenseName"].ToString();
                 }
-
-                int count1 = 0;
-                DataSet ds1 = model.GetExpenseTypeList();
-                if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                int count4 = 0;
+                List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
+                DataSet dsTemplate = model.GetExpenseTypeList();
+                if (dsTemplate != null && dsTemplate.Tables.Count > 0 && dsTemplate.Tables[0].Rows.Count > 0)
                 {
-                    foreach (DataRow r in ds1.Tables[0].Rows)
+                    foreach (DataRow r in dsTemplate.Tables[0].Rows)
                     {
-                        if (count1 == 0)
+                        if (count4 == 0)
                         {
                             ddlExpenseType.Add(new SelectListItem { Text = "Select", Value = "0" });
                         }
                         ddlExpenseType.Add(new SelectListItem { Text = r["ExpenseTypeName"].ToString(), Value = r["PK_ExpenseTypeId"].ToString() });
-                        count1 = count1 + 1;
+                        count4 = count4 + 1;
                     }
                 }
                 model.ddlExpenseType = ddlExpenseType;
@@ -199,7 +234,7 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["msg"] = "Expense type save successfully";
+                        TempData["msg"] = "Expense save successfully";
                     }
                     else
                     {
@@ -228,7 +263,7 @@ namespace AdvertisingERP.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
                     {
-                        TempData["msg"] = "Expense type updated successfully";
+                        TempData["msg"] = "Expense updated successfully";
                     }
                     else
                     {
@@ -263,6 +298,7 @@ namespace AdvertisingERP.Controllers
                     }
                 }
             }
+
             catch (Exception ex)
             {
                 TempData["msgerror"] = ex.Message;
