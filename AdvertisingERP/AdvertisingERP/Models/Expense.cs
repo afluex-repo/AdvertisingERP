@@ -11,6 +11,7 @@ namespace AdvertisingERP.Models
     public class Expense
     {
         public string ExpenseTypeId { get; set; }
+        public string Encrypt { get; set; }
         public string FK_ExpenseTypeId { get; set; }
         public string ExpenseId { get; set; }
         public string ExpenseType { get; set; }
@@ -40,9 +41,24 @@ namespace AdvertisingERP.Models
             return ds;
         }
 
+
+        public DataSet UpdateExpenseType()
+        {
+            SqlParameter[] para = {
+                                   new SqlParameter("@PK_ExpenseTypeId",ExpenseTypeId),
+                                   new SqlParameter("@ExpenseTypeName",ExpenseType ),
+                                       new SqlParameter("@AddedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("UpdateExpenseType", para);
+            return ds;
+        }
+
+
         public DataSet GetExpenseTypeList()
         {
-            DataSet ds = DBHelper.ExecuteQuery("GetExpenseTypeList");
+            SqlParameter[] para = { new SqlParameter("@PK_ExpenseTypeId",ExpenseTypeId)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("GetExpenseTypeList",para);
             return ds;
         }
 
