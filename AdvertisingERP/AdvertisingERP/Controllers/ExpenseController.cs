@@ -1,11 +1,13 @@
 ﻿using AdvertisingERP.Filter;
 using AdvertisingERP.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace AdvertisingERP.Controllers
 {
@@ -19,19 +21,9 @@ namespace AdvertisingERP.Controllers
 
         public ActionResult ExpenseTypeMaster(string Id)
         {
-            Expense model = new Expense();
-            if(Id!=null)
-            {
-                model.ExpenseTypeId = Id;
-                DataSet ds = model.GetExpenseTypeList();
-                if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
-                {
-                    model.ExpenseType = ds.Tables[0].Rows[0]["ExpenseTypeName"].ToString();
-                }
-            }
-            return View(model);
+            return View();
         }
-        
+
         [HttpPost]
         [ActionName("ExpenseTypeMaster")]
         [OnAction(ButtonName = "btnsave")]
@@ -151,7 +143,8 @@ namespace AdvertisingERP.Controllers
         public ActionResult ExpenseType(string Id)
         {
             Expense model = new Expense();
-            if (Id!=null)
+            List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
+            if (Id != null)
             {
                 model.ExpenseId = Id;
                 DataSet ds = model.GetExpenseList();
@@ -161,42 +154,42 @@ namespace AdvertisingERP.Controllers
                     model.FK_ExpenseTypeId = ds.Tables[0].Rows[0]["FK_ExpenseTypeId"].ToString();
                     model.ExpenseName = ds.Tables[0].Rows[0]["ExpenseName"].ToString();
                 }
-                int count4 = 0;
-                List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
-                DataSet dsTemplate = model.GetExpenseTypeList();
-                if (dsTemplate != null && dsTemplate.Tables.Count > 0 && dsTemplate.Tables[0].Rows.Count > 0)
+                int count41 = 0;
+                //List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
+                DataSet dsTemplate1 = model.GetExpenseTypeList();
+                if (dsTemplate1 != null && dsTemplate1.Tables.Count > 0 && dsTemplate1.Tables[0].Rows.Count > 0)
                 {
-                    foreach (DataRow r in dsTemplate.Tables[0].Rows)
+                    foreach (DataRow r in dsTemplate1.Tables[0].Rows)
                     {
-                        if (count4 == 0)
+                        if (count41 == 0)
                         {
                             ddlExpenseType.Add(new SelectListItem { Text = "Select", Value = "0" });
                         }
                         ddlExpenseType.Add(new SelectListItem { Text = r["ExpenseTypeName"].ToString(), Value = r["PK_ExpenseTypeId"].ToString() });
-                        count4 = count4 + 1;
+                        count41 = count41 + 1;
                     }
                 }
-                ViewBag.ddlExpenseType = ddlExpenseType;
+                model.ddlExpenseType = ddlExpenseType;
+
             }
-            else
+
+            int count4 = 0;
+            //List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
+            DataSet dsTemplate = model.GetExpenseTypeList();
+            if (dsTemplate != null && dsTemplate.Tables.Count > 0 && dsTemplate.Tables[0].Rows.Count > 0)
             {
-                int count4 = 0;
-                List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
-                DataSet dsTemplate = model.GetExpenseTypeList();
-                if (dsTemplate != null && dsTemplate.Tables.Count > 0 && dsTemplate.Tables[0].Rows.Count > 0)
+                foreach (DataRow r in dsTemplate.Tables[0].Rows)
                 {
-                    foreach (DataRow r in dsTemplate.Tables[0].Rows)
+                    if (count4 == 0)
                     {
-                        if (count4 == 0)
-                        {
-                            ddlExpenseType.Add(new SelectListItem { Text = "Select", Value = "0" });
-                        }
-                        ddlExpenseType.Add(new SelectListItem { Text = r["ExpenseTypeName"].ToString(), Value = r["PK_ExpenseTypeId"].ToString() });
-                        count4 = count4 + 1;
+                        ddlExpenseType.Add(new SelectListItem { Text = "Select", Value = "0" });
                     }
+                    ddlExpenseType.Add(new SelectListItem { Text = r["ExpenseTypeName"].ToString(), Value = r["PK_ExpenseTypeId"].ToString() });
+                    count4 = count4 + 1;
                 }
-                ViewBag.ddlExpenseType = ddlExpenseType;
             }
+            ViewBag.ddlExpenseType = ddlExpenseType;
+
             return View(model);
         }
 
@@ -227,7 +220,7 @@ namespace AdvertisingERP.Controllers
             }
             return View(model);
         }
-        
+
         [HttpPost]
         [ActionName("ExpenseType")]
         [OnAction(ButtonName = "btnsave")]
@@ -255,7 +248,7 @@ namespace AdvertisingERP.Controllers
             }
             return RedirectToAction("ExpenseType", "Expense");
         }
-        
+
 
         [HttpPost]
         [ActionName("ExpenseType")]
@@ -376,27 +369,128 @@ namespace AdvertisingERP.Controllers
 
         }
 
-  
+
         public ActionResult GetExpenseTypeName(string FK_ExpenseTypeId)
         {
             Expense model = new Expense();
-            List <SelectListItem> ddlExpenseName = new List<SelectListItem>();
-           
+            List<SelectListItem> ddlExpenseName = new List<SelectListItem>();
+
             model.ExpenseId = FK_ExpenseTypeId;
             DataSet dsTemp = model.GetExpenseTypeName();
             if (dsTemp != null && dsTemp.Tables.Count > 0 && dsTemp.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow r in dsTemp.Tables[0].Rows)
                 {
-                    
+
                     ddlExpenseName.Add(new SelectListItem { Text = r["ExpenseName"].ToString(), Value = r["PK_ExpenseId"].ToString() });
-                    
+
                 }
                 model.ddlExpenseName = ddlExpenseName;
 
 
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public ActionResult SaveDrExpense(Expense model)
+        {
+
+            //dt.Cr = " ";
+            model.EntryType = "Dr";
+            model.AddedBy = Session["UserID"].ToString();
+              var jss = new JavaScriptSerializer();
+            var jdv = jss.Deserialize<dynamic>(Request["dataValue"]);
+            DataTable VisitorDetails = new DataTable();
+            VisitorDetails = JsonConvert.DeserializeObject<DataTable>(jdv["AddData"]);
+            model.dt = VisitorDetails;
+            DataSet ds = new DataSet();
+            ds = model.SaveData();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                {
+                    TempData["msg"] = "Dr Expense  Save successfully";
+                }
+                else
+                {
+                    TempData["msgerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            else
+            {
+                TempData["msgerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+            }
+
+            return Json(model, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+        public ActionResult CrExpense()
+        {
+            Expense model = new Expense();
+            #region ddlpaymentmode
+            List<SelectListItem> ddlpaymentmode = new List<SelectListItem>();
+            DataSet dsTemplate = model.GetPaymentMode();
+            int count1 = 0;
+            if (dsTemplate != null && dsTemplate.Tables.Count > 0 && dsTemplate.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsTemplate.Tables[0].Rows)
+                {
+                    if (count1 == 0)
+                    {
+                        ddlpaymentmode.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlpaymentmode.Add(new SelectListItem { Text = r["PaymentMode"].ToString(), Value = r["PK_paymentID"].ToString() });
+                    count1 = count1 + 1;
+                }
+            }
+            ViewBag.ddlpaymentmode = ddlpaymentmode;
+            #endregion
+            #region  ddlExpenseType
+            int count4 = 0;
+            List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
+            DataSet dsTemp = model.GetExpenseTypeList();
+            if (dsTemp != null && dsTemp.Tables.Count > 0 && dsTemp.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dsTemp.Tables[0].Rows)
+                {
+                    if (count4 == 0)
+                    {
+                        ddlExpenseType.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlExpenseType.Add(new SelectListItem { Text = r["ExpenseTypeName"].ToString(), Value = r["PK_ExpenseTypeId"].ToString() });
+                    count4 = count4 + 1;
+                }
+            }
+            ViewBag.ddlExpenseType = ddlExpenseType;
+            #endregion
+            #region company name
+            int count2 = 0;
+            List<SelectListItem> ddlcompany = new List<SelectListItem>();
+            DataSet dscom = model.getCompany();
+            if (dscom != null && dscom.Tables.Count > 0 && dscom.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in dscom.Tables[0].Rows)
+                {
+                    if (count2 == 0)
+                    {
+                        ddlcompany.Add(new SelectListItem { Text = "Select", Value = "0" });
+                    }
+                    ddlcompany.Add(new SelectListItem { Text = r["CompanyName"].ToString(), Value = r["PK_CompanyID"].ToString() });
+                    count2 = count2 + 1;
+                }
+            }
+            ViewBag.ddlcompany = ddlcompany;
+            #endregion
+            List<SelectListItem> ddlExpenseName = new List<SelectListItem>();
+            ViewBag.ddlExpenseName = ddlExpenseName;
+            return View(model);
+
+        }
+        public ActionResult CrExpenseList()
+        {
+            return View();
         }
     }
 }
