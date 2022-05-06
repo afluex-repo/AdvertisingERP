@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            @if (@TempData["Delete"] != null)
+                            @if (@TempData["msg"] != null)
                             {
                                 <div class="alert border-0 alert-dismissible fade show py-2">
                                     <div class="d-flex align-items-center">
@@ -54,7 +54,7 @@
                                             <i class="bx bxs-check-circle" style="color:green"></i>
                                         </div>
                                         <div class="ms-3">
-                                            <div class="text-white">@TempData["Delete"]!</div>
+                                            <div class="text-white">@TempData["msg"]!</div>
                                         </div>
                                     </div>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -96,7 +96,7 @@
                                                 </td>
                                                 <td>@Html.DropDownListFor(m => m.PK_PaymentmodeId, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-select PaymentmodeId", @onchange = "return GetchaqueDetails()" })</td>
 
-                                                <td class="TransactionNo" style="display:none">@Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-select TransactionNo", @placeholder = "Transaction No", @visual = "false" })</td>
+                                                <td class="TransactionNo" style="display:none">@Html.TextBoxFor(m => m.TransactionNo, new { @class = "form-select TransactionNumber", @placeholder = "Transaction No", @visual = "false" })</td>
 
                                                 @*<td class="Chaque" style="display:none">@Html.TextBoxFor(m => m.ChaqueDate, new { @class = "form-select ", @placeholder = "Transaction Date", @visual = "false" })</td>*@
                              <td>@Html.TextBoxFor(m => m.Amount, new { @class = "form-select Amount", @placeholder = "Amount ", @onkeypress = "return isNumberOrDecimal(event);" })</td>
@@ -212,7 +212,7 @@
         return true;
     }
 </script>
-<script>
+@*<script>
     function pad2(n) {
         debugger;
   return (n < 10 ? '0' : '') + n;
@@ -225,7 +225,7 @@ var year= date.getFullYear();
 
 var formattedDate =  day+"/"+month+"/"+year;
 alert(formattedDate);
-</script>
+</script>*@
 <script>
     
     jQuery('.mydatepicker, #PaymentDate,  .input-group.date').datepicker(
@@ -324,11 +324,10 @@ alert(formattedDate);
                     FK_ExpenseTypeId: $('.ExpenseTypeId', this).val(),
                     PF_ExpenseID: $('.ExpenseNameID', this).val(),
                     PK_PaymentId: $('.PaymentmodeId', this).val(),
-                    TransactionNo: $('.TransactionNo', this).val(),
+                    TransactionNo: $('.TransactionNumber', this).val(),
                     Amount: $('.Amount', this).val(),
-                    PaymentDate: $('.formattedDate', this).val(),
+                    PaymentDate: $('.PaymentDate', this).val(),
                     Remark: $('.Remark', this).val()
-                    
                 }
                 list.push(orderItem);
             }

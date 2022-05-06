@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace AdvertisingERP.Models
 {
-    public class Expense
+    public class Expense : Common
     {
         public string ExpenseTypeId { get; set; }
         public string Encrypt { get; set; }

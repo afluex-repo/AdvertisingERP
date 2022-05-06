@@ -21,7 +21,18 @@ namespace AdvertisingERP.Controllers
 
         public ActionResult ExpenseTypeMaster(string Id)
         {
-            return View();
+            Expense model = new Expense();
+            if(Id!=null)
+            {
+                model.ExpenseTypeId = Id;
+                DataSet ds = model.GetExpenseTypeList();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.ExpenseType = ds.Tables[0].Rows[0]["ExpenseTypeName"].ToString();
+                }
+            }
+           
+            return View(model);
         }
 
         [HttpPost]
@@ -154,19 +165,19 @@ namespace AdvertisingERP.Controllers
                     model.FK_ExpenseTypeId = ds.Tables[0].Rows[0]["FK_ExpenseTypeId"].ToString();
                     model.ExpenseName = ds.Tables[0].Rows[0]["ExpenseName"].ToString();
                 }
-                int count4 = 0;
-                List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
-                DataSet dsTemplate = model.GetExpenseTypeList();
-                if (dsTemplate != null && dsTemplate.Tables.Count > 0 && dsTemplate.Tables[0].Rows.Count > 0)
+                int count41 = 0;
+                //List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
+                DataSet dsTemplate1 = model.GetExpenseTypeList();
+                if (dsTemplate1 != null && dsTemplate1.Tables.Count > 0 && dsTemplate1.Tables[0].Rows.Count > 0)
                 {
-                    foreach (DataRow r in dsTemplate.Tables[0].Rows)
+                    foreach (DataRow r in dsTemplate1.Tables[0].Rows)
                     {
-                        if (count4 == 0)
+                        if (count41 == 0)
                         {
                             ddlExpenseType.Add(new SelectListItem { Text = "Select", Value = "0" });
                         }
                         ddlExpenseType.Add(new SelectListItem { Text = r["ExpenseTypeName"].ToString(), Value = r["PK_ExpenseTypeId"].ToString() });
-                        count4 = count4 + 1;
+                        count41 = count41 + 1;
                     }
                 }
                 model.ddlExpenseType = ddlExpenseType;
