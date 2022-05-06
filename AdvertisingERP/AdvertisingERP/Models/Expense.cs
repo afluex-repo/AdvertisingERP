@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace AdvertisingERP.Models
 {
-    public class Expense
+    public class Expense : Common
     {
         public string ExpenseTypeId { get; set; }
         public string Encrypt { get; set; }
@@ -35,6 +35,7 @@ namespace AdvertisingERP.Models
         public string PaymentModeName { get; set; }
         public string PK_ExpenseDetailsID { get; set; }
         public DataTable dt { get; set; }
+        public DataTable dtExpenseDetails { get; set; }
         public List<Expense> lstExpenseType { get; set; }
         public List<Expense> lstExpense { get; set; }
         public List<Expense> lstCrDrExpense { get; set; }
@@ -147,7 +148,7 @@ namespace AdvertisingERP.Models
         }
         public DataSet SaveData()
         {
-            SqlParameter[] para = { new SqlParameter("@dt",dt),
+            SqlParameter[] para = { new SqlParameter("@dt",dtExpenseDetails),
                 new SqlParameter("@EntryType",EntryType),
                   new SqlParameter("@AddedBy",AddedBy)
                                   };
