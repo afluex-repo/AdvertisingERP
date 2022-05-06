@@ -154,23 +154,7 @@ namespace AdvertisingERP.Controllers
                     model.FK_ExpenseTypeId = ds.Tables[0].Rows[0]["FK_ExpenseTypeId"].ToString();
                     model.ExpenseName = ds.Tables[0].Rows[0]["ExpenseName"].ToString();
                 }
-                int count4 = 0;
-                List<SelectListItem> ddlExpenseType = new List<SelectListItem>();
-                DataSet dsTemplate = model.GetExpenseTypeList();
-                if (dsTemplate != null && dsTemplate.Tables.Count > 0 && dsTemplate.Tables[0].Rows.Count > 0)
-                {
-                    foreach (DataRow r in dsTemplate.Tables[0].Rows)
-                    {
-                        if (count4 == 0)
-                        {
-                            ddlExpenseType.Add(new SelectListItem { Text = "Select", Value = "0" });
-                        }
-                        ddlExpenseType.Add(new SelectListItem { Text = r["ExpenseTypeName"].ToString(), Value = r["PK_ExpenseTypeId"].ToString() });
-                        count4 = count4 + 1;
-                    }
-                }
-                model.ddlExpenseType = ddlExpenseType;
-
+                
             }
 
             int count4 = 0;
@@ -490,7 +474,69 @@ namespace AdvertisingERP.Controllers
         }
         public ActionResult CrExpenseList()
         {
-            return View();
+            Expense model = new Expense();
+            List<Expense> crdrlst = new List<Expense>();
+            DataSet ds = model.CrDrExpenseList();
+            if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+            {
+                
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Expense obj = new Expense();
+                    obj.CompanyName = r[""].ToString();
+                    obj.ExpenseId = r[""].ToString();
+                    obj.ExpenseName = r[""].ToString();
+                    obj.ExpenseTypeId = r[""].ToString();
+                    obj.ExpenseType = r[""].ToString();
+                    obj.PK_CompanyID = r[""].ToString();
+                    obj.Amount = r[""].ToString();
+                    obj.LoginId = r[""].ToString();
+                    obj.TransactionNo = r[""].ToString();
+                    obj.PaymentDate = r[""].ToString();
+                    obj.ExpenseType = r[""].ToString();
+                    obj.PaymentModeName = r[""].ToString();
+                    obj.PK_DrExpenseID = r[""].ToString();
+                    crdrlst.Add(obj);
+                }
+                model.lstCrDrExpense = crdrlst;
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("CrExpenseList")]
+        [OnAction(ButtonName ="")]
+        public ActionResult CrExpenseListDetails(Expense model)
+        {
+            
+            List<Expense> crdrlst = new List<Expense>();
+            DataSet ds = model.CrDrExpenseList();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    Expense obj = new Expense();
+                    obj.CompanyName = r["CompanyName"].ToString();
+                    obj.PK_CompanyID = r["FK_CompanyID"].ToString();
+                    obj.ExpenseId = r["Fk_ExpenseId"].ToString();
+                    obj.ExpenseName = r["ExpenseName"].ToString();
+                    obj.ExpenseTypeId = r["FK_ExpensetypeId"].ToString();
+                    obj.ExpenseType = r["ExpenseTypeName"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.UserName = r["Name"].ToString();
+                    obj.EntryType = r["EntryType"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.PaymentModeName = r["PaymentMode"].ToString();
+                    obj.PK_ExpenseDetailsID = r["PK_ExpenseDetailsID"].ToString();
+                    crdrlst.Add(obj);
+                }
+                model.lstCrDrExpense = crdrlst;
+            }
+            return View(model);
         }
     }
 }

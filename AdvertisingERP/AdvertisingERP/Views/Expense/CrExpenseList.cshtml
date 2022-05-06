@@ -70,30 +70,38 @@
                                 <thead>
                                     <tr>
                                         <th>Sr No.</th>
+                                        <th>Login ID</th>
                                         <th>Company Name</th>
                                         <th>Expense Type</th>
                                         <th>Expense Name</th>
-                                        <th>Cr</th>
-                                        <th>User Name</th>
-                                        <th>Remark</th>
-                                        <th>Payment Mode</th>
                                         <th>Amount</th>
+                                        <th>Cr/Dr</th>
+                                         <th>Payment Mode</th>
+                                        <th>Transaction No</th>
                                         <th>Payment Date</th>
+                                        <th>Remark</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
                                     {
-                                        if (Model.lstExpense != null)
+                                        if (Model.lstCrDrExpense != null)
                                         {
                                             int i = 1;
-                                            foreach (var item in Model.lstExpense)
+                                            foreach (var item in Model.lstCrDrExpense)
                                             {
                                                 <tr>
                                                     <td>@i</td>
+                                                    <td>@item.LoginId</td>
+                                                    <td>@item.CompanyName</td>
                                                     <td>@item.ExpenseType</td>
                                                     <td>@item.ExpenseName</td>
+                                                    <td>@item.Amount</td>
+                                                    <td>@item.EntryType</td>
+                                                    <td>@item.PaymentModeName</td>
+                                                   
+                                                    <td>@item.Remark</td>
                                                     <td>
                                                         <a href="/Expense/ExpenseType?Id=@item.ExpenseId" class="btn btn-light list-button">
                                                             <i class='bx bxs-edit'></i>

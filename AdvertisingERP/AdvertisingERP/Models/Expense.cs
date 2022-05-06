@@ -28,13 +28,16 @@ namespace AdvertisingERP.Models
         public string Amount { get; set; }
         public string LoginId { get; set; }
         public string EntryType { get; set; }
-    
-
-
-
+        public string DrAmount { get; set; }
+        public string CrAmount { get; set; }
+        public string UserName { get; set; }
+        public string CompanyName { get; set; }
+        public string PaymentModeName { get; set; }
+        public string PK_ExpenseDetailsID { get; set; }
         public DataTable dt { get; set; }
         public List<Expense> lstExpenseType { get; set; }
         public List<Expense> lstExpense { get; set; }
+        public List<Expense> lstCrDrExpense { get; set; }
         public List<SelectListItem> ddlExpenseType { get; set; }
         public List<SelectListItem> ddlExpenseName { get; set; }
 
@@ -151,20 +154,14 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("SaveExpenseDetailsDr", para);
             return ds;
         }
-        public DataSet DrExpenseList()
+       
+        public DataSet CrDrExpenseList()
         {
             SqlParameter[] para = { new SqlParameter("@LoginID",LoginId),
-                
-                                  };
-            DataSet ds = DBHelper.ExecuteQuery("DrExpenseList", para);
-            return ds;
-        }
-        public DataSet CrExpenseList()
-        {
-            SqlParameter[] para = { new SqlParameter("@LoginID",LoginId),
+                                new SqlParameter("@EntryType",EntryType),
 
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("CrExpenseList", para);
+            DataSet ds = DBHelper.ExecuteQuery("DrExpenseList", para);
             return ds;
         }
     }
