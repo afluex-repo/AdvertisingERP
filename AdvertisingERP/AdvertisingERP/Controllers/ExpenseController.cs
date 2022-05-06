@@ -21,7 +21,18 @@ namespace AdvertisingERP.Controllers
 
         public ActionResult ExpenseTypeMaster(string Id)
         {
-            return View();
+            Expense model = new Expense();
+            if(Id!=null)
+            {
+                model.ExpenseTypeId = Id;
+                DataSet ds = model.GetExpenseTypeList();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.ExpenseType = ds.Tables[0].Rows[0]["ExpenseTypeName"].ToString();
+                }
+            }
+           
+            return View(model);
         }
 
         [HttpPost]
