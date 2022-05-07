@@ -1587,7 +1587,7 @@
     <Content Include="Views\Master\CompanyList.cshtml" />
     <Content Include="Views\Expense\DrExpense.cshtml" />
     <Content Include="Views\Expense\CrExpense.cshtml" />
-    <Content Include="Views\Expense\CrExpenseList.cshtml" />
+    <Content Include="Views\Expense\CrDrExpenseList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

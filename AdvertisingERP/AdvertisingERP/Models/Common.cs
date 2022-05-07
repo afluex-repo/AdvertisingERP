@@ -64,6 +64,22 @@ namespace AdvertisingERP.Models
          
             return ddldateformat;
         }
+        public static List<SelectListItem> ddlCrDr()
+        {
+            List<SelectListItem> ddlCrDr = new List<SelectListItem>();
+            ddlCrDr.Add(new SelectListItem { Text = "-Select-", Value = "" });
+            ddlCrDr.Add(new SelectListItem { Text = "Credit", Value = "Cr" });
+            ddlCrDr.Add(new SelectListItem { Text = "Debit", Value = "Dr" });
+
+            return ddlCrDr;
+        }
+        public static List<SelectListItem> ddlCrDr1()
+        {
+            List<SelectListItem> ddlcrdr = new List<SelectListItem>();
+            ddlcrdr.Add(new SelectListItem { Text = "Credit", Value = "Cr" });
+            ddlcrdr.Add(new SelectListItem { Text = "Debit", Value = "Dr" });
+            return ddlcrdr;
+        }
         public static List<SelectListItem> BindPaymentTerms()
         {
             List<SelectListItem> PaymentMode = new List<SelectListItem>();

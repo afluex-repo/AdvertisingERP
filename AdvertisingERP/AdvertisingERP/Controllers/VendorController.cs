@@ -178,6 +178,7 @@ namespace AdvertisingERP.Controllers
             List<Vendor> lst = new List<Vendor>();
             objVendor.VendorName = string.IsNullOrEmpty(objVendor.VendorName) ? null : objVendor.VendorName;
             objVendor.VendorId = string.IsNullOrEmpty(objVendor.VendorCode) ? null : objVendor.VendorCode;
+           
             DataSet ds = objVendor.GetAllVendors();
             if (ds != null && ds.Tables[0].Rows.Count > 0)
             {

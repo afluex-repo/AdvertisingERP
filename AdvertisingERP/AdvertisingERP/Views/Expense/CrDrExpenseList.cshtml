@@ -1,10 +1,15 @@
 ﻿@model AdvertisingERP.Models.Expense
 @{
-    ViewBag.Title = "CrExpenseList";
+    ViewBag.Title = "CrDrExpenseList";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-@using (Html.BeginForm("CrExpenseList", "Expense", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+@using (Html.BeginForm("CrDrExpenseList", "Expense", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
     <div class="page-content">
         <!--breadcrumb-->
@@ -16,16 +21,16 @@
                         <li class="breadcrumb-item">
                             <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Cr Expense List</li>
+                        <li class="breadcrumb-item active" aria-current="page">Cr/Dr Expense List</li>
                     </ol>
                 </nav>
             </div>
-            <div class="ms-auto">
+            @*<div class="ms-auto">
                 <div class="btn-group">
                     <a href="/Expense/CrExpense" class="btn btn-light list-button">Cr Expense</a>
 
                 </div>
-            </div>
+            </div>*@
         </div>
         <hr />
         <div class="card">
@@ -60,10 +65,34 @@
             }
             <div class="card-body">
                 <div class="m-b-0 card-title">
-                    <h5 class="card-title">Expense List</h5>
+                    <h5 class="card-title">Cr/Dr Expense List</h5>
                 </div>
                 <hr>
                 <div class="p-4 border rounded">
+                    <div class="row g-3">
+                            <div class="col-md-3">
+                            <label for="input-1">Login ID</label>
+                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @Placeholder = "Login Id" })
+                        </div>
+                        <div class="col-md-3">
+                            <label for="input-1">Entry Type </label>
+                            @Html.DropDownListFor(m => m.EntryType, new SelectList(ViewBag.ddlCrDr, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                            <div class="col-md-3">
+                                <label for="input-1">From Date </label>
+                                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @Placeholder = "From Date" ,@readonly="true"})
+                            </div>
+                            <div class="col-md-3">
+                                <label for="input-1">To Date </label>
+                                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Placeholder = "To Date", @readonly = "true" })
+                            </div>
+                           
+                            <div class="col-md-2 pt-4">
+                                <label for="input-1">&nbsp; </label>
+                                <input type="submit" value="Get Details" class="btn btn-light list-button mt-btn mb-3" name="GetDetails" />
+                            </div>
+                        </div>
+                    <br />
                     <div class="row g-3">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="example2">
@@ -74,9 +103,10 @@
                                         <th>Company Name</th>
                                         <th>Expense Type</th>
                                         <th>Expense Name</th>
-                                        <th>Amount</th>
-                                        <th>Cr/Dr</th>
-                                         <th>Payment Mode</th>
+                                        <th>CrAmount</th>
+                                        <th>DrAmount</th>
+                                        <th>EntryType</th>
+                                        <th>Payment Mode</th>
                                         <th>Transaction No</th>
                                         <th>Payment Date</th>
                                         <th>Remark</th>
@@ -89,6 +119,7 @@
                                         if (Model.lstCrDrExpense != null)
                                         {
                                             int i = 1;
+                                            int sum = 0;
                                             foreach (var item in Model.lstCrDrExpense)
                                             {
                                                 <tr>
@@ -97,20 +128,24 @@
                                                     <td>@item.CompanyName</td>
                                                     <td>@item.ExpenseType</td>
                                                     <td>@item.ExpenseName</td>
-                                                    <td>@item.Amount</td>
+                                                    <td>@item.CrAmount</td>
+                                                    <td>@item.DrAmount</td>
                                                     <td>@item.EntryType</td>
                                                     <td>@item.PaymentModeName</td>
-                                                   
+                                                    <td>@item.TransactionNo</td>
+                                                    <td>@item.PaymentDate</td>
                                                     <td>@item.Remark</td>
+                                                   
                                                     <td>
-                                                        <a href="/Expense/ExpenseType?Id=@item.ExpenseId" class="btn btn-light list-button">
+                                                        @*<a href="/Expense/ExpenseType?Id=@item.ExpenseId" class="btn btn-light list-button">
                                                             <i class='bx bxs-edit'></i>
 
-                                                        </a>
+                                                        </a>*@
 
-                                                        <a href="/Expense/DeleteExpense?Id=@item.ExpenseId" class="btn btn-light list-button " onclick="return confirm('Are you sure you want to delete this expense ?')"><i class='bx bxs-trash'></i></a>
+                                                        <a href="/Expense/DeleteCrDrExpense?Id=@item.PK_ExpenseDetailsID" class="btn btn-light list-button " onclick="return confirm('Are you sure you want to delete this expense details ?')"><i class='bx bxs-trash'></i></a>
 
                                                     </td>
+                                                   
                                                 </tr>
                                                 i++;
                                             }
@@ -119,6 +154,9 @@
                                     }
 
                                 </tbody>
+                                <tfoot>
+                                   
+                                </tfoot>
 
                             </table>
                         </div>
@@ -129,4 +167,12 @@
         </div>
     </div>
 }
+<script>
+    jQuery('.mydatepicker, #FromDate, #ToDate,  .input-group.date').datepicker(
+        {
+            dateFormat: 'dd/mm/yy',
+            changeYear: true,
+            changeMonth: true
+        });
+</script>
 

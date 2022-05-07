@@ -32,6 +32,8 @@ namespace AdvertisingERP.Models
         public string CrAmount { get; set; }
         public string UserName { get; set; }
         public string CompanyName { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
         public string PaymentModeName { get; set; }
         public string PK_ExpenseDetailsID { get; set; }
         public DataTable dt { get; set; }
@@ -146,7 +148,7 @@ namespace AdvertisingERP.Models
             DataSet ds = DBHelper.ExecuteQuery("GetExpenseTypeName", para);
             return ds;
         }
-        public DataSet SaveData()
+        public DataSet SaveDataDr()
         {
             SqlParameter[] para = { new SqlParameter("@dt",dtExpenseDetails),
                 new SqlParameter("@EntryType",EntryType),
@@ -162,7 +164,37 @@ namespace AdvertisingERP.Models
                                 new SqlParameter("@EntryType",EntryType),
 
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("DrExpenseList", para);
+            DataSet ds = DBHelper.ExecuteQuery("CrDrExpenseList", para);
+            return ds;
+        }
+        public DataSet DeleteCrDrExpense()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_ExpenseDetailsID",PK_ExpenseDetailsID ),
+                                       new SqlParameter("@DeletedBy", AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteCrDrEpense", para);
+            return ds;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public DataSet SaveDataCr()
+        {
+            SqlParameter[] para = { new SqlParameter("@dt",dtExpenseDetails),
+                new SqlParameter("@EntryType",EntryType),
+                  new SqlParameter("@AddedBy",AddedBy)
+                                  };
+            DataSet ds = DBHelper.ExecuteQuery("SaveExpenseDetailsCr", para);
             return ds;
         }
     }
