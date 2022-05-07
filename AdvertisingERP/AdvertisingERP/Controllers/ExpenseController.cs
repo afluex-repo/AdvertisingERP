@@ -11,14 +11,13 @@ using System.Web.Script.Serialization;
 
 namespace AdvertisingERP.Controllers
 {
-    public class ExpenseController : Controller
+    public class ExpenseController : AdminBaseController
     {
         // GET: Expense
         public ActionResult Index()
         {
             return View();
         }
-
         public ActionResult ExpenseTypeMaster(string Id)
         {
             Expense model = new Expense();
@@ -34,7 +33,6 @@ namespace AdvertisingERP.Controllers
            
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ExpenseTypeMaster")]
         [OnAction(ButtonName = "btnsave")]
@@ -62,7 +60,6 @@ namespace AdvertisingERP.Controllers
             }
             return RedirectToAction("ExpenseTypeMaster", "Expense");
         }
-
         [HttpPost]
         [OnAction(ButtonName="btnupdate")]
         [ActionName("ExpenseTypeMaster")]
@@ -94,10 +91,6 @@ namespace AdvertisingERP.Controllers
             }
             return RedirectToAction("ExpenseTypeMaster", "Expense");
         }
-
-
-
-
         public ActionResult ExpenseTypeList()
         {
             Expense model = new Expense();
@@ -123,7 +116,6 @@ namespace AdvertisingERP.Controllers
             }
             return View(model);
         }
-
         public ActionResult DeleteExpenseType(Expense model, string Id)
         {
             try
@@ -149,8 +141,6 @@ namespace AdvertisingERP.Controllers
             }
             return RedirectToAction("ExpenseTypeList", "Expense");
         }
-
-
         public ActionResult ExpenseType(string Id)
         {
             Expense model = new Expense();
@@ -203,8 +193,6 @@ namespace AdvertisingERP.Controllers
 
             return View(model);
         }
-
-
         public ActionResult ExpenseList()
         {
             Expense model = new Expense();
@@ -231,7 +219,6 @@ namespace AdvertisingERP.Controllers
             }
             return View(model);
         }
-
         [HttpPost]
         [ActionName("ExpenseType")]
         [OnAction(ButtonName = "btnsave")]
@@ -259,8 +246,6 @@ namespace AdvertisingERP.Controllers
             }
             return RedirectToAction("ExpenseType", "Expense");
         }
-
-
         [HttpPost]
         [ActionName("ExpenseType")]
         [OnAction(ButtonName = "btnupdate")]
@@ -288,8 +273,6 @@ namespace AdvertisingERP.Controllers
             }
             return RedirectToAction("ExpenseList", "Expense");
         }
-
-
         public ActionResult DeleteExpense(Expense model, string Id)
         {
             try
@@ -316,7 +299,6 @@ namespace AdvertisingERP.Controllers
             }
             return RedirectToAction("ExpenseList", "Expense");
         }
-
         public ActionResult DrExpense()
         {
             Expense model = new Expense();
@@ -379,8 +361,6 @@ namespace AdvertisingERP.Controllers
             return View(model);
 
         }
-
-
         public ActionResult GetExpenseTypeName(string FK_ExpenseTypeId)
         {
             Expense model = new Expense();
@@ -402,39 +382,6 @@ namespace AdvertisingERP.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        //public ActionResult SaveDrExpense(Expense model)
-        //{
-
-        //    //dt.Cr = " ";
-        //    model.EntryType = "Dr";
-        //    model.AddedBy = Session["UserID"].ToString();
-        //      var jss = new JavaScriptSerializer();
-        //    var jdv = jss.Deserialize<dynamic>(Request["dataValue"]);
-        //    DataTable VisitorDetails = new DataTable();
-        //    VisitorDetails = JsonConvert.DeserializeObject<DataTable>(jdv["AddData"]);
-        //    model.dt = VisitorDetails;
-        //    DataSet ds = new DataSet();
-        //    ds = model.SaveData();
-        //    if (ds != null && ds.Tables[0].Rows.Count > 0)
-        //    {
-        //        if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
-        //        {
-        //            TempData["msg"] = "Dr Expense  Save successfully";
-        //        }
-        //        else
-        //        {
-        //            TempData["msgerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        TempData["msgerror"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-        //    }
-
-        //    return Json(model, JsonRequestBehavior.AllowGet);
-
-        //}
         public ActionResult SaveDrExpense(Expense order, string dataValue)
         {
             
@@ -451,23 +398,18 @@ namespace AdvertisingERP.Controllers
                 var isValidModel = TryUpdateModel(order);
                 var jss = new JavaScriptSerializer();
                 var jdv = jss.Deserialize<dynamic>(dataValue);
-
                 DataTable DrExpenseDetails = new DataTable();
                 DrExpenseDetails.Columns.Add("Fk_CompanyId");
                 DrExpenseDetails.Columns.Add("FK_ExpenseTypeId");
                 DrExpenseDetails.Columns.Add("PF_ExpenseID");
                 DrExpenseDetails.Columns.Add("PK_PaymentId");
                 DrExpenseDetails.Columns.Add("TransactionNo");
+                DrExpenseDetails.Columns.Add("Amount");
                 DrExpenseDetails.Columns.Add("PaymentDate");
                 DrExpenseDetails.Columns.Add("Remark");
-                DrExpenseDetails.Columns.Add("Amount");
-              
-             
                 DataTable dt = new DataTable();
                 dt = JsonConvert.DeserializeObject<DataTable>(jdv["AddData"]);
                 int numberOfRecords = dt.Rows.Count;
-             
-
                 foreach (DataRow row in dt.Rows)
                 {
                     Fk_CompanyId = row["Fk_CompanyId"].ToString();
@@ -475,24 +417,22 @@ namespace AdvertisingERP.Controllers
                     PF_ExpenseID = row["PF_ExpenseID"].ToString();
                     PK_PaymentId = row["PK_PaymentId"].ToString();
                     TransactionNo = row["TransactionNo"].ToString();
-                    //PaymentDate = row["PaymentDate"].ToString();
-                    Remark = row["Remark"].ToString();
                     Amount = row["Amount"].ToString();
                     PaymentDate = string.IsNullOrEmpty(row["PaymentDate"].ToString()) ? null : Common.ConvertToSystemDate(row["PaymentDate"].ToString(), "dd/MM/yyyy");
-                  
-                    DrExpenseDetails.Rows.Add(Fk_CompanyId, FK_ExpenseTypeId, PF_ExpenseID, PK_PaymentId, TransactionNo, PaymentDate, Amount, Remark);
+                    Remark = row["Remark"].ToString();
+                    DrExpenseDetails.Rows.Add(Fk_CompanyId, FK_ExpenseTypeId, PF_ExpenseID, PK_PaymentId, TransactionNo, Amount, PaymentDate,  Remark);
                 }
                 order.dtExpenseDetails = DrExpenseDetails;
                 order.AddedBy = Session["UserID"].ToString();
                 order.EntryType = "Dr";
                 DataSet ds = new DataSet();
-                ds = order.SaveData();
+                ds = order.SaveDataDr();
                 if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         TempData["msg"] = "Dr Expense  Save successfully";
-                        order.Result = "Yes";
+                       
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
@@ -501,19 +441,17 @@ namespace AdvertisingERP.Controllers
                 }
                 else
                 {
-                    TempData["DrExpenses"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                TempData["msg"] = ex.Message;
             }
 
-            return new JsonResult { Data = new { status = order.Result } };
+            return Json(order, JsonRequestBehavior.AllowGet);
         }
-
-
         public ActionResult CrExpense()
         {
             Expense model = new Expense();
@@ -576,30 +514,36 @@ namespace AdvertisingERP.Controllers
             return View(model);
 
         }
-        public ActionResult CrExpenseList()
+        public ActionResult CrDrExpenseList()
         {
             Expense model = new Expense();
             List<Expense> crdrlst = new List<Expense>();
+
+            List<SelectListItem> ddlCrDr = Common.ddlCrDr();
+            ViewBag.ddlCrDr = ddlCrDr;
             DataSet ds = model.CrDrExpenseList();
             if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
             {
-                
+
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     Expense obj = new Expense();
-                    obj.CompanyName = r[""].ToString();
-                    obj.ExpenseId = r[""].ToString();
-                    obj.ExpenseName = r[""].ToString();
-                    obj.ExpenseTypeId = r[""].ToString();
-                    obj.ExpenseType = r[""].ToString();
-                    obj.PK_CompanyID = r[""].ToString();
-                    obj.Amount = r[""].ToString();
-                    obj.LoginId = r[""].ToString();
-                    obj.TransactionNo = r[""].ToString();
-                    obj.PaymentDate = r[""].ToString();
-                    obj.ExpenseType = r[""].ToString();
-                    obj.PaymentModeName = r[""].ToString();
-                    obj.PK_DrExpenseID = r[""].ToString();
+                    obj.CompanyName = r["CompanyName"].ToString();
+                    obj.PK_CompanyID = r["FK_CompanyID"].ToString();
+                    obj.ExpenseId = r["Fk_ExpenseId"].ToString();
+                    obj.ExpenseName = r["ExpenseName"].ToString();
+                    obj.ExpenseTypeId = r["FK_ExpensetypeId"].ToString();
+                    obj.ExpenseType = r["ExpenseTypeName"].ToString();
+                    obj.CrAmount = r["CrAmount"].ToString();
+                    obj.DrAmount = r["DrAmount"].ToString();
+                    obj.LoginId = r["LoginId"].ToString();
+                    obj.TransactionNo = r["TransactionNo"].ToString();
+                    obj.PaymentDate = r["PaymentDate"].ToString();
+                    obj.UserName = r["Name"].ToString();
+                    obj.EntryType = r["EntryType"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.PaymentModeName = r["PaymentMode"].ToString();
+                    obj.PK_ExpenseDetailsID = r["PK_ExpenseDetailsID"].ToString();
                     crdrlst.Add(obj);
                 }
                 model.lstCrDrExpense = crdrlst;
@@ -607,11 +551,19 @@ namespace AdvertisingERP.Controllers
             return View(model);
         }
         [HttpPost]
-        [ActionName("CrExpenseList")]
-        [OnAction(ButtonName ="")]
+        [ActionName("CrDrExpenseList")]
+        [OnAction(ButtonName = "GetDetails")]
         public ActionResult CrExpenseListDetails(Expense model)
         {
-            
+            List<SelectListItem> ddlCrDr = Common.ddlCrDr();
+          
+            ViewBag.ddlCrDr = ddlCrDr;
+
+         
+            model.EntryType = string.IsNullOrEmpty(model.EntryType) ? null : model.EntryType;
+            model.LoginId = string.IsNullOrEmpty(model.LoginId) ? null : model.LoginId;
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             List<Expense> crdrlst = new List<Expense>();
             DataSet ds = model.CrDrExpenseList();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
@@ -641,6 +593,101 @@ namespace AdvertisingERP.Controllers
                 model.lstCrDrExpense = crdrlst;
             }
             return View(model);
+        }
+
+        public ActionResult DeleteCrDrExpense(string Id)
+        {
+            Expense model = new Expense();
+            model.PK_ExpenseDetailsID = Id;
+            model.AddedBy = Session["UserID"].ToString();
+            DataSet ds = model.DeleteCrDrExpense();
+            try
+            {
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    TempData["msg"] = "Delete expense successfull";
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["msg"] = ex.Message;
+            }
+            return RedirectToAction("CrDrExpenseList", "Expense");
+        }
+
+        public ActionResult SaveCrExpense(Expense order, string dataValue)
+        {
+
+            try
+            {
+                string Fk_CompanyId = "";
+                string FK_ExpenseTypeId = "";
+                string PF_ExpenseID = "";
+                string PK_PaymentId = "";
+                string TransactionNo = "";
+                string Amount = "";
+                string PaymentDate = "";
+                string Remark = "";
+                var isValidModel = TryUpdateModel(order);
+                var jss = new JavaScriptSerializer();
+                var jdv = jss.Deserialize<dynamic>(dataValue);
+                DataTable DrExpenseDetails = new DataTable();
+                DrExpenseDetails.Columns.Add("Fk_CompanyId");
+                DrExpenseDetails.Columns.Add("FK_ExpenseTypeId");
+                DrExpenseDetails.Columns.Add("PF_ExpenseID");
+                DrExpenseDetails.Columns.Add("PK_PaymentId");
+                DrExpenseDetails.Columns.Add("TransactionNo");
+                DrExpenseDetails.Columns.Add("Amount");
+                DrExpenseDetails.Columns.Add("PaymentDate");
+                DrExpenseDetails.Columns.Add("Remark");
+                DataTable dt = new DataTable();
+                dt = JsonConvert.DeserializeObject<DataTable>(jdv["AddData"]);
+                int numberOfRecords = dt.Rows.Count;
+                foreach (DataRow row in dt.Rows)
+                {
+                    Fk_CompanyId = row["Fk_CompanyId"].ToString();
+                    FK_ExpenseTypeId = row["FK_ExpenseTypeId"].ToString();
+                    PF_ExpenseID = row["PF_ExpenseID"].ToString();
+                    PK_PaymentId = row["PK_PaymentId"].ToString();
+                    TransactionNo = row["TransactionNo"].ToString();
+                    Amount = row["Amount"].ToString();
+                    PaymentDate = string.IsNullOrEmpty(row["PaymentDate"].ToString()) ? null : Common.ConvertToSystemDate(row["PaymentDate"].ToString(), "dd/MM/yyyy");
+                    Remark = row["Remark"].ToString();
+                    DrExpenseDetails.Rows.Add(Fk_CompanyId, FK_ExpenseTypeId, PF_ExpenseID, PK_PaymentId, TransactionNo, Amount, PaymentDate, Remark);
+                }
+                order.dtExpenseDetails = DrExpenseDetails;
+                order.AddedBy = Session["UserID"].ToString();
+                order.EntryType = "Cr";
+                DataSet ds = new DataSet();
+                ds = order.SaveDataCr();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["msg"] = "Cr Expense  Save successfully";
+
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        order.Result = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                TempData["msg"] = ex.Message;
+            }
+
+            return Json(order, JsonRequestBehavior.AllowGet);
         }
     }
 }
