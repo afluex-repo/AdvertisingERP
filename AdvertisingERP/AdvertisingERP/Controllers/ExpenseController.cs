@@ -536,6 +536,7 @@ namespace AdvertisingERP.Controllers
                     obj.ExpenseType = r["ExpenseTypeName"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
+                    obj.totalBalance = r["totalBalance"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();
@@ -545,6 +546,10 @@ namespace AdvertisingERP.Controllers
                     obj.PaymentModeName = r["PaymentMode"].ToString();
                     obj.PK_ExpenseDetailsID = r["PK_ExpenseDetailsID"].ToString();
                     crdrlst.Add(obj);
+                    ViewBag.TotalDrAmount = Convert.ToDecimal(ViewBag.TotalDrAmount) + Convert.ToDecimal(r["DrAmount"].ToString());
+                    ViewBag.TotalCrAmount = Convert.ToDecimal(ViewBag.TotalCrAmount) + Convert.ToDecimal(r["CrAmount"].ToString());
+                    ViewBag.TotalBalances = Convert.ToDecimal(ViewBag.TotalBalances) + Convert.ToDecimal(r["totalBalance"].ToString());
+                    ViewBag.TotalBalance = ViewBag.TotalCrAmount - ViewBag.TotalDrAmount;
                 }
                 model.lstCrDrExpense = crdrlst;
             }
@@ -580,6 +585,7 @@ namespace AdvertisingERP.Controllers
                     obj.ExpenseType = r["ExpenseTypeName"].ToString();
                     obj.CrAmount = r["CrAmount"].ToString();
                     obj.DrAmount = r["DrAmount"].ToString();
+                    obj.totalBalance = r["totalBalance"].ToString();
                     obj.LoginId = r["LoginId"].ToString();
                     obj.TransactionNo = r["TransactionNo"].ToString();
                     obj.PaymentDate = r["PaymentDate"].ToString();
@@ -589,6 +595,10 @@ namespace AdvertisingERP.Controllers
                     obj.PaymentModeName = r["PaymentMode"].ToString();
                     obj.PK_ExpenseDetailsID = r["PK_ExpenseDetailsID"].ToString();
                     crdrlst.Add(obj);
+                    ViewBag.TotalDrAmount = Convert.ToDecimal(ViewBag.TotalDrAmount) + Convert.ToDecimal(r["DrAmount"].ToString());
+                    ViewBag.TotalCrAmount = Convert.ToDecimal(ViewBag.TotalCrAmount) + Convert.ToDecimal(r["CrAmount"].ToString());
+                    ViewBag.TotalBalances = Convert.ToDecimal(ViewBag.TotalBalances) + Convert.ToDecimal(r["totalBalance"].ToString());
+                    ViewBag.TotalBalance = ViewBag.TotalCrAmount - ViewBag.TotalDrAmount;
                 }
                 model.lstCrDrExpense = crdrlst;
             }
