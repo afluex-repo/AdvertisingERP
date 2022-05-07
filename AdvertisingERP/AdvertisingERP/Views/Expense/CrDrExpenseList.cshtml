@@ -106,6 +106,7 @@
                                         <th>CrAmount</th>
                                         <th>DrAmount</th>
                                         <th>EntryType</th>
+                                        <th>Total Balance</th>
                                         <th>Payment Mode</th>
                                         <th>Transaction No</th>
                                         <th>Payment Date</th>
@@ -119,7 +120,7 @@
                                         if (Model.lstCrDrExpense != null)
                                         {
                                             int i = 1;
-                                            int sum = 0;
+                                            
                                             foreach (var item in Model.lstCrDrExpense)
                                             {
                                                 <tr>
@@ -131,6 +132,7 @@
                                                     <td>@item.CrAmount</td>
                                                     <td>@item.DrAmount</td>
                                                     <td>@item.EntryType</td>
+                                                    <td>@item.totalBalance</td>
                                                     <td>@item.PaymentModeName</td>
                                                     <td>@item.TransactionNo</td>
                                                     <td>@item.PaymentDate</td>
@@ -155,7 +157,15 @@
 
                                 </tbody>
                                 <tfoot>
-                                   
+                                    <tr>
+                                        <th colspan="4"></th>
+                                        <th >Total</th>
+                                        <th>@ViewBag.TotalCrAmount</th>
+                                        <th>@ViewBag.TotalDrAmount</th>
+                                        <th colspan="1">Total Balance</th>
+                                         <th >@ViewBag.TotalBalances</th>
+                                        <th colspan="5"></th>
+                                        </tr>
                                 </tfoot>
 
                             </table>

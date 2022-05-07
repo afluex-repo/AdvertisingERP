@@ -34,6 +34,7 @@ namespace AdvertisingERP.Models
         public string CompanyName { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
+        public string totalBalance { get; set; }
         public string PaymentModeName { get; set; }
         public string PK_ExpenseDetailsID { get; set; }
         public DataTable dt { get; set; }
